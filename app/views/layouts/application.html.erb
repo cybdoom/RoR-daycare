@@ -8,8 +8,12 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="mid_pages">
+    <%if controller_name == 'welcome' && action_name == 'index'%>
       <%= yield %>
-    </div>
+    <%else%>
+      <div class="mid_pages">
+        <%= yield %>
+      </div>
+    <%end%>
   </body>
 </html>
