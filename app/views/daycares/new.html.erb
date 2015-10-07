@@ -1,0 +1,27 @@
+<div class="c_row_1">
+  <span class="edit_btn">Register</span>
+  <span class="menu_icons"></span>
+</div>
+
+<div class="c_row_1 c_row_3">
+  <%=form_for setup_daycare(@daycare) do |f|%>
+    <div class="d_input_wrap">
+      <%=f.text_field :name, class: "d_input d_input2", placeholder: 'Daycare Name'%>
+      <%=f.text_field :address_line1, class: "d_input d_input1", placeholder: 'Address line 1'%>
+      <%=f.text_field :post_code, class: "d_input d_input1", placeholder: 'Post code'%>
+      
+      <div class="f1">
+        <a class="select_txt select_txt2 blue_c" href="#">Norway</a>
+        <%=f.text_field :country, class: "d_input d_input2", placeholder: 'Country'%>
+      </div>
+
+      <%= f.fields_for :users do |daycare_manager| %>
+        <%= daycare_manager.email_field :email, class: "d_input d_input1", placeholder: 'Email'%>
+        <%= daycare_manager.password_field :password, class: "d_input d_input1", placeholder: 'Password'%>
+        <%= daycare_manager.password_field :password_confirmation, class: "d_input d_input1", placeholder: 'Confirm Password'%>
+      <%end%>
+      <%=f.text_field :telephone, class: "d_input d_input1", placeholder: 'Telephone'%>
+    </div>
+    <%=f.submit 'Submit', class: 'submit_btn mar_b'%>
+  <%end%>   
+</div>

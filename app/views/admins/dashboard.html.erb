@@ -1,0 +1,31 @@
+<br/>
+<div class="col-md-6 col-centered">
+    <div class="panel padding20">
+      <div class="panel-body">
+        <div class="pull-center">
+            <a href="#"><img src="/assets/franchise-icon.gif" class="linksSpace top7" width="150"></a>  
+            <a href="#"><img src="/assets/partners-icon.gif" class="linksSpace top7" width="150"></a> 
+            <a href="#"><img src="/assets/customer-icon.gif" class="linksSpace top7" width="150"></a> 
+            <a href="#"><img src="/assets/privileges-icon.gif" class="linksSpace top7" width="150"></a> 
+            <a href="#"><img src="/assets/functionalities-icon.gif" class="linksSpace top7" width="150"></a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Scripts and styles -->
+<script>
+    $(function(){
+        $("#slogan").prepend("<%= session[:admin_name]%>");
+        $("#sloganbar").removeClass("top7");
+    })
+</script>
+
+<style>
+#topbar {
+    background-color: #ea5b0c;
+}
+#linksBar {
+    margin-top:15px;
+}
+</style>
