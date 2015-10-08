@@ -7,7 +7,15 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :daycares
+  resources :daycares do
+    collection do
+      match :login, via: [:get, :post]
+    end
+    member do
+      match :add_departments, via: [:get, :post]
+      get :congratulations
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -51,9 +59,8 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  namespace :admin do
+    match :login, to: 'admin#login', via: [:get, :post]
+    get :dashboard, to: 'admin#dashboard'
+  end
 end

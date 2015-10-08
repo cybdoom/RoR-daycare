@@ -1,18 +1,19 @@
-<div class="welcome_col">
-  <h4>WELCOME!</h4>
-  <h6>Let's get stared and choose who you are!</h6>
- 
-  <ul class="func_list func_list1">
-    <li><a href="#"><%=image_tag 'we_img1.png', height: '109', width: '91'%>
-      <h5>Daycare Manager</h5>
-      </a></li>
+<div class="vertical_mid_center">
+  <div class="welcome_col">
+    <h4>WELCOME!</h4>
+    <h6>Let's get stared and choose who you are!</h6>
+    <ul class="func_list func_list1">
+      <li><a href="<%=login_daycares_path%>"><%=image_tag 'we_img1.png', height: '109', width: '91'%>
+        <h5>Daycare Manager</h5>
+        </a></li>
       <li><a href="#"><%=image_tag 'we_img2.png', height: '109', width: '91'%>
-      <h5>Daycare Worker</h5>
-      </a></li>
-      <li><a href="#"><%=image_tag 'we_img3.png', height: '109', width: '91'%>
-      <h5>Parents</h5>
-      </a></li>
-  </ul>
+        <h5>Daycare Worker</h5>
+        </a></li>
+      <li><a href="#"><%=image_tag 'we_img3.png', height: '109', width: '143'%>
+        <h5>Parents</h5>
+        </a></li>
+    </ul>
+  </div>
 </div>
 <script type="text/javascript">
   $('body').addClass('welcome_body');

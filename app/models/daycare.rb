@@ -1,8 +1,9 @@
 class Daycare < ActiveRecord::Base
   has_many :users, dependent: :destroy
   has_many :roles, dependent: :destroy
+  has_many :departments
 
-  accepts_nested_attributes_for :users, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :users, :departments, allow_destroy: true, reject_if: :all_blank
   
   after_create :set_role
 
@@ -14,7 +15,7 @@ class Daycare < ActiveRecord::Base
     end
   end
 
-  #Organization admin based on admin role-----------
+  #Daycare manager based on manager role-----------
   def daycare_manager
     if users.present?
       role = roles.find_by(name: 'manager')

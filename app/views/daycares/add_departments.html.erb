@@ -1,0 +1,17 @@
+<div class="mid_wrapp padd34">
+  <div class="d_input_wrap padd_zero">
+    <%= nested_form_for @daycare, url: add_departments_daycare_path(@daycare), method: :post do |f| %>
+      <%= f.fields_for :departments do |department| %>
+       	<div class="append_div">
+          <div class="input_field_col">
+            <%=department.text_field :department_name, placeholder: 'Daycare department name' %>
+          </div>
+        </div>
+      <%end%>
+      <div class="add_link">
+        <%= f.link_to_add "Add more", :departments %>
+      </div>
+      <%= f.submit 'Submit', class: 'submit_btn mar_b'%>
+    <%end%>
+  </div>
+</div>
