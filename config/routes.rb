@@ -6,15 +6,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-  
-  ####### SUPER ADMIN
-  get  'login' => 'login#index'
-  post 'login' => 'login#login'
-  get  'logout'  => 'login#logout'
-  post 'forgot_password'  => 'login#forgot_password'
-  get  'password_reset' => 'login#password_reset'
-  post 'password_reset' => 'login#do_reset'
-  get  '/admin/dashboard' => 'admins#dashboard'
 
   resources :daycares
   # Example of regular route:
