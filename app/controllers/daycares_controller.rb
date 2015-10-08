@@ -13,7 +13,7 @@ class DaycaresController < ApplicationController
       if @daycare.name.present? && @daycare.users.last && @daycare.users.last.email.present? && @daycare.save(validate: false)
         @daycare.roles.create(name: 'manager')
         flash[:notice] = "Daycare Successfully created."
-        redirect_to new_daycare_department(department_id: @daycare)
+        redirect_to add_departments_daycare_path(@daycare)
       else
         render :new
       end
