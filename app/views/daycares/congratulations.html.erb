@@ -5,8 +5,8 @@
       <span class="invite">Invite Daycare Workers and <br/> Parents to this App for  <br/> START BENEFITTING  <br/> for this imidiately?
       </span>
       <div class="btns_col">
-        <a class="yes" href="#">Yes</a>
-        <a class="yes no" href="#">No</a>
+        <%=link_to 'Yes', invite_workers_daycare_path(@daycare), class: 'yes'%>
+        <%=link_to 'No', @daycare, class: 'yes no'%>
       </div>
   </div>
 </div>

@@ -82,7 +82,15 @@ class DaycaresController < ApplicationController
   end
 
   def congratulations
-    
+    @daycare = Daycare.find(params[:id])
+  end
+
+  def invite_parents
+    @daycare = Daycare.find(params[:id])
+  end
+
+  def invite_workers
+    @daycare = Daycare.find(params[:id])
   end
 
   private

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     member do
       match :add_departments, via: [:get, :post]
       get :congratulations
+      match :invite_parents, via: [:get, :post]
+      match :invite_workers, via: [:get, :post]
     end
   end
   # Example of regular route:
