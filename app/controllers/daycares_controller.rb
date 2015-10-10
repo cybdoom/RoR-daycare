@@ -1,6 +1,25 @@
 class DaycaresController < ApplicationController
-  before_action :authenticate_manager!, only: [:show, :edit, :update, :add_departments, :congratulations]
-  before_action :ensure_manager, only: [:show, :edit, :update, :add_departments]
+  before_action :authenticate_manager!, only: [
+                                            :show, :edit, :update, 
+                                            :add_departments, 
+                                            :congratulations, 
+                                            :invite_workers,
+                                            :invite_parents
+                                          ]
+  before_action :ensure_manager, only: [
+                                     :show, :edit, :update, 
+                                     :add_departments,
+                                     :congratulations,
+                                     :invite_workers,
+                                     :invite_parents
+                                    ]
+  before_action :set_daycare, only: [
+                                  :edit, :show, :update, 
+                                  :add_departments, 
+                                  :congratulations,
+                                  :invite_workers,
+                                  :invite_parents
+                                ]
 
   def new
     @daycare = Daycare.new
@@ -70,7 +89,6 @@ class DaycaresController < ApplicationController
   end
 
   def add_departments
-    @daycare = Daycare.find(params[:id])
     @departments = @daycare.departments.build if @daycare.departments.blank?
     if request.post?
       daycare_params[:departments_attributes].values.each do |department|
@@ -82,15 +100,22 @@ class DaycaresController < ApplicationController
   end
 
   def congratulations
-    @daycare = Daycare.find(params[:id])
-  end
-
-  def invite_parents
-    @daycare = Daycare.find(params[:id])
   end
 
   def invite_workers
-    @daycare = Daycare.find(params[:id])
+    if request.post?
+      DaycareMailer.send_invite_to_workers(params[:email_ids], @daycare).deliver_now
+      flash[:notice] = 'Invitation to daycare workers has been sent successfully!'
+      redirect_to invite_parents_daycare_path(@daycare)
+    end
+  end
+
+  def invite_parents
+    if request.post?
+      DaycareMailer.send_invite_to_parents(params[:email_ids], @daycare).deliver_now
+      flash[:notice] = 'Invitation to daycare parents has been sent successfully!'
+      redirect_to @daycare
+    end
   end
 
   private
@@ -109,5 +134,9 @@ class DaycaresController < ApplicationController
       unless current_user.manager? && current_user.daycare_id.to_s == params[:id]
         redirect_to root_path, alert: "You don't have permission to access this page!"
       end
+    end
+
+    def set_daycare
+      @daycare = Daycare.find(params[:id])
     end
 end

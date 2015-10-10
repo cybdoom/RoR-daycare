@@ -1,0 +1,90 @@
+<div class="mid_wrapp padd34">
+  <div class="c_list_1 c_list_3">
+    <h4>Add Icon</h4>
+  </div>
+  <div class="c_list_1">
+    <h4>Environment Day</h4>
+    <div class="c_list_1_in c_list_1_in2">
+      <%=image_tag 'e_img5.jpg', width: '159', height: '158' %>
+    </div>
+  </div>
+  <%=nested_form_for [@daycare, @todo] do |f|%>
+    <div class="schedule_col">
+      <div class="schedule_field">
+        <div class="sehedule_dt_tm">
+          <label>Schedule Date / time</label>
+          <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: false%>
+        </div>
+        <a class="sc_cal_icon fl"></a>
+        <div class="sehedule_dt_tm">
+          <label>Due Date / time</label>
+          <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker'%>
+        </div>
+      </div>
+      <div class="schedule_field">
+        <div class="sc_1">
+          <label>Add Title</label>
+          <div class="add_key_task">
+            <%=f.text_field :title, class: 'key_task_input', placeholder: 'Title'%>
+          </div>
+          <%= f.link_to_add "Add Key <br/>Task".html_safe, :key_tasks, class: 'add_file' %>
+        </div>
+      </div>
+      <div class="schedule_field">
+        <div class="sc_1">
+          <%=f.fields_for :key_tasks do |key_task|%>
+            <label class="pdleft_40">Key Task</label>
+            <span class="sc_no"><%= @incrementer.call %></span>
+            <div class="add_key_task wdt77">
+              <%=key_task.text_field :name, class: 'key_task_input', placeholder: 'Task Name'%>
+              <a class="close_img" href="#"></a>
+            </div>
+            <!-- <a class="add_file sub_task_btn" href="#">Add Sub <br/>Task</a> -->
+            <%= key_task.link_to_add "Add Sub <br/>Task".html_safe, :sub_tasks, class: 'add_file sub_task_btn' %>
+            <div class="add_sub_task_col">
+              <div class="sc_1">
+                <label>Sub Task</label>
+                <%=key_task.fields_for :sub_tasks do |sub_task|%>
+                  <div class="add_key_task">
+                    <!-- <input name="" type="text" class="key_task_input" placeholder="Spech for not to cut trees"> -->
+                    <%=sub_task.text_field :name, class: 'key_task_input', placeholder: 'Sub Task Name'%> 
+                    <a class="close_img" href="#"></a>
+                  </div>
+                  <!-- <div class="add_key_task">
+                    <input name="" type="text" class="key_task_input" placeholder="Save tress"> 
+                    <a class="close_img" href="#"></a>
+                  </div> -->
+                <%end%>
+              </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+      <!-- <div class="schedule_field">
+        <div class="sc_1">
+          <label class="pdleft_40">Key Task</label>
+          <span class="sc_no">2</span>
+          <div class="add_key_task wdt77">
+            <input name="" type="text" class="key_task_input" placeholder="Planting Tress"> 
+            <a class="close_img" href="#"></a>
+          </div>
+          <a class="add_file sub_task_btn" href="#">Add Sub <br/>Task</a>
+          <div class="add_sub_task_col">
+            <div class="sc_1">
+              <label>Sub Task</label>
+              <div class="add_key_task">
+                <input name="" type="text" class="key_task_input" placeholder="Spech for not to cut trees"> 
+                <a class="close_img" href="#"></a>
+              </div>
+              <div class="add_key_task">
+                <input name="" type="text" class="key_task_input" placeholder="Save tress"> 
+                <a class="close_img" href="#"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <%=f.submit 'Create', class: 'submit_btn mar_b'%>
+    </div>
+  <%end%>
+</div>

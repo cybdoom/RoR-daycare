@@ -1,7 +1,8 @@
 class Daycare < ActiveRecord::Base
   has_many :users, dependent: :destroy
   has_many :roles, dependent: :destroy
-  has_many :departments
+  has_many :departments, dependent: :destroy
+  has_many :todos, dependent: :destroy
 
   accepts_nested_attributes_for :users, :departments, allow_destroy: true, reject_if: :all_blank
   
@@ -11,7 +12,7 @@ class Daycare < ActiveRecord::Base
   def set_role
     role = self.roles.find_or_create_by(name: 'manager')
     if users.last.present?
-      self.users.last.update(role_id: role.id, daycare_id: id)
+      self.users.first.update(role_id: role.id, daycare_id: id)
     end
   end
 

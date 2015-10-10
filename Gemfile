@@ -52,3 +52,7 @@ group :development, :test do
 end
 
 gem 'devise'
+
+gem 'jquery-datetimepicker-rails'
+
+gem 'chronic'

@@ -5,19 +5,14 @@
     <%=form_tag invite_workers_daycare_path(@daycare), method: :post do%>
       <div class="cong_input_wrap mr_up">
         <ol>
-          <li><input name="" type="text" placeholder="Daycare worker email"></li>
-          <li><input name="" type="text" placeholder="Daycare worker email"></li>
-          <li><input name="" type="text" placeholder="Daycare worker email"></li>
-          <li><input name="" type="text" placeholder="Daycare worker email"></li>
-          <li><input name="" type="text" placeholder="Daycare worker email"></li>
-          <li><input name="" type="text" placeholder="Daycare worker email"></li>
-          <li><input name="" type="text" placeholder="Daycare worker email"></li>
+          <% for i in 1..3 %>
+            <li><%= email_field_tag "email_ids[]", nil, placeholder: 'Daycare worker email', required: true %></li>
+          <% end %>
         </ol>
       </div>
-      <a class="add_files add_more_email_worker" href="#">Add more...</a>
-
+      <a class="add_files add_more_email_worker" id="add_more_worker_email" href="javascript:;">Add more...</a>
       <div class="btns_col">
-        <input name="" type="button" class="submit_btn send_btn" value="Send Invitation">
+        <%=submit_tag 'Send Invitation', class: 'submit_btn send_btn'%>
       </div>
     <%end%>
   </div>               

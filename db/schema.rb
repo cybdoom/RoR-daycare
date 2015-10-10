@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008174526) do
+ActiveRecord::Schema.define(version: 20151010152750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20151008174526) do
 
   add_index "departments", ["daycare_id"], name: "index_departments_on_daycare_id", using: :btree
 
+  create_table "key_tasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "key_task_id"
+    t.integer  "todo_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "key_tasks", ["key_task_id"], name: "index_key_tasks_on_key_task_id", using: :btree
+  add_index "key_tasks", ["todo_id"], name: "index_key_tasks_on_todo_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "daycare_id"
@@ -43,6 +54,15 @@ ActiveRecord::Schema.define(version: 20151008174526) do
   end
 
   add_index "roles", ["daycare_id"], name: "index_roles_on_daycare_id", using: :btree
+
+  create_table "todos", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "schedule_date"
+    t.datetime "due_date"
+    t.integer  "daycare_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -72,5 +92,7 @@ ActiveRecord::Schema.define(version: 20151008174526) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "departments", "daycares"
+  add_foreign_key "key_tasks", "key_tasks"
+  add_foreign_key "key_tasks", "todos"
   add_foreign_key "roles", "daycares"
 end

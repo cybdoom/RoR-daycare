@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       match :invite_parents, via: [:get, :post]
       match :invite_workers, via: [:get, :post]
     end
+    resources :todos
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

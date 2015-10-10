@@ -1,7 +1,7 @@
 @charset "utf-8";
+/* CSS Document */
 
 body,html{height:100%}
-
 body{
   background:#f4f4f4;
   margin:0px;
@@ -9,7 +9,7 @@ body{
   font-family:Arial, Helvetica, sans-serif;
 }
 body.welcome_body{
-  background: image-url('oragne_bg.jpg') no-repeat fixed; background-size: cover;
+  background: image-url('oragne_bg.jpg') no-repeat fixed;     background-size: cover;
 }
 *{  box-sizing:border-box;
   -moz-box-sizing:border-box;
@@ -64,12 +64,12 @@ p{
   font-stretch: normal;
   unicode-range: U+0020-25CA;
 }
-.page_wrapper{width:768px; height: 100%; float:left; background:#f4f4f4;}
+.page_wrapper{width:100%; height: 100%; float:left; background:#f4f4f4; }
 .page_wrapper.hgt_auto{height:auto}
 .header_top_row{
   width:100%; float:left; background:#f05c52; padding:15px 22px;
 }
-.back_btn{    background: image-url('ar_left.png') no-repeat 0px 0px;
+.back_btn{ background: image-url('ar_left.png') no-repeat 0px 0px;
     font-size: 26px;
     color: #fff;
   width:auto; 
@@ -169,19 +169,20 @@ p{
     line-height: 40px;} 
 .notificaiton_list ul li a:hover{color:#000;}
 .notificaiton_list ul li a.mother_icon{background: image-url('women_icon.jpg') no-repeat; }
-.notificaiton_list ul li a.environmnt_icon{background: image-url('environment_icon.jpg') no-repeat; } 
+.notificaiton_list ul li a.environmnt_icon{background: image-url('environment_icon.jpg') no-repeat; }  
 .notificaiton_list ul li a.parent_icon{background: image-url('parent_icon.jpg') no-repeat; }
-.notificaiton_list ul li a.medical_icon{background: image-url('medical_icon.jpg') no-repeat; }  
+.notificaiton_list ul li a.medical_icon{background: image-url('medical_icon.jpg') no-repeat; } 
 
 
 .mid_wrapp.padd34{padding:32px}
 .d_input_wrap{
-  width:100%; float:left; margin:0px; padding:0px; background:#fff; padding:11px; border-radius:10px;     min-height: 313px;
+  width:100%; float:left; margin:0px; padding:0px; background:#fff; padding:11px; border-radius:10px;   
 }
 .d_input_wrap.padd_zero{    background: none;
     padding: 0;}
 .d_input_wrap ul{margin:0px; padding:0px;}
-.d_input_wrap ul li{float:left; width:100%; background: image-url('ar_rght.png') no-repeat right center #fff; list-style:none; color:#a6a8ab; font-family:'MyriadPro-Regular'; font-size:20px; border-bottom:1px solid #efefef!important; border:0px;}
+.d_input_wrap ul li{float:left; width:100%; background: image-url('ar_rght.png') no-repeat right center #fff; list-style:none; color:#a6a8ab; font-family:'MyriadPro-Regular'; font-size:20px; border-bottom:1px solid #efefef; border-top:0px; border-left:0px; border-right:0px;}
+.d_input_wrap ul li:last-child{border-bottom:0;}
 .d_input_wrap ul li a{ padding:12px 10px; float:left; width:100%; color:#a6a8ab; text-decoration:none;}
 .d_input{
   float:left; width:100%; background: image-url('tick_icon.png') no-repeat right center #fff; color:#a6a8ab; font-family:'MyriadPro-Regular'; font-size:20px;
@@ -336,7 +337,12 @@ a.c_edit.c_delete.c_delete1{
 .schedule_field{
   width:100%; float:left; margin:10px 0px;
 }
-.sehedule_dt_tm{    width: 46.7%; float:left}
+.sehedule_dt_tm{ width: 46.7%; float:left}
+.sehedule_dt_tm.wdt_100{width:100%;     position: relative;}
+.sehedule_dt_tm.wdt_100 a.sc_edit_icon {
+
+    top: 37px;
+}
 .sehedule_dt_tm input{float: left;
     color: #939393;
     font-size: 20px;
@@ -345,6 +351,16 @@ a.c_edit.c_delete.c_delete1{
     width: 100%;
     background: #fff;
     padding: 10px;}
+  a.date_calen_icon {
+    width: 26px;
+    height: 26px;
+    background: image-url('cal_icon.png') no-repeat;
+    float: right;
+    margin-right: 10px;
+    position: absolute;
+        top: 38px;
+    right: 0px;
+}
 .schedule_field label{
   color:#939393; font-size:20px; font-family:'HelveticaNeue-LightCond'; width:100%; float:left; margin-bottom:5px;
 }
@@ -369,9 +385,7 @@ a.c_edit.c_delete.c_delete1{
     background: #fff;
     padding: 10px;
 }
-a.sc_edit_icon{
-  width:23px; height:23px; background: image-url('edit_icon.png') no-repeat; float:right; margin-right:10px;
-}
+
 a.sc_edit_icon:hover{
   opacity:.8;
 }
@@ -406,8 +420,17 @@ a.sc_close_icon:hover{
   padding-left:60px; width:100%;
 }
 a.add_file{
-  background:#65868d; float:right; padding:3px 5px 2px; color:#fff; font-size:18px; font-family:'HelveticaNeue-MediumCond'; text-decoration:none; 
-  display:block; text-align:center; line-height:21px; width:110px;
+    background: #65868d;
+    float: right;
+    padding: 5px 5px 6px;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'HelveticaNeue-LightCond';
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    line-height: 21px;
+    width: 110px;
 }
 a.add_file.add_file1{
   margin:28px 0px 0px;
@@ -459,11 +482,20 @@ ul.day_list1 li:last-child{
 }
 
 .sc_no{
-  width:38px; height:47px; background:#e5e5e5; font-size:18px; font-family:'HelveticaNeue-MediumCond'; float:left; color:#b5b5b5; line-height:47px; text-align:center;
-  margin:28px 5px 0px 0px;
+      width: 38px;
+    height: 53px;
+    background: #e5e5e5;
+    font-size: 18px;
+    font-family: 'HelveticaNeue-MediumCond';
+    float: left;
+    color: #b5b5b5;
+    line-height: 53px;
+    text-align: center;
+    margin:0px 5px 0px 0px;
 }
 .sc_no.sc_no1{
   background:none;
+  text-indent:-9999px;
 }
 
 .task_com_col{
@@ -495,7 +527,7 @@ ul.func_list.func_list1 li img{
   margin:20px 0px;
 }
 ul.func_list.func_list1 li h5{
-  color:#f05c51; background:#fde8e9; padding:15px;
+  color:#f05c51; background:#fde8e9; padding:15px; margin:0;
 }
 ul.func_list li{
       list-style: none;
@@ -549,19 +581,12 @@ input[type="radio" i] {
   margin-bottom:10px;
 }
 .append_div{width:100%; float:left}
-
-a.add_nested_fields{ 
-  background: image-url('add_icon.png') no-repeat 98% center #fff;
-  border-radius: 10px;
-}
-.add_link{  
-  width: 100%;
-  float: left;
-  font-family:'MyriadPro-Regular'; 
-  font-size:20px; color:#a5a7aa;
-  border-radius: 10px;
-  margin-bottom:10px;
-}
+.add_link{  width: 100%;
+    float: left;
+   background: image-url('add_icon.png') no-repeat 98% center #fff; font-family:'MyriadPro-Regular'; font-size:20px; color:#a5a7aa;
+   
+    border-radius: 10px;
+  margin-bottom:10px;}
 .add_link a{    padding: 0 10px;
     width: 100%;
     color: #a5a7aa;
@@ -628,7 +653,7 @@ a.add_files{
 }
 
 
-.vertical_mid_center{    width: 100%;
+.vertical_mid_center{ width: 100%;
     float: left;
     display: table;
     min-height: 100%;}
@@ -643,7 +668,7 @@ a.add_files{
 
 }
 .welcome_col h4{
-  font-size:60px; color:#fff;     font-family: 'HelveticaNeue-LightCond';
+  font-size:60px; color:#fff; font-family: 'HelveticaNeue-LightCond';
 }
 .welcome_col h6{
       font-size: 37px;
@@ -714,6 +739,121 @@ a.add_files{
         left: -30px;
  
     padding-left: 30px;}
+  
+.add_key_task{ width: 83%; float:left; position:relative;     z-index: 1;}
+.add_key_task.wdt77{    width: 77%;}
+.add_key_task a.close_img {
+     width: 32px;
+    height: 33px;
+    background: image-url('close_icon.jpg') no-repeat;
+    float: right;
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    background-size: cover;
+}
+a.sc_edit_icon{
+  width:23px; height:23px; background: image-url('edit_icon.png') no-repeat; float:right; margin-right:10px;  position: absolute;
+       top: 14px;
+    right: 40px;
+}
+a.add_file.sub_task_btn{    opacity: .4;}
+.add_key_task .key_task_input{    float: left;
+    color: #939393;
+    font-size: 20px;
+    font-family: 'HelveticaNeue-LightCond';
+    border: 0px;
+    width: 100%;
+    background: #fff;
+    padding: 15px 10px;}
+  .add_sub_task_col{    float: left;
+    width: 100%;
+      margin-top: 10px;
+    padding-left: 85px;}
+  .add_sub_task_col.no_after .sc_1:before, .add_sub_task_col.no_after .sc_1:after, .add_sub_task_col.no_after .add_key_task:before{display:none}
+  
+  
+
+  .add_sub_task_col .add_key_task{    width: 100%;     margin-bottom: 35px;}
+  .add_sub_task_col .add_key_task:last-child{margin-bottom:0}
+  .schedule_field label.pdleft_40{padding-left:40px;}
+  .add_sub_task_col .add_key_task:before{background: image-url('circle_task_append.jpg') no-repeat;      left: -24px;width:28px; height:16px; position:absolute; content:''; top:50%; margin-top:-8px;}
+  .add_sub_task_col{position:relative;}
+  .add_sub_task_col .sc_1:before{     width: 2px;
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: -25px;
+      z-index: 0;
+    background: #ccc;
+    left: 59px;}
+  .add_sub_task_col .sc_1:after{     width: 12px;
+    height: 12px;
+    background: #c6c6c6;
+    content: '';
+    position: absolute;
+    top: -17px;
+    left: 53px;
+    border-radius: 100%;
+    border: 2px solid #f3f3f3;
+    z-index: 1;}
+  .custom_checbox_list{width:100%; float:left;
+    margin: 0px;
+    padding: 0px;
+    background: #fff;
+    padding: 11px;
+    border-radius: 10px;
+}
+  .custom_checbox_list ul{margin:0px; padding:0px}
+  .custom_checbox_list ul li{width:100%; float:left; display:inline-block; list-style:none;
+    position: relative;
+    color: #a6a8ab;
+    font-family: 'MyriadPro-Regular';
+    font-size: 20px;
+    border-bottom: 1px solid #efefef;
+    padding:0;
+    border-width: 0px 0 1px 0;
+  }
+  .custom_checbox_list ul li:last-child{border-bottom:0}
+  .custom_checbox_list ul li label {
+
+     font-weight: 100;
+    width: 100%;
+    padding: 8px 10px 5px;
+    cursor: pointer;
+}
+  .custom_checbox_list ul li [type="checkbox"]{display:none}
+  
+
+.custom_checbox_list ul li [type="checkbox"]:not(:checked) + label:before,
+.custom_checbox_list ul li [type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  right:0; top: 2px;
+  width: 20px; height: 15px;
+
+}
+
+.custom_checbox_list ul li [type="checkbox"]:not(:checked) + label:after,
+.custom_checbox_list ul li [type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: 0;   right: 12px;
+    font-size: 28px;
+  color: #60e905;
+  transition: all .2s;
+    
+}
+
+.custom_checbox_list ul li [type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+.custom_checbox_list ul li [type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+.edit_col_box{width:100%; float:left; min-height:400px;}
 @media only screen and (min-width:240px) and (max-width:759px) {
 .welcome_col {
     padding:30px 14px 0;
