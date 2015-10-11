@@ -16,7 +16,7 @@ class TodosController < ApplicationController
   def create
     @todo = @daycare.todos.new(todo_params)
     if @todo.save
-      redirect_to daycare_todo_share_todo_path(@daycare, @todo)
+      redirect_to share_todo_todo_path(@todo)
     else
       render :new
     end
@@ -39,13 +39,25 @@ class TodosController < ApplicationController
   end
 
   def share_todo
-    
+    @todo = Todo.find(params[:id])
+  end
+
+  def todo_departments
+    @todo = Todo.find(params[:id])
+    if request.post?
+      params[:department_ids].each do |department_id|
+        department_todo = @todo.department_todos.new(department_id: department_id)
+        department_todo.save
+      end
+      flash[:notice] = 'Todo has been shared with these departments successfully!'
+      redirect_to current_daycare
+    end
   end
 
   private
 
     def set_daycare
-      @daycare = Daycare.find(params[:daycare_id])
+      @daycare = current_daycare
     end
 
     def todo_params

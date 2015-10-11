@@ -17,8 +17,12 @@ Rails.application.routes.draw do
       match :invite_parents, via: [:get, :post]
       match :invite_workers, via: [:get, :post]
     end
-    resources :todos do
+  end
+  
+  resources :todos do
+    member do
       get :share_todo
+      match :todo_departments, via: [:get, :post]
     end
   end
   # Example of regular route:

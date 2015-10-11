@@ -1,0 +1,25 @@
+<div class="mid_wrapp padd34">
+  <%=form_tag todo_departments_todo_path(@todo), method: :post do%>
+    <div class="sel_col">
+      <a class="select_txt" href="#">Select All</a>
+    </div>
+    <div class="custom_checbox_list">
+      <ul>
+        <%current_daycare.departments.each do |department|%>
+          <li>
+            <%= check_box_tag 'department_ids[]', department.id, false, :id => "department_id_#{department.id}" %>
+            <label for="department_id_<%=department.id%>"><%=department.department_name%></label>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="task_com_col">
+      <h4>Once task are completed todo list delegatable</h4>
+      <span class="yes_no">
+      <a href="#" class="yn_active">Yes</a>
+      <a href="#">No</a>
+      </span>
+    </div>
+    <input name="" type="submit" class="submit_btn" value="Submit">
+  <%end%>
+</div>
