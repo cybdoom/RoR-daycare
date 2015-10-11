@@ -9,8 +9,6 @@ class TodosController < ApplicationController
   def new
     @todo = @daycare.todos.new
     @todo.key_tasks.build
-    index = 0
-    @incrementer = -> { index += 1}
   end
 
   def create

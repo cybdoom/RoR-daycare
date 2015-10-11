@@ -34,7 +34,7 @@
         <div class="sc_1">
           <%=f.fields_for :key_tasks do |key_task|%>
             <label class="pdleft_40">Key Task</label>
-            <span class="sc_no"><%= @incrementer.call %></span>
+            <span class="sc_no">1</span>
             <div class="add_key_task wdt77">
               <%=key_task.text_field :name, class: 'key_task_input', placeholder: 'Task Name'%>
               <%= key_task.link_to_remove "", class: 'close_img' %>
