@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010152750) do
+ActiveRecord::Schema.define(version: 20151011092553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20151010152750) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "department_todos", force: :cascade do |t|
+    t.integer  "todo_id"
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "department_todos", ["department_id"], name: "index_department_todos_on_department_id", using: :btree
+  add_index "department_todos", ["todo_id"], name: "index_department_todos_on_todo_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "department_name"
@@ -86,11 +96,14 @@ ActiveRecord::Schema.define(version: 20151010152750) do
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "department_todos", "departments"
+  add_foreign_key "department_todos", "todos"
   add_foreign_key "departments", "daycares"
   add_foreign_key "key_tasks", "key_tasks"
   add_foreign_key "key_tasks", "todos"

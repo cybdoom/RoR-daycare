@@ -16,7 +16,7 @@ class TodosController < ApplicationController
   def create
     @todo = @daycare.todos.new(todo_params)
     if @todo.save
-      redirect_to @daycare
+      redirect_to daycare_todo_share_todo_path(@daycare, @todo)
     else
       render :new
     end
@@ -35,6 +35,10 @@ class TodosController < ApplicationController
   end
 
   def destroy
+    
+  end
+
+  def share_todo
     
   end
 

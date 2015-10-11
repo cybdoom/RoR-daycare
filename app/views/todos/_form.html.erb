@@ -37,18 +37,16 @@
             <span class="sc_no"><%= @incrementer.call %></span>
             <div class="add_key_task wdt77">
               <%=key_task.text_field :name, class: 'key_task_input', placeholder: 'Task Name'%>
-              <a class="close_img" href="#"></a>
+              <%= key_task.link_to_remove "", class: 'close_img' %>
             </div>
-            <!-- <a class="add_file sub_task_btn" href="#">Add Sub <br/>Task</a> -->
             <%= key_task.link_to_add "Add Sub <br/>Task".html_safe, :sub_tasks, class: 'add_file sub_task_btn' %>
             <div class="add_sub_task_col">
               <div class="sc_1">
                 <label>Sub Task</label>
                 <%=key_task.fields_for :sub_tasks do |sub_task|%>
                   <div class="add_key_task">
-                    <!-- <input name="" type="text" class="key_task_input" placeholder="Spech for not to cut trees"> -->
                     <%=sub_task.text_field :name, class: 'key_task_input', placeholder: 'Sub Task Name'%> 
-                    <a class="close_img" href="#"></a>
+                    <%= sub_task.link_to_remove "", class: 'close_img' %>
                   </div>
                   <!-- <div class="add_key_task">
                     <input name="" type="text" class="key_task_input" placeholder="Save tress"> 
@@ -60,30 +58,6 @@
           <%end%>
         </div>
       </div>
-      <!-- <div class="schedule_field">
-        <div class="sc_1">
-          <label class="pdleft_40">Key Task</label>
-          <span class="sc_no">2</span>
-          <div class="add_key_task wdt77">
-            <input name="" type="text" class="key_task_input" placeholder="Planting Tress"> 
-            <a class="close_img" href="#"></a>
-          </div>
-          <a class="add_file sub_task_btn" href="#">Add Sub <br/>Task</a>
-          <div class="add_sub_task_col">
-            <div class="sc_1">
-              <label>Sub Task</label>
-              <div class="add_key_task">
-                <input name="" type="text" class="key_task_input" placeholder="Spech for not to cut trees"> 
-                <a class="close_img" href="#"></a>
-              </div>
-              <div class="add_key_task">
-                <input name="" type="text" class="key_task_input" placeholder="Save tress"> 
-                <a class="close_img" href="#"></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <%=f.submit 'Create', class: 'submit_btn mar_b'%>
     </div>
   <%end%>

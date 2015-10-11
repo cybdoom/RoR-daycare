@@ -1,6 +1,8 @@
 class Todo < ActiveRecord::Base
   belongs_to :daycare
   has_many :key_tasks
+  has_many :department_todos, dependent: :destroy
+  has_many :departments, through: :department_todos, dependent: :destroy
 
   validates :title, :schedule_date, :due_date, presence: true
 

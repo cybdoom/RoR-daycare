@@ -14,7 +14,7 @@ $(document).on('page:change', function(){
   $('.datetimepicker').datetimepicker({
     formatDate: 'd-m-Y',
     minDate: getFormattedDate(new Date()),
-    theme:'dark'
+    theme:'default'
   });
 
   function getFormattedDate(date) {

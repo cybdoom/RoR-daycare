@@ -1,0 +1,96 @@
+<div class="mid_wrapp padd34">
+  <div class="c_list_1 c_list_3">
+    <h4>Add Icon</h4>
+  </div>
+  <div class="c_list_1">
+    <h4>Environment Day</h4>
+    <div class="c_list_1_in c_list_1_in2">
+      <img src="images/e_img5.jpg" width="159" height="158"> 
+    </div>
+  </div>
+  <div class="schedule_col">
+    <div class="schedule_field">
+      <div class="sehedule_dt_tm">
+        <label>Schedule Date / time</label>
+        <input name="" type="text" placeholder="10-07-2015/ 10:30">
+      </div>
+      <a class="sc_cal_icon fl"></a>
+      <div class="sehedule_dt_tm">
+        <label>Due Date / time</label>
+        <input name="" type="text" placeholder="20-07-2015/ 10:30">
+      </div>
+    </div>
+    <div class="schedule_field">
+      <div class="sc_1">
+        <label>Add Title</label>
+        <div class="add_key_task">
+          <input name="" type="text" class="key_task_input" placeholder="Environment Day"> 
+        </div>
+        <a class="add_file" href="javascript:;" id="add_key_task">Add Key <br/>Task</a>
+      </div>
+    </div>
+    <div id="key_task_fields">
+      <div class="schedule_field">
+        <div class="sc_1">
+          <label class="pdleft_40">Key Task</label>
+          <span class="sc_no">1</span>
+          <div class="add_key_task wdt77">
+            <input name="" type="text" class="key_task_input" placeholder="Planting Tress"> 
+            <a class="close_img" href="#"></a>
+          </div>
+          <a class="add_file sub_task_btn add_sub_task" href="javascript:;">Add Sub <br/>Task</a>
+          <div class="add_sub_task_col">
+            <div class="sc_1 sub_task_div">
+              <label>Sub Task</label>
+              <div class="add_key_task subtask_div">
+                <input name="" type="text" class="key_task_input" placeholder="Spech for not to cut trees"> 
+                <a class="close_img close_subtask" href="javascript:;"></a>
+              </div>
+              <!-- <div class="add_key_task">
+                <input name="" type="text" class="key_task_input" placeholder="Save tress"> 
+                <a class="close_img" href="#"></a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="schedule_field">
+      <div class="sc_1">
+        <label class="pdleft_40">Key Task</label>
+        <span class="sc_no">2</span>
+        <div class="add_key_task wdt77">
+          <input name="" type="text" class="key_task_input" placeholder="Planting Tress"> 
+          <a class="close_img" href="#"></a>
+        </div>
+        <a class="add_file sub_task_btn" href="#">Add Sub <br/>Task</a>
+        <div class="add_sub_task_col">
+          <div class="sc_1">
+            <label>Sub Task</label>
+            <div class="add_key_task">
+              <input name="" type="text" class="key_task_input" placeholder="Spech for not to cut trees"> 
+              <a class="close_img" href="#"></a>
+            </div>
+            <div class="add_key_task">
+              <input name="" type="text" class="key_task_input" placeholder="Save tress"> 
+              <a class="close_img" href="#"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <input name="" type="button" class="submit_btn mar_b" onClick="location.href='share_to_do.html'" value="Create">
+  </div>
+</div>
+<script type="text/javascript">
+  $("#add_key_task").click(function(){
+    $("#key_task_fields").append('<div class="schedule_field"><div class="sc_1"><label class="pdleft_40">Key Task</label><span class="sc_no">1</span><div class="add_key_task wdt77"><input name="" type="text" class="key_task_input" placeholder="Planting Tress"><a class="close_img" href="#"></a></div><a class="add_file sub_task_btn" href="#">Add Sub <br>Task</a><div class="add_sub_task_col"><div class="sc_1"><label>Sub Task</label><div class="add_key_task"><input name="" type="text" class="key_task_input" placeholder="Spech for not to cut trees"><a class="close_img" href="#"></a></div><div class="add_key_task"><input name="" type="text" class="key_task_input" placeholder="Save tress"><a class="close_img" href="#"></a></div></div></div></div></div>');
+  });
+  $(".add_sub_task").click(function(){
+    $(this).next().find('.sub_task_div').append('<div class="add_key_task subtask_div"><input name="" type="text" class="key_task_input" placeholder="Plant Trees"><a class="close_img close_subtask" href="javascript:;"></a></div>');
+  });
+  $('.close_subtask').click(function(){
+    alert('hi')
+    // $(this).closest('.subtask_div').remove();
+  });
+</script>

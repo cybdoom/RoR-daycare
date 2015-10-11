@@ -1,0 +1,2 @@
+class Worker < User
+end

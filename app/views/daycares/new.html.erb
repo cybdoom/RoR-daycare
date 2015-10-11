@@ -10,7 +10,7 @@
         <%=f.text_field :country, class: "d_input d_input2", placeholder: 'Country'%>
       </div>
 
-      <%= f.fields_for :users do |daycare_manager| %>
+      <%= f.fields_for :manager do |daycare_manager| %>
         <%= daycare_manager.email_field :email, class: "d_input d_input1", placeholder: 'Email'%>
         <%= daycare_manager.password_field :password, class: "d_input d_input1", placeholder: 'Password'%>
         <%= daycare_manager.password_field :password_confirmation, class: "d_input d_input1", placeholder: 'Confirm Password'%>
