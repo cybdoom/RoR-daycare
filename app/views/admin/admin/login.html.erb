@@ -6,7 +6,7 @@
         <%=image_tag 'login_logo.jpg', width: '236', height: '133', class: 'login_logo', alt: 'Healthcare'%>
         <%=form_tag '/admin/login', method: :post do %>
           <%=email_field_tag :email, nil, class: 'user_icon', placeholder: 'Email', required: true%>
-          <%=password_field_tag :email, nil, class: 'password_icon', placeholder: 'Password', required: true%>
+          <%=password_field_tag :password, nil, class: 'password_icon', placeholder: 'Password', required: true%>
           <%=submit_tag 'Login', class: 'login_btn'%>
         <%end%>
       </div>

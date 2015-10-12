@@ -56,3 +56,6 @@ gem 'devise'
 gem 'jquery-datetimepicker-rails'
 
 gem 'chronic'
+
+# gem 'country_select'
+gem 'countries_and_languages', :require => 'countries_and_languages/rails'

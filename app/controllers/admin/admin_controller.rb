@@ -12,10 +12,10 @@ class Admin::AdminController < ApplicationController
           redirect_to admin_dashboard_path and return
         else
           flash[:error] = 'Invalid email & password'
-          redirect_to root_path and return
+          render :login
         end
       else
-        flash[:error] = 'Invalid email & password'
+        flash[:error] = 'Unauthorized access!'
         redirect_to root_path
       end
     else

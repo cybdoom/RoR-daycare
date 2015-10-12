@@ -1,1 +1,36 @@
-<h1>Super Admin Dashboard</h1>
+<div class="mid_wrapp">
+    <div class="super_admin_lft"> 
+      <div class="admin_prof_img">
+        <%=image_tag 'admin_prof_img.jpg'%>
+      </div>
+      <div class="edit_prof_text">
+        <h4>Tareq <br>Gholam</h4><p>Norway</p>
+        <a href="#" class="edt_prof_btn">Edit Profile</a>
+      </div>
+    </div>
+    <div class="notif_left_col super_admin_rht">
+      <ul>
+        <li>
+          <a href="#">
+            <%=image_tag 'customer_icon.jpg'%>
+            <span class="ser_heading">Customer</span>
+          </a>
+        </li>
+          
+        <li class="prev_box">
+          <a href="<%=admin_select_privilege_path%>">
+            <%=image_tag 'previledge.jpg'%>
+            <span class="ser_heading">Priviledge</span>
+          </a>
+        </li>
+          
+        <li class="fun_box"> 
+          <a href="functionality.html">
+            <%=image_tag 'setting_icon.jpg'%> 
+            <span class="ser_heading">Functionality</span>
+          </a>
+        </li>
+         
+      </ul>
+   </div>
+  </div>

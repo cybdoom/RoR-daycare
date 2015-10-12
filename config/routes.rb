@@ -71,5 +71,8 @@ Rails.application.routes.draw do
   namespace :admin do
     match :login, to: 'admin#login', via: [:get, :post]
     get :dashboard, to: 'admin#dashboard'
+    get :select_privilege, to: 'admin#select_privilege'
+    match :set_privilege, to: 'admin#set_privilege', via: [:get, :post]
+    get :functionality, to: 'admin#functionality'
   end
 end
