@@ -3,7 +3,6 @@ class DaycareMailer < ApplicationMailer
   def send_invite_to_workers(emails, daycare)
     emails = emails.join(",")
     @daycare = daycare
-    binding.pry
     mail(to: emails, subject: 'Welcome to Daycare')
   end
 
