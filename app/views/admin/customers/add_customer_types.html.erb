@@ -1,0 +1,20 @@
+<div class="mid_wrapp padd34">
+  <div class="d_input_wrap padd_zero">
+    <%=form_tag '/admin/customers/add_customer_types', method: :post do |f|%>
+      <div class="append_div">
+        <div class="input_field_col">
+          <%=text_field_tag 'name[]', nil, placeholder: 'Customer Type'%>
+        </div>
+      </div>
+      <div class="add_link">
+        <a id="add_more_customer_type" href="javascript:;">Add more...</a>
+      </div>
+      <%=submit_tag 'Submit', class: 'submit_btn mar_b'%>
+    <%end%>
+  </div>
+</div>
+<script type="text/javascript">
+  $('#add_more_customer_type').click(function(){
+    $('.append_div').append('<div class="input_field_col"><input type="text" name="name[]" id="name_" placeholder="Customer Type"></div>');
+  });
+</script>
