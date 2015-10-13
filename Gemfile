@@ -61,3 +61,5 @@ gem 'chronic'
 gem 'countries_and_languages', :require => 'countries_and_languages/rails'
 
 gem 'roo'
+
+gem 'roo-xls'
