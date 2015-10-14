@@ -51,8 +51,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    countries (1.1.0)
+      currencies (~> 0.4.2)
+      i18n_data (~> 0.7.0)
     countries_and_languages (0.2.0)
       i18n_data
+    currencies (0.4.2)
     debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -187,6 +191,7 @@ DEPENDENCIES
   byebug
   chronic
   coffee-rails (~> 4.1.0)
+  countries
   countries_and_languages
   devise
   jbuilder (~> 2.0)

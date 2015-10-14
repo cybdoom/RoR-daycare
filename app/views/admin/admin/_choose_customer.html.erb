@@ -1,0 +1,53 @@
+<div class="priv_col_wrapper">
+  <div class="sel_col mrg_bot_zero">
+    <h4>Customer</h4>
+    <!-- <a class="select_txt" href="#">Select All</a> -->
+  </div>
+  <div class="custom_checbox_list admin_tic_chkbox">
+    <ul>
+      <%if customers.present?%>
+        <%customers.each do |customer|%>
+          <li>
+            <input type="checkbox" name="daycare_id" class="cust_check" id="customer_<%=customer.id%>" value="<%=customer.id%>" />
+            <label for="customer_<%=customer.id%>"><%=customer.name%></label>
+          </li>
+        <%end%>
+      <%else%>
+        <li>There are no customer. Please select another customer type</li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+
+<%if customers.present? %>
+  <%=form_tag admin_set_privilege_path, method: :get, id: 'functionality_form' do%>
+    <%=hidden_field_tag :daycare_id %>
+    <%=hidden_field_tag :functionality %>
+    <%=render 'choose_user_type'%>
+    <%=render 'choose_functionality'%>
+  <%end%>
+<%end%>
+
+<script type="text/javascript">
+  var selectedBox = null;
+  $(".cust_check").click(function() {
+    selectedBox = this.id;
+
+    $(".cust_check").each(function() {
+      if ( this.id == selectedBox ){
+        this.checked = true;
+        $('#daycare_id').val($(this).val());
+      }else{
+        this.checked = false;
+      };
+    });
+  });
+
+  $('.functionality_link').click(function(){
+    functionality = $(this).data('name');
+    $('#functionality').val(functionality);
+    $('#functionality_form').submit();
+  });
+
+
+</script>

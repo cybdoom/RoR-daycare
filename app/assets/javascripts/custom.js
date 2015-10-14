@@ -23,4 +23,9 @@ $(document).on('page:change', function(){
     var year = date.getFullYear().toString().slice(2);
     return day + '-' + month + '-' + year;
   }
+
+  $('#select_country').change(function(){
+    $(this).closest('form').submit();
+  });
+
 });

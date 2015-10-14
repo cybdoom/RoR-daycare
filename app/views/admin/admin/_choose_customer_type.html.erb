@@ -1,0 +1,33 @@
+<div class="priv_col_wrapper">
+  <div class="sel_col mrg_bot_zero">
+    <h4>Customer Type</h4>
+    <a class="select_txt" href="javascript:;">Select All</a>
+  </div>
+  <div class="custom_checbox_list admin_tic_chkbox">
+    <ul>
+      <%if customer_types.present? %>
+        <%=form_tag admin_fetch_customers_path, method: :get, remote: true do%>
+          <%customer_types.all.each do |customer_type|%>
+            <li>
+              <input type="checkbox" name="customer_type_id[]" class="cust_type" id="customer_type_<%=customer_type.id%>" value="<%=customer_type.id%>" />
+              <label for="customer_type_<%=customer_type.id%>"><%=customer_type.name%></label>
+            </li>
+          <%end%>
+        <%end%>
+      <%else%>
+        <li>There are no customer types in this country</li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  
+  $('.cust_type').click(function(){
+    $(this).closest('form').submit();
+  });
+
+  $('.select_txt').click(function(){
+    $('.cust_type').click();
+  });
+  
+</script>
