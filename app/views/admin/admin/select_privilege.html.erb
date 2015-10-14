@@ -1,119 +1,38 @@
-<div class="hgt_auto">
-  <div class="header_top_row">
-    <span class="back_btn"><a href="/">&nbsp;</a></span>
-    <span class="menu_icons">
-      <div class="submenu_toggle">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <%if current_user%>
-            <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
-          <%end%>
-        </ul>
-      </div>
-    </span>
-  </div>
+<div class="header_top_row green_header">
+  <span class="back_btn"><%=link_to 'Privilege', :back %></span>
+  <span class="menu_icons">
+    <div class="submenu_toggle green_submenu">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <%if current_user%>
+          <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+        <%end%>
+      </ul>
+    </div>
+  </span>
 </div>
 <div class="mid_wrapp padd34">
   <div class="priv_col_wrapper">
     <div class="priv_col_wrapper">
       <div class="d_input_wrap">
-        <ul>
-          <li>
-            <a href="javascript:;">Country</a>
-            <span class="blue_norway"><%=select_tag(:country,options_for_select(countries), class: 'country_select')%></span>
-          </li>
-          <li>
-            <a href="javascript:;">Language</a>
-            <span class="blue_norway"><%=select_tag(:language,options_for_select(languages), class: 'language_select')%></span>
-          </li>
-        </ul>
+        <%=form_tag admin_fetch_customer_types_path, method: :get, remote: true do %>
+          <ul>
+            <li>
+              <a href="javascript:;">Country</a>
+              <span class="blue_norway"><%=select_tag(:country, options_for_select(countries), class: 'country_select', id: 'select_country')%></span>
+            </li>
+            <!-- <li>
+              <a href="javascript:;">Language</a>
+              <span class="blue_norway"><%=select_tag(:language,options_for_select(languages), class: 'language_select')%></span>
+            </li> -->
+          </ul>
+        <%end%>
       </div>
     </div>
-    <div class="priv_col_wrapper">
-      <div class="sel_col mrg_bot_zero">
-        <h4>Customer Type</h4>
-        <a class="select_txt" href="#">Select All</a>
-      </div>
-      <div class="custom_checbox_list admin_tic_chkbox">
-        <ul>
-          <li>
-            <input type="checkbox" id="test1" />
-            <label for="test1">Customer type-1</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test2" />
-            <label for="test2">Customer type-2</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test3" />
-            <label for="test3">Customer type-3</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test4" />
-            <label for="test4">Customer type-4</label>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="priv_col_wrapper">
-      <div class="sel_col mrg_bot_zero">
-        <h4>Customer</h4>
-        <a class="select_txt" href="#">Select All</a>
-      </div>
-      <div class="custom_checbox_list admin_tic_chkbox">
-        <ul>
-          <li>
-            <input type="checkbox" id="test5" />
-            <label for="test5">Customer-1</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test6" />
-            <label for="test6">Customer-2</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test7" />
-            <label for="test7">Customer-3</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test8" />
-            <label for="test8">Customer-4</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test9" />
-            <label for="test9">Customer-5</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test10" />
-            <label for="test10">Customer-6</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test11" />
-            <label for="test11">Customer-7</label>
-          </li>
-          <li>
-            <input type="checkbox" id="test12" />
-            <label for="test12">Customer-8</label>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="priv_col_wrapper">
-      <div class="sel_col mrg_bot_zero">
-        <h4>Functionality</h4>
-      </div>
-      <div class="d_input_wrap">
-        <ul>
-          <li><a href="#">Todo List</a></li>
-            <li><a href="#">Allergy</a></li>
-            <li><a href="#">Medication</a></li>
-            <li><a href="#">Notice Board</a></li>
-            <li><a href="#">Attendance</a></li>
-            <li><a href="#">Calender</a></li>
-            <li><a href="#">Intolerance</a></li>
-            <li><a href="todo_list.html">Todo List</a></li>
-        </ul>
-      </div>
-    </div>
+
+    <div id="show_customer_type"></div>
+    <div id="show_customer"></div>
+    <div id="show_functionality"></div>
 
   </div>
 </div>

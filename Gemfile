@@ -60,6 +60,8 @@ gem 'chronic'
 # gem 'country_select'
 gem 'countries_and_languages', :require => 'countries_and_languages/rails'
 
+gem 'countries', :require => 'global'
+
 gem 'roo'
 
 gem 'roo-xls'

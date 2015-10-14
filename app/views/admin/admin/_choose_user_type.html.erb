@@ -1,0 +1,34 @@
+<div class="priv_col_wrapper">
+  <div class="sel_col mrg_bot_zero">
+    <h4>User Type</h4>
+    <a class="select_txt select_user_type" href="javascript:;">Select All</a>
+  </div>
+  <div class="custom_checbox_list admin_tic_chkbox">
+    <ul>
+      <li>
+        <input type="checkbox" class="user_type_common" name="user_type[]" id="manager" value="manager" />
+        <label for="manager">Daycare Manager</label>
+      </li>
+      <li>
+        <input type="checkbox" class="user_type_common" name="user_type[]" id="worker" value="worker" />
+        <label for="worker">Daycare Workers</label>
+      </li>
+      <li>
+        <input type="checkbox" class="user_type_common" name="user_type[]" id="parents" value="parents" />
+        <label for="parents">Daycare Parents</label>
+      </li>
+      <li>
+        <input type="checkbox" class="user_type_common" name="user_type[]" id="partner" value="partner" />
+        <label for="partner">Daycare Partner</label>
+      </li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.select_user_type').click(function(){
+    $('.user_type_common').click();
+  });
+  $('.user_type_common').click(function(){
+    $('#user_type_').val($(this).val());
+  });
+</script>

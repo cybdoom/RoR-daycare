@@ -1,3 +1,16 @@
+<div class="header_top_row green_header">
+  <span class="back_btn"><%=link_to 'Privilege', :back %></span>
+  <span class="menu_icons">
+    <div class="submenu_toggle green_submenu">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <%if current_user%>
+          <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+        <%end%>
+      </ul>
+    </div>
+  </span>
+</div>
 <div class="mid_wrapp padd34">
   <div class="previlidge_category">
     <ul>

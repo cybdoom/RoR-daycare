@@ -7,6 +7,7 @@ class Daycare < ActiveRecord::Base
   has_many :roles, dependent: :destroy
   has_many :departments, dependent: :destroy
   has_many :todos, dependent: :destroy
+  belongs_to :customer_type
 
   accepts_nested_attributes_for :manager, :departments, allow_destroy: true, reject_if: :all_blank
   

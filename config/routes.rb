@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     get :select_privilege, to: 'admin#select_privilege'
     match :set_privilege, to: 'admin#set_privilege', via: [:get, :post]
     get :functionality, to: 'admin#functionality'
+    get :fetch_customer_types, to: 'admin#fetch_customer_types'
+    get :fetch_customers, to: 'admin#fetch_customers'
     resources :customers, only: [] do
       collection { 
         get  :import_new
