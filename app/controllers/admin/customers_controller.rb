@@ -10,9 +10,14 @@ class Admin::CustomersController < ApplicationController
   end
 
   def import
-    Daycare.import(params[:file])
-    flash[:success] = "Success: customers were loaded"
-    redirect_to admin_dashboard_path
+    if params[:customer_type_id].present?
+      Daycare.import(params[:file], params[:customer_type_id])
+      flash[:success] = "Success: customers were loaded"
+      redirect_to admin_dashboard_path
+    else
+      flash[:error] = 'Please select customer type first!'
+      render :import_new
+    end
   end
 
   def add_customer_types
