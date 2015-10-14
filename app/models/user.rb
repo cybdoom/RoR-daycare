@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def superadmin?
-  	role.name.eql?('superadmin')
+  	role and role.name.eql?('superadmin')
   end
 
   def manager?
