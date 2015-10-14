@@ -1,0 +1,59 @@
+                            Prefix Verb     URI Pattern                                   Controller#Action
+                  new_user_session GET      /users/sign_in(.:format)                      devise/sessions#new
+                      user_session POST     /users/sign_in(.:format)                      devise/sessions#create
+              destroy_user_session DELETE   /users/sign_out(.:format)                     devise/sessions#destroy
+                     user_password POST     /users/password(.:format)                     devise/passwords#create
+                 new_user_password GET      /users/password/new(.:format)                 devise/passwords#new
+                edit_user_password GET      /users/password/edit(.:format)                devise/passwords#edit
+                                   PATCH    /users/password(.:format)                     devise/passwords#update
+                                   PUT      /users/password(.:format)                     devise/passwords#update
+          cancel_user_registration GET      /users/cancel(.:format)                       devise/registrations#cancel
+                 user_registration POST     /users(.:format)                              devise/registrations#create
+             new_user_registration GET      /users/sign_up(.:format)                      devise/registrations#new
+            edit_user_registration GET      /users/edit(.:format)                         devise/registrations#edit
+                                   PATCH    /users(.:format)                              devise/registrations#update
+                                   PUT      /users(.:format)                              devise/registrations#update
+                                   DELETE   /users(.:format)                              devise/registrations#destroy
+                              root GET      /                                             welcome#index
+                    login_daycares GET|POST /daycares/login(.:format)                     daycares#login
+           add_departments_daycare GET|POST /daycares/:id/add_departments(.:format)       daycares#add_departments
+           congratulations_daycare GET      /daycares/:id/congratulations(.:format)       daycares#congratulations
+            invite_parents_daycare GET|POST /daycares/:id/invite_parents(.:format)        daycares#invite_parents
+            invite_workers_daycare GET|POST /daycares/:id/invite_workers(.:format)        daycares#invite_workers
+                          daycares GET      /daycares(.:format)                           daycares#index
+                                   POST     /daycares(.:format)                           daycares#create
+                       new_daycare GET      /daycares/new(.:format)                       daycares#new
+                      edit_daycare GET      /daycares/:id/edit(.:format)                  daycares#edit
+                           daycare GET      /daycares/:id(.:format)                       daycares#show
+                                   PATCH    /daycares/:id(.:format)                       daycares#update
+                                   PUT      /daycares/:id(.:format)                       daycares#update
+                                   DELETE   /daycares/:id(.:format)                       daycares#destroy
+                   share_todo_todo GET      /todos/:id/share_todo(.:format)               todos#share_todo
+             todo_departments_todo GET|POST /todos/:id/todo_departments(.:format)         todos#todo_departments
+                             todos GET      /todos(.:format)                              todos#index
+                                   POST     /todos(.:format)                              todos#create
+                          new_todo GET      /todos/new(.:format)                          todos#new
+                         edit_todo GET      /todos/:id/edit(.:format)                     todos#edit
+                              todo GET      /todos/:id(.:format)                          todos#show
+                                   PATCH    /todos/:id(.:format)                          todos#update
+                                   PUT      /todos/:id(.:format)                          todos#update
+                                   DELETE   /todos/:id(.:format)                          todos#destroy
+                       admin_login GET|POST /admin/login(.:format)                        admin/admin#login
+                   admin_dashboard GET      /admin/dashboard(.:format)                    admin/admin#dashboard
+            admin_select_privilege GET      /admin/select_privilege(.:format)             admin/admin#select_privilege
+               admin_set_privilege GET|POST /admin/set_privilege(.:format)                admin/admin#set_privilege
+               admin_functionality GET      /admin/functionality(.:format)                admin/admin#functionality
+        admin_fetch_customer_types GET      /admin/fetch_customer_types(.:format)         admin/admin#fetch_customer_types
+             admin_fetch_customers GET      /admin/fetch_customers(.:format)              admin/admin#fetch_customers
+        import_new_admin_customers GET      /admin/customers/import_new(.:format)         admin/customers#import_new
+            import_admin_customers POST     /admin/customers/import(.:format)             admin/customers#import
+add_customer_types_admin_customers GET|POST /admin/customers/add_customer_types(.:format) admin/customers#add_customer_types
+                 todos_admin_todos GET      /admin/todos/todos(.:format)                  admin/todos#todos
+                       admin_todos GET      /admin/todos(.:format)                        admin/todos#index
+                                   POST     /admin/todos(.:format)                        admin/todos#create
+                    new_admin_todo GET      /admin/todos/new(.:format)                    admin/todos#new
+                   edit_admin_todo GET      /admin/todos/:id/edit(.:format)               admin/todos#edit
+                        admin_todo GET      /admin/todos/:id(.:format)                    admin/todos#show
+                                   PATCH    /admin/todos/:id(.:format)                    admin/todos#update
+                                   PUT      /admin/todos/:id(.:format)                    admin/todos#update
+                                   DELETE   /admin/todos/:id(.:format)                    admin/todos#destroy

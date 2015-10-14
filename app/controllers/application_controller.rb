@@ -13,4 +13,18 @@ class ApplicationController < ActionController::Base
   end
   
   helper_method :current_daycare
+
+
+  private
+    def authenticate_admin!
+      unless current_user
+        redirect_to admin_login_path
+      end
+    end
+
+    def ensure_superadmin
+      unless current_user.superadmin?
+        redirect_to root_path, alert: "You don't have authorization to access this page!"
+      end
+    end
 end

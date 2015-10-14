@@ -1,7 +1,11 @@
+<%multi_select ||= false%>
+<%path ||= nil%>
 <div class="priv_col_wrapper">
   <div class="sel_col mrg_bot_zero">
     <h4>Customer</h4>
-    <!-- <a class="select_txt" href="#">Select All</a> -->
+    <%if multi_select == true%>
+      <a class="select_txt" href="#">Select All</a>
+    <%end%>
   </div>
   <div class="custom_checbox_list admin_tic_chkbox">
     <ul>
@@ -22,32 +26,35 @@
 <%if customers.present? %>
   <%=form_tag admin_set_privilege_path, method: :get, id: 'functionality_form' do%>
     <%=hidden_field_tag :daycare_id %>
-    <%=hidden_field_tag :functionality %>
-    <%=render 'choose_user_type'%>
-    <%=render 'choose_functionality'%>
+    <%=render 'choose_user_type', multi_select: multi_select, path: path%>
+    <%=hidden_field_tag :functionality unless path == "admin_todos" %>
+    <%=render 'choose_functionality' unless path == "admin_todos" %>
   <%end%>
 <%end%>
 
-<script type="text/javascript">
-  var selectedBox = null;
-  $(".cust_check").click(function() {
-    selectedBox = this.id;
+<%if multi_select == true%>
+<%else%>
+  <script type="text/javascript">
+    var selectedBox = null;
+    $(".cust_check").click(function() {
+      selectedBox = this.id;
 
-    $(".cust_check").each(function() {
-      if ( this.id == selectedBox ){
-        this.checked = true;
-        $('#daycare_id').val($(this).val());
-      }else{
-        this.checked = false;
-      };
+      $(".cust_check").each(function() {
+        if ( this.id == selectedBox ){
+          this.checked = true;
+          $('#daycare_id').val($(this).val());
+        }else{
+          this.checked = false;
+        };
+      });
     });
-  });
 
-  $('.functionality_link').click(function(){
-    functionality = $(this).data('name');
-    $('#functionality').val(functionality);
-    $('#functionality_form').submit();
-  });
+    $('.functionality_link').click(function(){
+      functionality = $(this).data('name');
+      $('#functionality').val(functionality);
+      $('#functionality_form').submit();
+    });
 
 
-</script>
+  </script>
+<%end%>

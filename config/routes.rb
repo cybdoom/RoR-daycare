@@ -40,5 +40,10 @@ Rails.application.routes.draw do
         match :add_customer_types, via: [:get, :post]
       }
     end
+    resources :todos do
+      collection do
+        get :todos
+      end
+    end
   end
 end

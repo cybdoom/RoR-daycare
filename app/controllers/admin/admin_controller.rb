@@ -27,12 +27,18 @@ class Admin::AdminController < ApplicationController
   end
 
   def fetch_customer_types
-    country = ISO3166::Country.new(params[:country])
-    country_name = country.name
-    @customer_types = CustomerType.includes(:daycares).where('daycares.country =?', country_name).references(:daycare)
+    @multi_select = params[:path] == 'admin_todos' ? true : false
+    @path = params[:path]
+    countries_params = Array(params[:country])
+    countries= []
+    countries_params.each{|cp| countries << ISO3166::Country.new(cp)}
+    country_names = countries.collect(&:name)
+    @customer_types = CustomerType.includes(:daycares).where('daycares.country IN (?)', country_names).references(:daycare)
   end
 
   def fetch_customers
+    @multi_select = params[:path] == 'admin_todos' ? true : false
+    @path = params[:path]
     if params[:customer_type_id]
       @customers = Daycare.where(customer_type_id: params[:customer_type_id])
     else
@@ -45,17 +51,11 @@ class Admin::AdminController < ApplicationController
     if request.post?
     end
   end
+
+  def todos
+    
+  end
   
   private
-    def authenticate_admin!
-      unless current_user
-        redirect_to admin_login_path
-      end
-    end
-
-    def ensure_superadmin
-      unless current_user.superadmin?
-        redirect_to root_path, alert: "You don't have authorization to access this page!"
-      end
-    end
+    
 end

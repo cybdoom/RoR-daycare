@@ -1,12 +1,15 @@
+<%multi_select ||= false%>
 <div class="priv_col_wrapper">
   <div class="sel_col mrg_bot_zero">
     <h4>Customer Type</h4>
-    <a class="select_txt" href="javascript:;">Select All</a>
+    <%if multi_select == true%>
+      <a class="select_txt" href="javascript:;">Select All</a>
+    <%end%>
   </div>
   <div class="custom_checbox_list admin_tic_chkbox">
     <ul>
       <%if customer_types.present? %>
-        <%=form_tag admin_fetch_customers_path, method: :get, remote: true do%>
+        <%=form_tag admin_fetch_customers_path(path: @path), method: :get, remote: true do%>
           <%customer_types.all.each do |customer_type|%>
             <li>
               <input type="checkbox" name="customer_type_id[]" class="cust_type" id="customer_type_<%=customer_type.id%>" value="<%=customer_type.id%>" />
@@ -20,6 +23,10 @@
     </ul>
   </div>
 </div>
+<%if multi_select == true%>
+<%else%>
+
+<%end%>
 <script type="text/javascript">
   
   $('.cust_type').click(function(){
