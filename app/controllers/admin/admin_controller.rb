@@ -47,7 +47,6 @@ class Admin::AdminController < ApplicationController
   end
 
   def set_privilege
-    # binding.pry
     if request.post?
     end
   end
