@@ -39,6 +39,9 @@ Rails.application.routes.draw do
         post :import
         match :add_customer_types, via: [:get, :post]
       }
+      member do
+        match :notify_users, via: [:get, :post]
+      end
     end
     resources :todos do
       collection do

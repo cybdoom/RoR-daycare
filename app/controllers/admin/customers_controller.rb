@@ -11,9 +11,13 @@ class Admin::CustomersController < ApplicationController
 
   def import
     if params[:customer_type_id].present?
-      Daycare.import(params[:file], params[:customer_type_id])
-      flash[:success] = "Success: customers were loaded"
-      redirect_to admin_dashboard_path
+      @daycare = Daycare.import(params[:file], params[:customer_type_id])
+      if @daycare.save
+        flash[:success] = "Success: customers were loaded"
+        redirect_to notify_users_admin_customer_path(@daycare)
+      else
+        render :import_new
+      end
     else
       flash[:error] = 'Please select customer type first!'
       render :import_new
@@ -31,6 +35,17 @@ class Admin::CustomersController < ApplicationController
         flash[:error] = 'Please select customer type'
       end
       redirect_to '/admin/customers/import_new'
+    end
+  end
+
+  def notify_users
+    @daycare = Daycare.find(params[:id])
+    if request.post?
+      AdminMailer.notify_manager(@daycare).deliver
+      AdminMailer.notify_workers(@daycare).deliver
+      AdminMailer.notify_parents(@daycare).deliver
+      flash[:notice] = 'All users have been notified via email successfully!'
+      redirect_to admin_dashboard_path
     end
   end
   

@@ -22,9 +22,11 @@ class Daycare < ActiveRecord::Base
       row = Hash[[header, spreadsheet.row(i)].transpose]
       unless Manager.exists?(email: row['Daycare Manager Email'])
         @daycare = Daycare.new
+        @daycare.country = row['Country']
+        @daycare.language = row['Language']
         @daycare.name = row['Customer Name']
         @daycare.address_line1 = row['Address']
-        @daycare.telephone = row['Telephone']
+        @daycare.telephone = row['Telephone'].to_s
         @daycare.customer_type_id = customer_type_id
         CSV.parse_line(row['Department Names']).each do |name|
           @daycare.departments.build(department_name: name)
@@ -41,9 +43,9 @@ class Daycare < ActiveRecord::Base
           @worker.password = Devise.friendly_token.first(8)
         end
 
-        # CSV.parse_line(row['Daycare Children Names']).each do |name|
-        #   @child = @daycare.children.build(name: name)
-        # end
+        CSV.parse_line(row['Daycare Children Names']).each do |name|
+          @child = @daycare.children.build(name: name)
+        end
 
         CSV.parse_line(row['Daycare Parent Names']).each_with_index do |name, index|
           @worker = @daycare.parents.build(name: name)
@@ -51,11 +53,9 @@ class Daycare < ActiveRecord::Base
           @worker.email = email if email.present?
           @worker.password = Devise.friendly_token.first(8)
         end
-
-        @daycare.save!
       end
     end
-    
+    @daycare
   end
   
   def self.open_spreadsheet(file)
