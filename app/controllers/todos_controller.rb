@@ -1,6 +1,8 @@
 class TodosController < ApplicationController
+  before_action :authenticate_manager!
   before_action :set_daycare
   before_action :parse_date, only: [:create, :update]
+  before_action :check_permission
 
   def index
     
@@ -65,6 +67,18 @@ class TodosController < ApplicationController
     def parse_date
       params[:todo][:schedule_date] = Chronic.parse(params[:todo][:schedule_date])
       params[:todo][:due_date] = Chronic.parse(params[:todo][:due_date])
+    end
+
+    def check_permission
+      unless current_user.can_create?('Todo')
+        redirect_to @daycare
+      end
+    end
+
+    def authenticate_manager!
+      unless current_user
+        redirect_to login_daycares_path
+      end
     end
 
 end

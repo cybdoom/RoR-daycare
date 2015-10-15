@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   belongs_to :daycare
   belongs_to :role
+  has_many :user_todos, dependent: :destroy
+  has_many :todos, through: :user_todos
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
