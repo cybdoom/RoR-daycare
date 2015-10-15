@@ -4,7 +4,7 @@
   <div class="sel_col mrg_bot_zero">
     <h4>Customer</h4>
     <%if multi_select == true%>
-      <a class="select_txt" href="#">Select All</a>
+      <a class="select_txt cust_select_all" href="javascript:;">Select All</a>
     <%end%>
   </div>
   <div class="custom_checbox_list admin_tic_chkbox">
@@ -23,16 +23,60 @@
   </div>
 </div>
 
-<%if customers.present? %>
-  <%=form_tag admin_set_privilege_path, method: :get, id: 'functionality_form' do%>
-    <%=hidden_field_tag :daycare_id %>
-    <%=render 'choose_user_type', multi_select: multi_select, path: path%>
-    <%=hidden_field_tag :functionality unless path == "admin_todos" %>
-    <%=render 'choose_functionality' unless path == "admin_todos" %>
+<%if path == "admin_todos"%>
+  <div class="priv_col_wrapper">
+    <div class="sel_col mrg_bot_zero">
+      <h4>whom the to do list is to be created for</h4>
+    </div>
+    <div class="custom_checbox_list admin_tic_chkbox">
+      <%=form_tag todo_assignee_admin_todos_path, method: :get, remote: true do%>
+        <ul>
+          <li>
+            <input type="checkbox" name="todo_assignee" class="type_check" id="department_todo" value="departments" />
+            <label for="department_todo">For Departments</label>
+          </li>
+          <li>
+            <input type="checkbox" name="todo_assignee" class="type_check" id="users_todo" value="users"/>
+            <label for="users_todo">For Users</label>
+          </li>
+        </ul>
+      <%end%>
+    </div>
+  </div>
+<%end%>
+
+<%unless path == 'admin_todos'%>
+  <%if customers.present? %>
+    <%=form_tag admin_set_privilege_path, method: :get, id: 'functionality_form' do%>
+      <%=hidden_field_tag :daycare_id %>
+      <%=render 'choose_user_type', multi_select: multi_select, path: path%>
+      <%=hidden_field_tag :functionality unless path == "admin_todos" %>
+      <%=render 'choose_functionality' unless path == "admin_todos" %>
+    <%end%>
   <%end%>
 <%end%>
 
+
 <%if multi_select == true%>
+  <script type="text/javascript">
+    $('.cust_select_all').click(function(){
+      $('.cust_check').trigger('click');
+    });
+    var selectedTypeBox = null;
+    $(".type_check").click(function() {
+      selectedTypeBox = this.id;
+
+      $(".type_check").each(function() {
+        if ( this.id == selectedTypeBox ){
+          this.checked = true;
+          $('#daycare_id').val($(this).val());
+        }else{
+          this.checked = false;
+        };
+      });
+      $(this).closest('form').submit();
+    });
+  </script>
 <%else%>
   <script type="text/javascript">
     var selectedBox = null;
@@ -54,7 +98,5 @@
       $('#functionality').val(functionality);
       $('#functionality_form').submit();
     });
-
-
   </script>
 <%end%>

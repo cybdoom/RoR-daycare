@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :todos do
       collection do
         get :todos
+        get :todo_assignee
       end
     end
   end

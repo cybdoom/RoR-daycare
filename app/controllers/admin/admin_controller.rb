@@ -27,13 +27,13 @@ class Admin::AdminController < ApplicationController
   end
 
   def fetch_customer_types
-    @multi_select = params[:path] == 'admin_todos' ? true : false
+    @multi_select = params[:path] == 'admin_todos' ? true : true
     @path = params[:path]
     countries_params = Array(params[:country])
     countries= []
     countries_params.each{|cp| countries << ISO3166::Country.new(cp)}
     country_names = countries.collect(&:name)
-    @customer_types = CustomerType.includes(:daycares).where('daycares.country IN (?)', country_names).references(:daycare)
+    @customer_types = CustomerType.includes(:daycares).where('daycares.country IN (?) AND daycares.language =?', country_names, params[:language]).references(:daycare)
   end
 
   def fetch_customers

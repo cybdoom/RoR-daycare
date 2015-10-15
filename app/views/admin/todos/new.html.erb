@@ -14,7 +14,6 @@
   </div>
 </div>
 
-
 <div class="mid_wrapp padd34">
   <div class="priv_col_wrapper">
     <div class="priv_col_wrapper">
@@ -23,7 +22,11 @@
           <ul>
             <li>
               <a href="javascript:;">Country</a>
-              <span class="blue_norway"><%=select_tag(:country, options_for_select(countries),:multiple => true, class: 'country_select', id: 'select_country')%></span>
+              <span class="blue_norway"><%=select_tag(:country, options_for_select(countries), class: 'country_select')%></span>
+            </li>
+            <li>
+              <a href="javascript:;">Language</a>
+              <span class="blue_norway"><%=select_tag(:language,options_for_select(languages), class: 'language_select', id: 'select_country')%></span>
             </li>
           </ul>
         <%end%>
@@ -32,6 +35,6 @@
 
     <div id="show_customer_type"></div>
     <div id="show_customer"></div>
-
+    <div id="show_user_types"></div>
   </div>
 </div>

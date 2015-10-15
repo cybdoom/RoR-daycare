@@ -14,6 +14,14 @@ class Admin::TodosController < ApplicationController
     # @todo.key_tasks.build
   end
 
+  def todo_assignee
+    if params[:todo_assignee] == 'users'
+      @show_user_types = true
+    else
+      @show_user_types = false
+    end
+  end
+
   # def create
   #   @todo = @daycare.todos.new(todo_params)
   #   if @todo.save

@@ -1,0 +1,3 @@
+<%if @show_user_types == true%>
+  $('#show_user_types').html("<%=j render 'admin/admin/choose_user_type', multi_select: true, path: 'admin_todos'%>")
+<%end%>
