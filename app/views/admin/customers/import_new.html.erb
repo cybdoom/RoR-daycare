@@ -13,6 +13,7 @@
     </span>
   </div>
 </div>
+
 <div class="mid_wrapp padd34">
   <div class="d_input_wrap padd_zero">
     <%=form_tag import_admin_customers_path, multipart: true do |f|%>
@@ -20,6 +21,9 @@
         <div class="input_field_col">
           <%= select_tag :customer_type_id, options_from_collection_for_select(CustomerType.all, 'id', 'name'), prompt: 'Select Customer Type', class: 'daycare_select', required: true %>
           <%= file_field_tag :file, {required: "true"} %>
+        </div>
+        <div class="add_link">
+          <%= link_to "Add new customer type", add_customer_types_admin_customers_path %>
         </div>
       </div>
       <%=submit_tag 'Import', class: 'submit_btn mar_b'%>
