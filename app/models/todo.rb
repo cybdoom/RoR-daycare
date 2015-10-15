@@ -16,21 +16,25 @@ class Todo < ActiveRecord::Base
 
   #Check permissions by user
   def can_be_created_by?(user)
+    return true if user.superadmin?
     permission = user.daycare.create_permissions.find_by(functionality_type: self.class.name, user_type: user.type)
     permission ? true : false
   end
 
   def can_be_edited_by?(user)
+    return true if user.superadmin?
     permission = user.daycare.edit_permissions.find_by(functionality_type: self.class.name, user_type: user.type)
     permission ? true : false
   end
 
   def can_be_viewed_by?(user)
+    return true if user.superadmin?
     permission = user.daycare.view_permissions.find_by(functionality_type: self.class.name, user_type: user.type)
     permission ? true : false
   end
 
   def can_be_reported_by?(user)
+    return true if user.superadmin?
     permission = user.daycare.report_permissions.find_by(functionality_type: self.class.name, user_type: user.type)
     permission ? true : false
   end
