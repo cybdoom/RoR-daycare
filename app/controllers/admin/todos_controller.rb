@@ -13,28 +13,28 @@ class Admin::TodosController < ApplicationController
   end
 
   def create
-    @departments = Department.where(daycare_id: params[:daycare_ids])
-    params[:daycare_ids].each do |daycare_id|
-      @todo = Todo.new(todo_params)
-      @todo.daycare_id = daycare_id.to_i
-      @todo.save
-      if params[:todo_assignee] == 'departments'
-        @departments.each do |department|
-          DepartmentTodo.create(department_id: department.id, todo_id: @todo.id)
-        end
-      else
-        params[:user_type].each do |user_type|
-          if user_type != 'Partner'
-            users = user_type.constantize.where(daycare_id: daycare_id)
-            users.each do |user|
-              UserTodo.create(todo_id: @todo.id, user_id: user.id)
-            end
+    @todo = Todo.new(todo_params)
+    if params[:todo_assignee] == 'departments'
+      @departments = Department.where(daycare_id: params[:daycare_ids])
+      @departments.each do |department|
+        @todo.department_todos.build(department_id: department.id)
+      end
+    else
+      params[:user_type].each do |user_type|
+        if user_type != 'Partner'
+          users = user_type.constantize.where(daycare_id: params[:daycare_ids])
+          users.each do |user|
+            @todo.user_todos.build(user_id: user.id)
           end
         end
       end
     end
-    flash[:notice] = 'Todo Successfully created!'
-    redirect_to admin_dashboard_path
+    if @todo.save
+      flash[:notice] = 'Todo Successfully created!'
+      redirect_to admin_dashboard_path
+    else
+      render :new
+    end
   end
 
   def todo_assignee
