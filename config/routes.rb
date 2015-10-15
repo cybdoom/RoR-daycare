@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     end
     resources :todos do
       collection do
+        get :todos
         get :todo_assignee
         get :search
         # get :fetch_customer_types
