@@ -60,6 +60,13 @@ class Admin::TodosController < ApplicationController
     redirect_to admin_dashboard_path
   end
 
+  def destroy
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    flash[:notice] = 'Todo Successfully deleted!'
+    redirect_to admin_dashboard_path
+  end
+
   def search
   end
 
