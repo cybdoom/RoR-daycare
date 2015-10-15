@@ -1,0 +1,9 @@
+
+<div class="mid_wrapp padd34">
+  <h4><%=@todo.title%></h4>
+  <div class="priv_col_wrapper">
+  <%=nested_form_for [:admin, @todo] do |f|%>
+    <%= render 'todos/form', f: f%>
+  <%end%>
+  </div>
+</div>

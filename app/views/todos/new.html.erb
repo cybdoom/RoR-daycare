@@ -14,16 +14,16 @@
   </div>
 </div>
 <div class="mid_wrapp padd34">
-  <div class="c_list_1 c_list_3">
-    <h4>Add Icon</h4>
-  </div>
-  <div class="c_list_1">
-    <h4>Environment Day</h4>
-    <div class="c_list_1_in c_list_1_in2">
-      <%=image_tag 'e_img5.jpg', width: '159', height: '158' %>
-    </div>
-  </div>
+  
+  
   <%=nested_form_for @todo do |f|%>
+    <!-- <div class="c_list_1">
+      <h4>Environment Day</h4>
+      <div class="c_list_1_in c_list_1_in2">
+        <%#=image_tag 'e_img5.jpg', width: '159', height: '158' %>
+      </div>
+    </div> -->
+   
     <%= render 'form', f: f%>
   <%end%>
 </div>

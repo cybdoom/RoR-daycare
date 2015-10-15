@@ -1,3 +1,18 @@
+<!-- <div class="c_list_1">
+      <h4>Environment Day</h4>
+      <div class="c_list_1_in c_list_1_in2">
+        <%#=image_tag 'e_img5.jpg', width: '159', height: '158' %>
+      </div>
+    </div> -->
+<%= f.fields_for :icon do |image| %>
+  <div class="c_list_1 c_list_3">
+    <h4>Add Icon</h4>
+  </div>
+  <div class="c_list_1_in c_list_1_in2">
+    <%= image.file_field :image, class: "c_list_1" %>
+  </div>
+<% end %>
+
 <div class="schedule_col">
   <div class="schedule_field">
     <div class="sehedule_dt_tm">
@@ -47,5 +62,5 @@
       <%end%>
     </div>
   </div>
-  <%=f.submit 'Create', class: 'submit_btn mar_b'%>
+  <%=f.submit 'Save', class: 'submit_btn mar_b'%>
 </div>

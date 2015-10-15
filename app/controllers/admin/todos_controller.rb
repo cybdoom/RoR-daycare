@@ -5,11 +5,14 @@ class Admin::TodosController < ApplicationController
 
   def index
     @todos = Todo.includes(:departments, :users).where(daycare_id: params[:daycare_ids]).where('users.type in (?)', params[:user_type]).references(:todo)
+    @todos = Todo.all
+    
   end
 
   def new
     @todo = Todo.new
     @todo.key_tasks.build
+    @todo.build_icon
   end
 
   def create
@@ -45,10 +48,16 @@ class Admin::TodosController < ApplicationController
     end
   end
 
-  def edit    
+  def edit  
+    @todo = Todo.find(params[:id])  
+    @todo.build_icon if @todo.icon.blank?
   end
 
   def update
+    @todo = Todo.find(params[:id])  
+    @todo.update_attributes(todo_params)
+    flash[:notice] = 'Todo Successfully updated!'
+    redirect_to admin_dashboard_path
   end
 
   def search

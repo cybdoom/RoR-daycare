@@ -9,6 +9,7 @@ class TodosController < ApplicationController
   def new
     @todo = @daycare.todos.new
     @todo.key_tasks.build
+    @todo.build_icon
   end
 
   def create
