@@ -45,16 +45,13 @@ class Admin::TodosController < ApplicationController
     end
   end
 
-  def edit
-    
+  def edit    
   end
 
   def update
-    
   end
 
   def search
-    
   end
 
   private

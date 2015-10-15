@@ -60,8 +60,7 @@ class Admin::AdminController < ApplicationController
     end
   end
 
-  def todos
-    
+  def todos    
   end
   
   private

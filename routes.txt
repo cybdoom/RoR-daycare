@@ -48,7 +48,10 @@
         import_new_admin_customers GET      /admin/customers/import_new(.:format)         admin/customers#import_new
             import_admin_customers POST     /admin/customers/import(.:format)             admin/customers#import
 add_customer_types_admin_customers GET|POST /admin/customers/add_customer_types(.:format) admin/customers#add_customer_types
+       notify_users_admin_customer GET|POST /admin/customers/:id/notify_users(.:format)   admin/customers#notify_users
                  todos_admin_todos GET      /admin/todos/todos(.:format)                  admin/todos#todos
+         todo_assignee_admin_todos GET      /admin/todos/todo_assignee(.:format)          admin/todos#todo_assignee
+                search_admin_todos GET      /admin/todos/search(.:format)                 admin/todos#search
                        admin_todos GET      /admin/todos(.:format)                        admin/todos#index
                                    POST     /admin/todos(.:format)                        admin/todos#create
                     new_admin_todo GET      /admin/todos/new(.:format)                    admin/todos#new

@@ -5,14 +5,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # before_action :protect_from_devise_signin
 
-  def protect_from_devise_signin
-    return unless request.get? 
-    unless (request.path != "/users/sign_in" &&
-        request.path != "/users/sign_up" &&
-        !request.xhr?)
-      redirect_to root_url
-    end
-  end
+  # def protect_from_devise_signin
+  #   return unless request.get? 
+  #   unless (request.path != "/users/sign_in" &&
+  #       request.path != "/users/sign_up" &&
+  #       !request.xhr?)
+  #     redirect_to root_url
+  #   end
+  # end
 
   def current_daycare
   	if current_user
