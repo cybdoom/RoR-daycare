@@ -3,6 +3,16 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   
   protect_from_forgery with: :exception
+  before_action :protect_from_devise_signin
+
+  def protect_from_devise_signin
+    return unless request.get? 
+    unless (request.path != "/users/sign_in" &&
+        request.path != "/users/sign_up" &&
+        !request.xhr?)
+      redirect_to root_url
+    end
+  end
 
   def current_daycare
   	if current_user
@@ -11,7 +21,6 @@ class ApplicationController < ActionController::Base
   		nil
   	end
   end
-  
   helper_method :current_daycare
 
 
