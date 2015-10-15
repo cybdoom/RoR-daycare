@@ -4,6 +4,7 @@ class Todo < ActiveRecord::Base
   has_many :department_todos, dependent: :destroy
   has_many :departments, through: :department_todos
   has_many :user_todos, dependent: :destroy
+  has_many :users, through: :user_todos
   has_many :todo_managers, through: :user_todos, source: :manager
   has_many :todo_workers, through: :user_todos, source: :worker
   has_many :todo_parents, through: :user_todos, source: :parent

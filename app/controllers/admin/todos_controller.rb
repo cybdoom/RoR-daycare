@@ -4,7 +4,7 @@ class Admin::TodosController < ApplicationController
   before_action :parse_date, only: [:create, :update]
 
   def index
-    
+    @todos = Todo.includes(:departments, :users).where(daycare_id: params[:daycare_ids]).where('users.type in (?)', params[:user_type]).references(:todo)
   end
 
   def new
