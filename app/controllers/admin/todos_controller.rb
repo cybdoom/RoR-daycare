@@ -1,17 +1,40 @@
 class Admin::TodosController < ApplicationController
   before_action :authenticate_admin!
   before_action :ensure_superadmin
-  
-  # before_action :set_daycare
-  # before_action :parse_date, only: [:create, :update]
+  before_action :parse_date, only: [:create, :update]
 
-  # def index
+  def index
     
-  # end
+  end
 
   def new
-    # @todo = @daycare.todos.new
-    # @todo.key_tasks.build
+    @todo = Todo.new
+    @todo.key_tasks.build
+  end
+
+  def create
+    @departments = Department.where(daycare_id: params[:daycare_ids])
+    params[:daycare_ids].each do |daycare_id|
+      @todo = Todo.new(todo_params)
+      @todo.daycare_id = daycare_id.to_i
+      @todo.save
+      if params[:todo_assignee] == 'departments'
+        @departments.each do |department|
+          DepartmentTodo.create(department_id: department.id, todo_id: @todo.id)
+        end
+      else
+        params[:user_type].each do |user_type|
+          if user_type != 'Partner'
+            users = user_type.constantize.where(daycare_id: daycare_id)
+            users.each do |user|
+              UserTodo.create(todo_id: @todo.id, user_id: user.id)
+            end
+          end
+        end
+      end
+    end
+    flash[:notice] = 'Todo Successfully created!'
+    redirect_to admin_dashboard_path
   end
 
   def todo_assignee
@@ -22,60 +45,27 @@ class Admin::TodosController < ApplicationController
     end
   end
 
-  # def create
-  #   @todo = @daycare.todos.new(todo_params)
-  #   if @todo.save
-  #     redirect_to share_todo_todo_path(@todo)
-  #   else
-  #     render :new
-  #   end
-  # end
-
-  # def edit
+  def edit
     
-  # end
+  end
 
-  # def update
+  def update
     
-  # end
+  end
 
-  # def show
+  def search
     
-  # end
+  end
 
-  # def destroy
-    
-  # end
+  private
 
-  # def share_todo
-  #   @todo = Todo.find(params[:id])
-  # end
+    def todo_params
+      params.require(:todo).permit!
+    end
 
-  # def todo_departments
-  #   @todo = Todo.find(params[:id])
-  #   if request.post?
-  #     params[:department_ids].each do |department_id|
-  #       department_todo = @todo.department_todos.new(department_id: department_id)
-  #       department_todo.save
-  #     end
-  #     flash[:notice] = 'Todo has been shared with these departments successfully!'
-  #     redirect_to current_daycare
-  #   end
-  # end
-
-  # private
-
-  #   def set_daycare
-  #     @daycare = current_daycare
-  #   end
-
-  #   def todo_params
-  #     params.require(:todo).permit!
-  #   end
-
-  #   def parse_date
-  #     params[:todo][:schedule_date] = Chronic.parse(params[:todo][:schedule_date])
-  #     params[:todo][:due_date] = Chronic.parse(params[:todo][:due_date])
-  #   end
+    def parse_date
+      params[:todo][:schedule_date] = Chronic.parse(params[:todo][:schedule_date])
+      params[:todo][:due_date] = Chronic.parse(params[:todo][:due_date])
+    end
 
 end

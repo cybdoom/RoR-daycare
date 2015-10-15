@@ -1,1 +1,29 @@
-<%=render 'form'%>
+<div class="hgt_auto">
+  <div class="header_top_row">
+    <span class="back_btn"><%=link_to 'Create', :back%></span>
+    <span class="menu_icons">
+      <div class="submenu_toggle">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <%if current_user%>
+            <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+          <%end%>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>
+<div class="mid_wrapp padd34">
+  <div class="c_list_1 c_list_3">
+    <h4>Add Icon</h4>
+  </div>
+  <div class="c_list_1">
+    <h4>Environment Day</h4>
+    <div class="c_list_1_in c_list_1_in2">
+      <%=image_tag 'e_img5.jpg', width: '159', height: '158' %>
+    </div>
+  </div>
+  <%=nested_form_for @todo do |f|%>
+    <%= render 'form', f: f%>
+  <%end%>
+</div>

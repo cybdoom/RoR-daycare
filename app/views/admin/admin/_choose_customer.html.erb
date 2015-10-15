@@ -5,6 +5,9 @@
     <h4>Customer</h4>
     <%if multi_select == true%>
       <a class="select_txt cust_select_all" href="javascript:;">Select All</a>
+      <%name = 'daycare_id[]'%>
+    <%else%>
+      <%name = 'daycare_id'%>
     <%end%>
   </div>
   <div class="custom_checbox_list admin_tic_chkbox">
@@ -12,7 +15,7 @@
       <%if customers.present?%>
         <%customers.each do |customer|%>
           <li>
-            <input type="checkbox" name="daycare_id" class="cust_check" id="customer_<%=customer.id%>" value="<%=customer.id%>" />
+            <input type="checkbox" name="<%=name%>" class="cust_check" id="customer_<%=customer.id%>" value="<%=customer.id%>" />
             <label for="customer_<%=customer.id%>"><%=customer.name%></label>
           </li>
         <%end%>
@@ -26,7 +29,7 @@
 <%if path == "admin_todos"%>
   <div class="priv_col_wrapper">
     <div class="sel_col mrg_bot_zero">
-      <h4>whom the to do list is to be created for</h4>
+      <h4>Whom the to do list is to be created for?</h4>
     </div>
     <div class="custom_checbox_list admin_tic_chkbox">
       <%=form_tag todo_assignee_admin_todos_path, method: :get, remote: true do%>
@@ -61,7 +64,12 @@
   <script type="text/javascript">
     $('.cust_select_all').click(function(){
       $('.cust_check').trigger('click');
+      $('#all_customer').val('true')
     });
+    $('.cust_check').click(function(){
+      $('#customer_id').val($(this).val())
+    })
+
     var selectedTypeBox = null;
     $(".type_check").click(function() {
       selectedTypeBox = this.id;
@@ -80,6 +88,7 @@
 <%else%>
   <script type="text/javascript">
     var selectedBox = null;
+    var arr = [];
     $(".cust_check").click(function() {
       selectedBox = this.id;
 

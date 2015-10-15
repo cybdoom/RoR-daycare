@@ -1,0 +1,69 @@
+<div class="priv_col_wrapper">
+  <div class="sel_col mrg_bot_zero">
+    <h4>Customer</h4>
+    <a class="select_txt cust_select_all" href="javascript:;">Select All</a>
+  </div>
+  <div class="custom_checbox_list admin_tic_chkbox">
+    <ul>
+      <%if customers.present?%>
+        <%customers.each do |customer|%>
+          <li>
+            <input type="checkbox" name="daycare_ids[]" class="cust_check" id="customer_<%=customer.id%>" value="<%=customer.id%>" />
+            <label for="customer_<%=customer.id%>"><%=customer.name%></label>
+          </li>
+        <%end%>
+      <%else%>
+        <li>There are no customer. Please select another customer type</li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+
+<div class="priv_col_wrapper">
+  <div class="sel_col mrg_bot_zero">
+    <h4>Whom the to do list is to be created for?</h4>
+  </div>
+  <div class="custom_checbox_list admin_tic_chkbox">
+    <ul>
+      <li>
+        <input type="checkbox" name="todo_assignee" class="type_check" id="department_todo" value="departments" />
+        <label for="department_todo">For Departments</label>
+      </li>
+      <li>
+        <input type="checkbox" name="todo_assignee" class="type_check" id="users_todo" value="users"/>
+        <label for="users_todo">For Users</label>
+      </li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.cust_select_all').click(function(){
+    $('.cust_check').trigger('click');
+    $('#all_customer').val('true')
+  });
+  
+  var selectedTypeBox = null;
+  $(".type_check").click(function() {
+    selectedTypeBox = this.id;
+
+    $(".type_check").each(function() {
+      if ( this.id == selectedTypeBox ){
+        this.checked = true;
+        $('#daycare_id').val($(this).val());
+      }else{
+        this.checked = false;
+      };
+    });
+  });
+
+  $('.type_check').click(function(){
+    val = $(this).val();
+    $.ajax({
+      type: 'GET',
+      data: {todo_assignee: val, from: 'todo'},
+      url: '/admin/todos/todo_assignee',
+      success: function (data) {
+      }
+    });
+  });
+</script>

@@ -1,8 +1,12 @@
 class Todo < ActiveRecord::Base
   belongs_to :daycare
-  has_many :key_tasks
+  has_many :key_tasks, dependent: :destroy
   has_many :department_todos, dependent: :destroy
-  has_many :departments, through: :department_todos, dependent: :destroy
+  has_many :departments, through: :department_todos
+  has_many :user_todos, dependent: :destroy
+  has_many :todo_managers, through: :user_todos, source: :manager
+  has_many :todo_workers, through: :user_todos, source: :worker
+  has_many :todo_parents, through: :user_todos, source: :parent
   #has_many :create_permissions#, as: :functionality
 
   validates :title, :schedule_date, :due_date, presence: true

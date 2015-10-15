@@ -35,6 +35,11 @@
 
   $('.select_txt').click(function(){
     $('.cust_type').click();
+    $('#all_customer_type').val('true');
+  });
+
+  $('.cust_type').click(function(){
+    $('#customer_type_id').val($(this).val())
   });
   
 </script>

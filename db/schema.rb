@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015080900) do
+ActiveRecord::Schema.define(version: 20151015135951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 20151015080900) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "user_todos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "todo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_todos", ["todo_id"], name: "index_user_todos_on_todo_id", using: :btree
+  add_index "user_todos", ["user_id"], name: "index_user_todos_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -139,4 +149,6 @@ ActiveRecord::Schema.define(version: 20151015080900) do
   add_foreign_key "key_tasks", "todos"
   add_foreign_key "permissions", "daycares"
   add_foreign_key "roles", "daycares"
+  add_foreign_key "user_todos", "todos"
+  add_foreign_key "user_todos", "users"
 end

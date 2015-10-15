@@ -1,3 +1,6 @@
 <%if @show_user_types == true%>
-  $('#show_user_types').html("<%=j render 'admin/admin/choose_user_type', multi_select: true, path: 'admin_todos'%>")
+  $('#show_user_types').html("<%=j render 'admin/admin/choose_user_type', multi_select: true, path: 'admin_todos'%>");
+<%else%>
+  $('#show_user_types').html('');
 <%end%>
+$('#todo_next_btn').show();
