@@ -25,16 +25,19 @@ class User < ActiveRecord::Base
 
   # Check permissions
   def can_create?(functionality)
+    return true if superadmin?
     permission = daycare.create_permissions.find_by(functionality_type: functionality, user_type: self.type)
     permission ? true : false
   end
 
   def can_edit?(functionality)
+    return true if superadmin?
     permission = daycare.edit_permissions.find_by(functionality_type: functionality, user_type: self.type)
     permission ? true : false
   end
 
   def can_view?(functionality)
+    return true if superadmin?
     if can_create?(functionality) || can_edit?(functionality) || can_report?(functionality)
       true
     else
@@ -44,6 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def can_report?(functionality)
+    return true if superadmin?
     permission = daycare.report_permissions.find_by(functionality_type: functionality, user_type: self.type)
     permission ? true : false
   end
