@@ -1,0 +1,2 @@
+class ViewPermission < Permission
+end

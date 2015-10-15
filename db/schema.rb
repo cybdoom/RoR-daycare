@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013190640) do
+ActiveRecord::Schema.define(version: 20151015054022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 20151013190640) do
 
   add_index "key_tasks", ["key_task_id"], name: "index_key_tasks_on_key_task_id", using: :btree
   add_index "key_tasks", ["todo_id"], name: "index_key_tasks_on_todo_id", using: :btree
+
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "daycare_id"
+    t.string   "user_type"
+    t.string   "functionality_type"
+    t.string   "type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "permissions", ["daycare_id"], name: "index_permissions_on_daycare_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -115,5 +126,6 @@ ActiveRecord::Schema.define(version: 20151013190640) do
   add_foreign_key "departments", "daycares"
   add_foreign_key "key_tasks", "key_tasks"
   add_foreign_key "key_tasks", "todos"
+  add_foreign_key "permissions", "daycares"
   add_foreign_key "roles", "daycares"
 end

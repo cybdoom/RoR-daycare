@@ -47,7 +47,16 @@ class Admin::AdminController < ApplicationController
   end
 
   def set_privilege
+    @daycare = Daycare.find(params[:daycare_id])
     if request.post?
+      if params[:user_type].present?
+        params[:user_type].join(' ').split(' ').each do |user_type|
+          params[:permission_type].each do |permission_type|
+            permission_type.constantize.create(daycare_id: @daycare.id, functionality_type: params[:functionality], user_type: user_type)
+          end
+        end
+      end
+      redirect_to admin_dashboard_path
     end
   end
 

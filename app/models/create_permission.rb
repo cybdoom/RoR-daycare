@@ -1,0 +1,2 @@
+class CreatePermission < Permission
+end

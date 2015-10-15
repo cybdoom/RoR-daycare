@@ -13,34 +13,46 @@
 </div>
 <div class="mid_wrapp padd34">
   <div class="previlidge_category">
-    <ul>
-      <li>
-        <a href="javascript:;">
-        <%=image_tag 'create_icon_1.jpg'%>
-        <span class="ser_heading">Create</span>
-        </a>
-      </li>
-      <li class="prev_box">
-        <a href="priviledge.hmtl">
-        <%=image_tag 'edit_icon_1.jpg'%>
-        <span class="ser_heading">Edit</span>
-        </a>
-      </li>
-      <li class="fun_box"> 
-        <a href="functionality.html">
-        <%=image_tag 'view_icon.jpg'%>
-        <span class="ser_heading">View</span>
-        </a>
-      </li>
-      <li class="fun_box"> 
-        <a href="functionality.html">
-        <%=image_tag 'report_icon_1.jpg'%>
-        <span class="ser_heading">Report</span>
-        </a>
-      </li>
-    </ul>
-    <div class="green_btn_wrapper">
-      <input name="" type="button" class="submit_btn green_btn" value="Apply" >  
-    </div>
+    <%=form_tag admin_set_privilege_path, method: :post do%>
+      <%=hidden_field_tag :daycare_id, params[:daycare_id] %>
+      <%=hidden_field_tag 'user_type[]', params[:user_type] %>
+      <%=hidden_field_tag :functionality, params[:functionality]%>
+
+      <div class="custom_checbox_list check_privilege">
+        <ul>
+          <li>
+            <a href="javascript:;" class="check_label">
+              <%=image_tag 'create_icon_1.jpg'%>
+              <input type="checkbox" class="user_type_common" name="permission_type[]" id="create" value="CreatePermission" />
+              <label class="ser_heading mar_0" for="create">Create</label>
+            </a>
+          </li>
+          <li class="prev_box">
+            <a href="javascript:;">
+              <%=image_tag 'edit_icon_1.jpg'%>
+              <input type="checkbox" class="user_type_common" name="permission_type[]" id="edit" value="EditPermission" />
+              <label class="ser_heading mar_0" for="edit">Edit</label>
+            </a>
+          </li>
+          <li class="fun_box"> 
+            <a href="javascript:;">
+              <%=image_tag 'view_icon.jpg'%>
+              <input type="checkbox" class="user_type_common" name="permission_type[]" id="view" value="ViewPermission" />
+              <label class="ser_heading mar_0" for="view">View</label>
+            </a>
+          </li>
+          <li class="fun_box"> 
+            <a href="javascript:;">
+              <%=image_tag 'report_icon_1.jpg'%>
+              <input type="checkbox" class="user_type_common" name="permission_type[]" id="report" value="ReportPermission" />
+              <label class="ser_heading mar_0" for="report">Report</label>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="green_btn_wrapper">
+        <%=submit_tag 'Apply', class: 'submit_btn green_btn'%>
+      </div>
+    <%end%>
   </div>
 </div>

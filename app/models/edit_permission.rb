@@ -1,0 +1,2 @@
+class EditPermission < Permission
+end

@@ -14,3 +14,10 @@
 .submenu_toggle.green_submenu ul li a:hover {
   color: #618923;
 }
+.custom_checbox_list.check_privilege ul li [type="checkbox"]:checked + label:after{
+  font-size: 70px;
+}
+.ser_heading.mar_0{
+  margin-bottom: 0;
+  padding: 10px
+}
