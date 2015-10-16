@@ -21,8 +21,14 @@
       <%=f.text_field :post_code, class: "d_input d_input1", placeholder: 'Post code'%>
       
       <div class="f1">
-        <a class="select_txt select_txt2 blue_c" href="#">Norway</a>
-        <%=f.text_field :country, class: "d_input d_input2", placeholder: 'Country'%>
+        <a class="select_txt select_txt2 blue_c" href="#"><%=f.select(:country, options_for_select(countries), {}, {class: 'country_select daycare_country'})%></a>
+        <%#=f.text_field :country, class: "d_input d_input2", placeholder: 'Country'%>
+        <input type="text" class="d_input d_input2" placeholder="Country" disabled>
+      </div>
+
+      <div class="f1">
+        <a class="select_txt select_txt2 blue_c" href="#"><%=f.select(:language,options_for_select(languages), {}, {class: 'country_select daycare_country'})%></a>
+        <input type="text" class="d_input d_input2" placeholder="Language" disabled>
       </div>
 
       <%= f.fields_for :manager do |daycare_manager| %>

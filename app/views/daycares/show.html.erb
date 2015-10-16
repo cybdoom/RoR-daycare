@@ -68,8 +68,11 @@
     <div class="notificaiton_list">
       <h3 class="todo_list_img">Todo List</h3>
       <ul>
-        <li ><a href="#" class="mother_icon">Mother's Day</a></li>
-        <li ><a href="#" class="environmnt_icon">Environment Day</a></li>
+        <%current_user.todos.each do |todo|%>
+          <li><a href="#"><%=todo.title%></li>
+        <%end%>
+        <!-- <li ><a href="#" class="mother_icon">Mother's Day</a></li>
+        <li ><a href="#" class="environmnt_icon">Environment Day</a></li> -->
       </ul>
     </div>
     <div class="notificaiton_list">
