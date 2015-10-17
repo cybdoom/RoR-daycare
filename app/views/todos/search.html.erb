@@ -4,19 +4,19 @@
     <span class="edit_btn">Edit</span>
     <span class="menu_icons"></span>
   </div>
-  <!-- <div class="c_row_1 c_row_2">
+  <div class="c_row_1 c_row_2">
     <div class="search_col">
-      <input name="" type="text" class="search_input" value="Quick Search">
+      <input name="" type="text" class="search_input" placeholder="Quick Search">
       <input name="" type="button" class="search_btn">
     </div>
-  </div> -->
+  </div>
   <div class="c_row_1 c_row_3">
     <%@todos.each  do |todo| %>
       <div class="c_list_1">
         <h4><%=todo.title%></h4>
         <div class="c_list_1_in">
           <%= image_tag todo.image(:thumb)%>
-          <%=link_to'Edit', edit_admin_todo_path(todo), class: "c_edit"%>
+          <%=link_to'Edit', edit_todo_path(todo), class: "c_edit"%>
 
           <%=link_to 'Delete', [:admin, todo], method: :delete, class: "c_edit c_delete"%>
         </div>

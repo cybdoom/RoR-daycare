@@ -32,6 +32,9 @@ class Admin::TodosController < ApplicationController
         end
       end
     end
+    params[:daycare_ids].each do |daycare_id|
+      @todo.daycare_todos.build(daycare_id: daycare_id)
+    end
     if @todo.save
       flash[:notice] = 'Todo Successfully created!'
       redirect_to admin_dashboard_path

@@ -2,7 +2,9 @@ class TodosController < ApplicationController
   before_action :authenticate_manager!
   before_action :set_daycare
   before_action :parse_date, only: [:create, :update]
-  before_action :check_permission
+  before_action :check_create_permission, only: [:new, :create, :show]
+  before_action :check_view_permission, only: [:show]
+  before_action :check_edit_permission, only: [:edit, :update]
 
   def index
     
@@ -24,7 +26,7 @@ class TodosController < ApplicationController
   end
 
   def edit
-    
+    @todo = current_daycare.todos.find(params[:id])
   end
 
   def update
@@ -33,6 +35,10 @@ class TodosController < ApplicationController
 
   def show
     
+  end
+
+  def search
+    @todos = current_daycare.todos
   end
 
   def destroy
@@ -70,8 +76,23 @@ class TodosController < ApplicationController
       params[:todo][:due_date] = Chronic.parse(params[:todo][:due_date])
     end
 
-    def check_permission
+    def check_create_permission
       unless current_user.can_create?('Todo')
+        flash[:alert] = "You dont have permission to create todo"
+        redirect_to @daycare
+      end
+    end
+
+    def check_view_permission
+      unless current_user.can_view?('Todo')
+        flash[:alert] = "You dont have permission to view todo"
+        redirect_to @daycare
+      end
+    end
+
+    def check_edit_permission
+      unless current_user.can_edit?('Todo')
+        flash[:alert] = "You dont have permission to edit todo"
         redirect_to @daycare
       end
     end

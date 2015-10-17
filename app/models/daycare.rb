@@ -7,14 +7,16 @@ class Daycare < ActiveRecord::Base
   has_many :users, dependent: :destroy
   has_many :roles, dependent: :destroy
   has_many :departments, dependent: :destroy
-  has_many :todos, dependent: :destroy
+  # has_many :todos, dependent: :destroy
   has_many :create_permissions, dependent: :destroy
   has_many :edit_permissions, dependent: :destroy
   has_many :view_permissions, dependent: :destroy
   has_many :report_permissions, dependent: :destroy
+  has_many :daycare_todos, dependent: :destroy
+  has_many :todos, through: :daycare_todos
   belongs_to :customer_type
 
-  validates :name, :country, :language, :address_line1, presence: true
+  validates :name, :country, :language, :address_line1, :customer_type_id, presence: true
 
   accepts_nested_attributes_for :manager, :departments, allow_destroy: true, reject_if: :all_blank
   
@@ -29,6 +31,7 @@ class Daycare < ActiveRecord::Base
         @daycare.language = row['Language']
         @daycare.name = row['Customer Name']
         @daycare.address_line1 = row['Address']
+        @daycare.post_code = row['Postcode'].to_s
         @daycare.telephone = row['Telephone'].to_s
         @daycare.customer_type_id = customer_type_id
         CSV.parse_line(row['Department Names']).each do |name|

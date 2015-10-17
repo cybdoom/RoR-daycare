@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       get :share_todo
       match :todo_departments, via: [:get, :post]
     end
+    collection do
+      get :search
+    end
   end
 
   # Example resource route within a namespace:

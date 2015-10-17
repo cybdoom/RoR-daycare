@@ -31,6 +31,10 @@
         <input type="text" class="d_input d_input2" placeholder="Language" disabled>
       </div>
 
+      <div class="f1">
+        <%=f.select :customer_type_id, CustomerType.all.map{|c| [c.name, c.id]}, {prompt: 'Select Type'}, {class: 'd_input d_input1 daycare_select'}%>
+      </div>
+
       <%= f.fields_for :manager do |daycare_manager| %>
         <%= daycare_manager.email_field :email, class: "d_input d_input1", placeholder: 'Email'%>
         <%= daycare_manager.password_field :password, class: "d_input d_input1", placeholder: 'Password'%>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015191238) do
+ActiveRecord::Schema.define(version: 20151017070300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20151015191238) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "daycare_todos", force: :cascade do |t|
+    t.integer  "todo_id"
+    t.integer  "daycare_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "daycare_todos", ["daycare_id"], name: "index_daycare_todos_on_daycare_id", using: :btree
+  add_index "daycare_todos", ["todo_id"], name: "index_daycare_todos_on_todo_id", using: :btree
 
   create_table "daycares", force: :cascade do |t|
     t.string   "name"
@@ -108,7 +118,6 @@ ActiveRecord::Schema.define(version: 20151015191238) do
     t.string   "title"
     t.datetime "schedule_date"
     t.datetime "due_date"
-    t.integer  "daycare_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -153,6 +162,8 @@ ActiveRecord::Schema.define(version: 20151015191238) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "children", "daycares"
+  add_foreign_key "daycare_todos", "daycares"
+  add_foreign_key "daycare_todos", "todos"
   add_foreign_key "department_todos", "departments"
   add_foreign_key "department_todos", "todos"
   add_foreign_key "departments", "daycares"

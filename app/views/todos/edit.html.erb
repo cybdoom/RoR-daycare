@@ -13,4 +13,8 @@
     </span>
   </div>
 </div>
-<%=render 'form'%>
+<div class="mid_wrapp padd34">  
+  <%=nested_form_for @todo do |f|%>   
+    <%= render 'form', f: f%>
+  <%end%>
+</div>

@@ -27,6 +27,8 @@ class DaycaresController < ApplicationController
 
   def create
     @daycare = Daycare.new(daycare_params)
+    country = ISO3166::Country.new(params[:daycare][:country])
+    @daycare.country = country.name
     if @daycare.save
       flash[:notice] = "Daycare Successfully created."
       sign_in @daycare.manager
