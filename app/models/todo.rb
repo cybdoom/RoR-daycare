@@ -1,4 +1,8 @@
 class Todo < ActiveRecord::Base
+
+  REPEAT_OPTIONS = %W(#{"One time event"} Weekly #{"Every month"} #{"Every 3 month"} #{"Every 6 month"} #{"Every year"} )
+  DAILY = %w(Sunday Monday Tuesday Wednesday Thrusday Friday Saturday)
+  
   belongs_to :daycare
   has_many :key_tasks, dependent: :destroy
   has_many :department_todos, dependent: :destroy
@@ -13,7 +17,7 @@ class Todo < ActiveRecord::Base
   has_one :icon, as: :photoable, class_name: "Photo", dependent: :destroy
   #has_many :create_permissions#, as: :functionality
 
-  validates :title, :schedule_date, :due_date, presence: true
+  validates :title, :schedule_date, :due_date, :todo_for, presence: true
 
   accepts_nested_attributes_for :key_tasks, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :icon, allow_destroy: true
