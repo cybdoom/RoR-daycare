@@ -27,7 +27,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'nested_form'
 gem 'pnotify-rails'
 gem 'unobtrusive_flash'
-gem 'animate-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
