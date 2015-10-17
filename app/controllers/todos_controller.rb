@@ -19,6 +19,7 @@ class TodosController < ApplicationController
   def create
     @todo = @daycare.todos.new(todo_params)
     if @todo.save
+      flash[:notice] = 'Todo has been successfully created'
       redirect_to share_todo_todo_path(@todo)
     else
       render :new
@@ -30,7 +31,12 @@ class TodosController < ApplicationController
   end
 
   def update
-    
+    if @todo.update(todo_params)
+      flash[:notice] = 'Todo has been successfully updated'
+      redirect_to share_todo_todo_path(@todo)
+    else
+      render :edit
+    end
   end
 
   def show

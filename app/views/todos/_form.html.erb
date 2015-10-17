@@ -11,19 +11,31 @@
   <div class="schedule_field">
     <div class="sehedule_dt_tm">
       <label>Schedule Date / time</label>
-      <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: false%>
+      <%if @todo.new_record?%>
+        <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: true%>
+      <%else%>
+        <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true%>
+      <%end%>
     </div>
     <a class="sc_cal_icon fl"></a>
     <div class="sehedule_dt_tm">
       <label>Due Date / time</label>
-      <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker'%>
+      <%if @todo.new_record?%>
+        <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker', readonly: true%>
+      <%else%>
+        <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true%>
+      <%end%>
     </div>
   </div>
   <div class="schedule_field">
     <div class="sc_1">
       <label>Add Title</label>
       <div class="add_key_task">
-        <%=f.text_field :title, class: 'key_task_input', placeholder: 'Title'%>
+        <%if @todo.new_record?%>
+          <%=f.text_field :title, class: 'key_task_input', placeholder: 'Title'%>
+        <%else%>
+          <%=f.text_field :title, class: 'key_task_input', placeholder: 'Title', disabled: true%>
+        <%end%>
       </div>
       <%= f.link_to_add "Add Key <br/>Task".html_safe, :key_tasks, class: 'add_file' %>
     </div>
