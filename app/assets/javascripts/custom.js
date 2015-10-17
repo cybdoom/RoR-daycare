@@ -1,4 +1,14 @@
 $(document).on('page:change', function(){
+ 
+  $(window).bind('rails:flash', function(e, params) {
+
+    new PNotify({
+      title: params.type,
+      text: params.message,
+      type: params.type
+    });
+  });
+
   $(".menu_icons").click(function(){
     $(".submenu_toggle").toggleClass("dis_block") 
   });

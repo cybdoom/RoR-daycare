@@ -30,7 +30,7 @@ class DaycaresController < ApplicationController
     country = ISO3166::Country.new(params[:daycare][:country])
     @daycare.country = country.name
     if @daycare.save
-      flash[:notice] = "Daycare Successfully created."
+      flash[:success] = "Daycare Successfully created."
       sign_in @daycare.manager
       redirect_to add_departments_daycare_path(@daycare)
     else
@@ -47,7 +47,7 @@ class DaycaresController < ApplicationController
 
   def update
     if @daycare.update(daycare_params)
-      flash[:notice] = "Daycare Successfully created."
+      flash[:success] = "Daycare Successfully created."
       sign_in @daycare.manager
       redirect_to add_departments_daycare_path(@daycare)
     else
@@ -61,7 +61,7 @@ class DaycaresController < ApplicationController
       if @user && @user.manager?
         if @user.valid_password?(params[:password])
           sign_in @user
-          flash[:notice] = 'Signed in successfully'
+          flash[:success] = 'Signed in successfully'
           redirect_to @user.daycare
         else
           flash[:error] = 'Invalid email & password'
@@ -73,7 +73,7 @@ class DaycaresController < ApplicationController
       end
     else
       if current_user && current_user.manager?
-        flash[:notice] = 'You are already logged in!'
+        flash[:success] = 'You are already logged in!'
         redirect_to current_user.daycare
       end
     end
@@ -96,7 +96,7 @@ class DaycaresController < ApplicationController
   def invite_workers
     if request.post?
       DaycareMailer.send_invite_to_workers(params[:email_ids], @daycare).deliver_now
-      flash[:notice] = 'Invitation to daycare workers has been sent successfully!'
+      flash[:success] = 'Invitation to daycare workers has been sent successfully!'
       redirect_to invite_parents_daycare_path(@daycare)
     end
   end
@@ -104,7 +104,7 @@ class DaycaresController < ApplicationController
   def invite_parents
     if request.post?
       DaycareMailer.send_invite_to_parents(params[:email_ids], @daycare).deliver_now
-      flash[:notice] = 'Invitation to daycare parents has been sent successfully!'
+      flash[:success] = 'Invitation to daycare parents has been sent successfully!'
       redirect_to @daycare
     end
   end

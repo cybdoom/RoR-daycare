@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require jquery_nested_form
 //= require jquery.datetimepicker
+//= require pnotify
+//= require unobtrusive_flash
 //= require_tree .

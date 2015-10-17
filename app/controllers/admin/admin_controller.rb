@@ -8,7 +8,7 @@ class Admin::AdminController < ApplicationController
       if @user && @user.superadmin?
         if @user.valid_password?(params[:password])
           sign_in @user
-          flash[:notice] = 'Signed in successfully'
+          flash[:success] = 'Signed in successfully'
           redirect_to session[:previous_url] || admin_dashboard_path and return
         else
           flash[:error] = 'Invalid email & password'
@@ -20,7 +20,7 @@ class Admin::AdminController < ApplicationController
       end
     else
       if current_user && current_user.superadmin?
-        flash[:notice] = 'You are already logged in!'
+        flash[:success] = 'You are already logged in!'
         redirect_to admin_dashboard_path
       end
     end

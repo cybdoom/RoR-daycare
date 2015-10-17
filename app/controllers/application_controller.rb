@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   
   protect_from_forgery with: :exception
+  after_filter :prepare_unobtrusive_flash
   # before_action :protect_from_devise_signin
 
   # def protect_from_devise_signin

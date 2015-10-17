@@ -36,7 +36,7 @@ class Admin::TodosController < ApplicationController
       @todo.daycare_todos.build(daycare_id: daycare_id)
     end
     if @todo.save
-      flash[:notice] = 'Todo Successfully created!'
+      flash[:success] = 'Todo Successfully created!'
       redirect_to admin_dashboard_path
     else
       render :new
@@ -59,14 +59,14 @@ class Admin::TodosController < ApplicationController
   def update
     @todo = Todo.find(params[:id])  
     @todo.update_attributes(todo_params)
-    flash[:notice] = 'Todo Successfully updated!'
+    flash[:success] = 'Todo Successfully updated!'
     redirect_to admin_dashboard_path
   end
 
   def destroy
     @todo = Todo.find(params[:id])
     @todo.destroy
-    flash[:notice] = 'Todo Successfully deleted!'
+    flash[:success] = 'Todo Successfully deleted!'
     redirect_to admin_dashboard_path
   end
 

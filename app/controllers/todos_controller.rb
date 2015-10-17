@@ -2,8 +2,8 @@ class TodosController < ApplicationController
   before_action :authenticate_manager!
   before_action :set_daycare
   before_action :parse_date, only: [:create, :update]
-  before_action :check_create_permission, only: [:new, :create, :show]
-  before_action :check_view_permission, only: [:show]
+  before_action :check_create_permission, only: [:new, :create, :delete]
+  before_action :check_view_permission, only: [:show, :search]
   before_action :check_edit_permission, only: [:edit, :update]
 
   def index
@@ -19,7 +19,7 @@ class TodosController < ApplicationController
   def create
     @todo = @daycare.todos.new(todo_params)
     if @todo.save
-      flash[:notice] = 'Todo has been successfully created'
+      flash[:success] = 'Todo has been successfully created'
       redirect_to share_todo_todo_path(@todo)
     else
       render :new
@@ -32,7 +32,7 @@ class TodosController < ApplicationController
 
   def update
     if @todo.update(todo_params)
-      flash[:notice] = 'Todo has been successfully updated'
+      flash[:success] = 'Todo has been successfully updated'
       redirect_to share_todo_todo_path(@todo)
     else
       render :edit
@@ -62,7 +62,7 @@ class TodosController < ApplicationController
         department_todo = @todo.department_todos.new(department_id: department_id)
         department_todo.save
       end
-      flash[:notice] = 'Todo has been shared with these departments successfully!'
+      flash[:success] = 'Todo has been shared with these departments successfully!'
       redirect_to current_daycare
     end
   end
