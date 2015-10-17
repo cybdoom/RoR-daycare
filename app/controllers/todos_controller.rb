@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :authenticate_manager!
+  before_action :authenticate_manager!, except: [:accept_todo]
   before_action :set_daycare
   before_action :parse_date, only: [:create, :update]
   before_action :check_create_permission, only: [:new, :create, :delete]
@@ -18,7 +18,7 @@ class TodosController < ApplicationController
 
   def create
     @todo = @daycare.todos.new(todo_params)
-    if @todo.save
+    if @todo.save!
       flash[:success] = 'Todo has been successfully created'
       redirect_to share_todo_todo_path(@todo)
     else
@@ -63,6 +63,15 @@ class TodosController < ApplicationController
         department_todo.save
       end
       flash[:success] = 'Todo has been shared with these departments successfully!'
+      redirect_to current_daycare
+    end
+  end
+
+  def accept_todo
+    if current_user
+      @todo = Todo.find(params[:id])
+      @todo.update_attributes(status: "accepted", acceptor_id: current_user.id)
+      flash[:success] = 'You have accepted the task successfully'
       redirect_to current_daycare
     end
   end

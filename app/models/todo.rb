@@ -17,7 +17,10 @@ class Todo < ActiveRecord::Base
   has_one :icon, as: :photoable, class_name: "Photo", dependent: :destroy
   #has_many :create_permissions#, as: :functionality
 
-  validates :title, :schedule_date, :due_date, :todo_for, presence: true
+  belongs_to :acceptor, class_name: 'User', foreign_key: 'acceptor_id'
+
+  validates :title, :schedule_date, :due_date, presence: true
+  # validates :title, :schedule_date, :due_date, :todo_for, presence: true
 
   accepts_nested_attributes_for :key_tasks, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :icon, allow_destroy: true

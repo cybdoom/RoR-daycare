@@ -30,6 +30,8 @@
                                    DELETE   /daycares/:id(.:format)                       daycares#destroy
                    share_todo_todo GET      /todos/:id/share_todo(.:format)               todos#share_todo
              todo_departments_todo GET|POST /todos/:id/todo_departments(.:format)         todos#todo_departments
+                  accept_todo_todo POST     /todos/:id/accept_todo(.:format)              todos#accept_todo
+                      search_todos GET      /todos/search(.:format)                       todos#search
                              todos GET      /todos(.:format)                              todos#index
                                    POST     /todos(.:format)                              todos#create
                           new_todo GET      /todos/new(.:format)                          todos#new

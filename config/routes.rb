@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     member do
       get :share_todo
       match :todo_departments, via: [:get, :post]
+      post :accept_todo
     end
     collection do
       get :search

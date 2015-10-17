@@ -67,13 +67,14 @@
     <div class="notif_heading">Notification<span class="noti_count">2</span></div>
     <div class="notificaiton_list">
       <h3 class="todo_list_img">Todo List</h3>
-      <ul>
-        <%current_user.todos.each do |todo|%>
-          <li><a href="#"><%=todo.title%></li>
+        <%current_user.all_todos.each do |todo|%>
+          <ul>
+           <li><a href="#"><%=todo.title%></a> <%=todo.status%></li>
+          </ul>
+          <%=link_to "Accept", accept_todo_todo_path(todo), method: :post unless todo.status == "accepted"%>
         <%end%>
         <!-- <li ><a href="#" class="mother_icon">Mother's Day</a></li>
         <li ><a href="#" class="environmnt_icon">Environment Day</a></li> -->
-      </ul>
     </div>
     <div class="notificaiton_list">
       <h3 class="messages_icon">Messages</h3>
