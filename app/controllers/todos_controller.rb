@@ -30,7 +30,6 @@ class TodosController < ApplicationController
   end
 
   def update
-    binding.pry
     if @todo.update(todo_params)
       flash[:success] = 'Todo has been successfully updated'
       redirect_to share_todo_todo_path(@todo)
@@ -64,7 +63,6 @@ class TodosController < ApplicationController
   end
 
   def share_with_workers
-    binding.pry
     if request.post?
       @todo.save_user_todos( params[:worker_ids])
       flash[:success] = 'Todo has been shared with these workers successfully!'
@@ -73,7 +71,6 @@ class TodosController < ApplicationController
   end
 
   def share_with_parents
-    binding.pry
    if request.post?
       @todo.save_user_todos( params[:parent_ids])
       flash[:success] = 'Todo has been shared with these parents successfully!'
