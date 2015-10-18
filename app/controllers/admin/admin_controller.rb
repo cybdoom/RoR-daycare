@@ -5,6 +5,7 @@ class Admin::AdminController < ApplicationController
   def login
     if request.post?
       @user = User.find_by(email: params[:email])
+      # autheticate_user(role)
       if @user && @user.superadmin?
         if @user.valid_password?(params[:password])
           sign_in @user
@@ -66,5 +67,35 @@ class Admin::AdminController < ApplicationController
   end
   
   private
+
+  # def autheticate_user(role)
+  #   if @user && check_role(role, @user)
+  #     if @user.valid_password?(params[:password])
+  #       sign_in @user
+  #       flash[:success] = 'Signed in successfully'
+  #       redirect_to session[:previous_url] || admin_dashboard_path and return
+  #     else
+  #       flash[:error] = 'Invalid email & password'
+  #       render :login
+  #     end
+  #   else
+  #     flash[:error] = 'Unauthorized access!'
+  #     redirect_to root_path
+  #   end
+  # end
+
+  # def check_role(role, user)
+  #   if role == "superadmin"
+  #     uers.superadmin?
+  #   else role == "manager"
+  #     uers.manager?
+  #   else role == "worker"
+  #     uers.worker?
+  #   else role == "parent"
+  #     uers.parent?
+  #   else
+  #     false
+  #   end
+  # end
     
 end

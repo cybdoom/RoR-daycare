@@ -28,8 +28,30 @@
                                    PATCH    /daycares/:id(.:format)                       daycares#update
                                    PUT      /daycares/:id(.:format)                       daycares#update
                                    DELETE   /daycares/:id(.:format)                       daycares#destroy
+             login_daycare_workers GET|POST /daycare_workers/login(.:format)              daycare_workers#login
+          dashboard_daycare_worker GET      /daycare_workers/:id/dashboard(.:format)      daycare_workers#dashboard
+                   daycare_workers GET      /daycare_workers(.:format)                    daycare_workers#index
+                                   POST     /daycare_workers(.:format)                    daycare_workers#create
+                new_daycare_worker GET      /daycare_workers/new(.:format)                daycare_workers#new
+               edit_daycare_worker GET      /daycare_workers/:id/edit(.:format)           daycare_workers#edit
+                    daycare_worker GET      /daycare_workers/:id(.:format)                daycare_workers#show
+                                   PATCH    /daycare_workers/:id(.:format)                daycare_workers#update
+                                   PUT      /daycare_workers/:id(.:format)                daycare_workers#update
+                                   DELETE   /daycare_workers/:id(.:format)                daycare_workers#destroy
+             login_daycare_parents GET|POST /daycare_parents/login(.:format)              daycare_parents#login
+          dashboard_daycare_parent GET      /daycare_parents/:id/dashboard(.:format)      daycare_parents#dashboard
+                   daycare_parents GET      /daycare_parents(.:format)                    daycare_parents#index
+                                   POST     /daycare_parents(.:format)                    daycare_parents#create
+                new_daycare_parent GET      /daycare_parents/new(.:format)                daycare_parents#new
+               edit_daycare_parent GET      /daycare_parents/:id/edit(.:format)           daycare_parents#edit
+                    daycare_parent GET      /daycare_parents/:id(.:format)                daycare_parents#show
+                                   PATCH    /daycare_parents/:id(.:format)                daycare_parents#update
+                                   PUT      /daycare_parents/:id(.:format)                daycare_parents#update
+                                   DELETE   /daycare_parents/:id(.:format)                daycare_parents#destroy
                    share_todo_todo GET      /todos/:id/share_todo(.:format)               todos#share_todo
-             todo_departments_todo GET|POST /todos/:id/todo_departments(.:format)         todos#todo_departments
+       share_with_departments_todo GET|POST /todos/:id/share_with_departments(.:format)   todos#share_with_departments
+           share_with_workers_todo GET|POST /todos/:id/share_with_workers(.:format)       todos#share_with_workers
+           share_with_parents_todo GET|POST /todos/:id/share_with_parents(.:format)       todos#share_with_parents
                   accept_todo_todo POST     /todos/:id/accept_todo(.:format)              todos#accept_todo
                       search_todos GET      /todos/search(.:format)                       todos#search
                              todos GET      /todos(.:format)                              todos#index

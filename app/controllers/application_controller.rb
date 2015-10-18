@@ -32,8 +32,44 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def authenticate_manager!
+      unless current_user
+        redirect_to login_daycares_path
+      end
+    end
+
+    def authenticate_parent!
+      unless current_user
+        redirect_to login_daycare_parents_path
+      end
+    end
+
+    def authenticate_worker!
+      unless current_user
+        redirect_to login_daycare_workers_path
+      end
+    end
+
     def ensure_superadmin
       unless current_user.superadmin?
+        redirect_to root_path, alert: "You don't have authorization to access this page!"
+      end
+    end
+
+    def ensure_manager
+      unless current_user.manager?
+        redirect_to root_path, alert: "You don't have authorization to access this page!"
+      end
+    end
+
+    def ensure_worker
+      unless current_user.worker?
+        redirect_to root_path, alert: "You don't have authorization to access this page!"
+      end
+    end
+
+    def ensure_parent
+      unless current_user.parent?
         redirect_to root_path, alert: "You don't have authorization to access this page!"
       end
     end

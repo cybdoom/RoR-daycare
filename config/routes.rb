@@ -24,6 +24,24 @@ Rails.application.routes.draw do
       match :invite_workers, via: [:get, :post]
     end
   end
+
+  resources :daycare_workers do
+    collection do
+      match :login, via: [:get, :post]
+    end
+    member do
+      get :dashboard
+    end
+  end
+
+  resources :daycare_parents do
+    collection do
+      match :login, via: [:get, :post]
+    end
+    member do
+      get :dashboard
+    end
+  end
   
   resources :todos do
     member do

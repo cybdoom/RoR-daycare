@@ -1,5 +1,6 @@
 class TodosController < ApplicationController
   before_action :authenticate_manager!, except: [:accept_todo]
+  before_action :ensure_manager, except: [:accept_todo]
   before_action :set_daycare
   before_action :set_todo, only: [:edit, :update, :show, :destroy, :share_todo, :share_with_departments, :share_with_workers, :share_with_parents ]
   before_action :parse_date, only: [:create, :update]
@@ -130,10 +131,6 @@ class TodosController < ApplicationController
       end
     end
 
-    def authenticate_manager!
-      unless current_user
-        redirect_to login_daycares_path
-      end
-    end
+   
 
 end
