@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def all_todos
-    self.todos.where("start_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")
+    self.todos.where("schedule_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")
     # Todo.all
   end
 
