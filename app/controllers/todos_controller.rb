@@ -72,7 +72,7 @@ class TodosController < ApplicationController
   end
 
   def share_with_parents
-   if request.post?
+    if request.post?
       @todo.save_user_todos( params[:parent_ids])
       flash[:success] = 'Todo has been shared with these parents successfully!'
       redirect_to current_daycare
@@ -129,8 +129,6 @@ class TodosController < ApplicationController
         flash[:alert] = "You dont have permission to edit todo"
         redirect_to @daycare
       end
-    end
-
-   
+    end  
 
 end

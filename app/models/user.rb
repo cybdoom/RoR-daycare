@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   has_many :user_todos, dependent: :destroy
   has_many :todos, through: :user_todos
   has_many :accepted_todos, class_name: 'Todo', foreign_key: 'acceptor_id'
-  # has_many :owned_todos, class_name: "Todo", foreign_key: "owner_id"
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

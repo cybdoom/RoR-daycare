@@ -1,14 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users#, controllers: {
-  #   sessions: 'users/sessions',
-  #   registrations: 'users/registrations'
-  # }
-
-  # devise_scope :user do
-  #   get "users/sign_in" => '/', via: :get
-  #   get "users/sign_up" => '/', via: :get
-  # end
+  devise_for :users
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
@@ -40,6 +32,15 @@ Rails.application.routes.draw do
     end
     member do
       get :dashboard
+    end
+  end
+
+  resources :passwords, only: [] do
+    member do
+      get :set_manager_password
+      get :set_worker_password
+      get :set_parent_password
+      post :set_password
     end
   end
   

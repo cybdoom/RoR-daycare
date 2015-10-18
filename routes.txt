@@ -48,6 +48,10 @@
                                    PATCH    /daycare_parents/:id(.:format)                daycare_parents#update
                                    PUT      /daycare_parents/:id(.:format)                daycare_parents#update
                                    DELETE   /daycare_parents/:id(.:format)                daycare_parents#destroy
+     set_manager_password_password GET      /passwords/:id/set_manager_password(.:format) passwords#set_manager_password
+      set_worker_password_password GET      /passwords/:id/set_worker_password(.:format)  passwords#set_worker_password
+      set_parent_password_password GET      /passwords/:id/set_parent_password(.:format)  passwords#set_parent_password
+             set_password_password POST     /passwords/:id/set_password(.:format)         passwords#set_password
                    share_todo_todo GET      /todos/:id/share_todo(.:format)               todos#share_todo
        share_with_departments_todo GET|POST /todos/:id/share_with_departments(.:format)   todos#share_with_departments
            share_with_workers_todo GET|POST /todos/:id/share_with_workers(.:format)       todos#share_with_workers

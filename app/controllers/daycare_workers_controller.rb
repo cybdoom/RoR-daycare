@@ -26,19 +26,6 @@ class DaycareWorkersController < ApplicationController
       @user = User.find_by(email: params[:email])
       path = login_user_and_set_redirect_path("worker")
       redirect_to path
-      # if @user && @user.worker?
-      #   if @user.valid_password?(params[:password])
-      #     sign_in @user
-      #     flash[:success] = 'Signed in successfully'
-      #     redirect_to dashboard_daycare_worker_path(@user)
-      #   else
-      #     flash[:error] = 'Invalid email & password'
-      #     render :login
-      #   end
-      # else
-      #   flash[:error] = 'Invalid email & password'
-      #   render :login
-      # end
     else
       if current_user && current_user.worker?
         flash[:success] = 'You are already logged in!'
@@ -49,6 +36,14 @@ class DaycareWorkersController < ApplicationController
 
   def dashboard
   end
+
+  # def set_password
+  #   if request.post?
+  #     @user = @worker
+  #     path = password_and_set_redirect_path("worker")
+  #     redirect_to path
+  #   end
+  # end
 
   private
     def set_daycare
