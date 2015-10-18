@@ -2,7 +2,7 @@ class TodosController < ApplicationController
   before_action :authenticate_manager!, except: [:accept_todo]
   before_action :ensure_manager, except: [:accept_todo]
   before_action :set_daycare
-  before_action :set_todo, only: [:edit, :update, :show, :destroy, :share_todo, :share_with_departments, :share_with_workers, :share_with_parents ]
+  before_action :set_todo, only: [:edit, :update, :show, :destroy, :share_todo, :accept_todo, :share_with_departments, :share_with_workers, :share_with_parents ]
   before_action :parse_date, only: [:create, :update]
   before_action :check_create_permission, only: [:new, :create, :delete]
   before_action :check_view_permission, only: [:show, :search]
@@ -94,7 +94,7 @@ class TodosController < ApplicationController
     end
 
     def set_todo
-      if action_name == "accept_todo" 
+      if action_name == "" 
         @todo = Todo.find(params[:id])
       else
         @todo = current_daycare.todos.find(params[:id])
