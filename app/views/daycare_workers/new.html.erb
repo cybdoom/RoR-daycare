@@ -1,0 +1,31 @@
+<div class="hgt_auto">
+  <div class="header_top_row">
+    <span class="back_btn"><a href="/">&nbsp;</a></span>
+    <span class="menu_icons">
+      <div class="submenu_toggle">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <%if current_user%>
+            <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+          <%end%>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>
+<div class="c_row_1 c_row_3">
+  <%=form_for @worker, url: daycare_workers_path do |f|%>
+    <div class="d_input_wrap">
+      <div class="f1">
+        <a class="select_txt select_txt2 blue_c" href="#"><%=f.select(:daycare_id,  Daycare.all.map{|d| [d.name, d.id]})%></a>
+        <input type="text" class="d_input d_input2" placeholder="Daycare" disabled>
+      </div>
+
+      <%= f.text_field :name, class: "d_input d_input1", placeholder: 'Name'%>
+      <%= f.email_field :email, class: "d_input d_input1", placeholder: 'Email'%>
+      <%= f.password_field :password, class: "d_input d_input1", placeholder: 'Password'%>
+      <%= f.password_field :password_confirmation, class: "d_input d_input1", placeholder: 'Confirm Password'%>
+    </div>
+    <%=f.submit 'Submit', class: 'submit_btn mar_b'%>
+  <%end%>   
+</div>
