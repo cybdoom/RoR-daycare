@@ -12,8 +12,8 @@ class Todo < ActiveRecord::Base
   has_many :todo_managers, through: :user_todos, source: :manager
   has_many :todo_workers, through: :user_todos, source: :worker
   has_many :todo_parents, through: :user_todos, source: :parent
-  has_many :daycare_todos, dependent: :destroy
-  has_many :daycares, through: :daycare_todos
+  # has_many :daycare_todos, dependent: :destroy
+  # has_many :daycares, dependent: :destroy
   has_one :icon, as: :photoable, class_name: "Photo", dependent: :destroy
   #has_many :create_permissions#, as: :functionality
 

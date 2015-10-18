@@ -17,24 +17,24 @@ class Admin::TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
-    if params[:todo_assignee] == 'departments'
-      @departments = Department.where(daycare_id: params[:daycare_ids])
-      @departments.each do |department|
-        @todo.department_todos.build(department_id: department.id)
-      end
-    else
-      params[:user_type].each do |user_type|
-        if user_type != 'Partner'
-          users = user_type.constantize.where(daycare_id: params[:daycare_ids])
-          users.each do |user|
-            @todo.user_todos.build(user_id: user.id)
+    params[:daycare_ids].each do |daycare_id|
+      if params[:todo_assignee] == 'departments'
+        @departments = Department.where(daycare_id: params[:daycare_ids])
+        @departments.each do |department|
+          @todo.department_todos.build(department_id: department.id, daycare_id: daycare_id)
+        end
+      else
+        params[:user_type].each do |user_type|
+          if user_type != 'Partner'
+            users = user_type.constantize.where(daycare_id: params[:daycare_ids])
+            users.each do |user|
+              @todo.user_todos.build(user_id: user.id, daycare_id: daycare_id)
+            end
           end
         end
       end
     end
-    params[:daycare_ids].each do |daycare_id|
-      @todo.daycare_todos.build(daycare_id: daycare_id)
-    end
+    
     if @todo.save
       flash[:success] = 'Todo Successfully created!'
       redirect_to admin_dashboard_path
