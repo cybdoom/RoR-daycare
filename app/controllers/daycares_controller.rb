@@ -58,19 +58,21 @@ class DaycaresController < ApplicationController
   def login
     if request.post?
       @user = User.find_by(email: params[:email])
-      if @user && @user.manager?
-        if @user.valid_password?(params[:password])
-          sign_in @user
-          flash[:success] = 'Signed in successfully'
-          redirect_to @user.daycare
-        else
-          flash[:error] = 'Invalid email & password'
-          render :login
-        end
-      else
-        flash[:error] = 'Invalid email & password'
-        render :login
-      end
+      path = login_user_and_set_redirect_path("manager")
+      redirect_to path
+      # if @user && @user.manager?
+      #   if @user.valid_password?(params[:password])
+      #     sign_in @user
+      #     flash[:success] = 'Signed in successfully'
+      #     redirect_to @user.daycare
+      #   else
+      #     flash[:error] = 'Invalid email & password'
+      #     render :login
+      #   end
+      # else
+      #   flash[:error] = 'Invalid email & password'
+      #   render :login
+      # end
     else
       if current_user && current_user.manager?
         flash[:success] = 'You are already logged in!'
