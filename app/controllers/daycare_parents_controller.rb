@@ -22,7 +22,6 @@ class DaycareParentsController < ApplicationController
 
   def login
     if request.post?
-      binding.pry
       @user = User.find_by(email: params[:email])
       path = login_user_and_set_redirect_path("parent")
       redirect_to path

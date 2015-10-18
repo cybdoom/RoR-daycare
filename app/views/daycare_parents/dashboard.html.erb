@@ -1,1 +1,87 @@
-Parent Dashboard
+<div class="hgt_auto">
+  <div class="header_top_row">
+    <span class="back_btn"><a href="/">&nbsp;</a></span>
+    <span class="menu_icons">
+      <div class="submenu_toggle">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <%if current_user%>
+            <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+          <%end%>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>
+<div class="mid_wrapp">
+  <div class="notif_left_col">
+    <ul>
+      <li class="mrht58">
+        <a href="<%=todos_path%>">
+          <%=image_tag 'todo_list_icon.jpg', width: '126', height: '114'%>
+          <span class="ser_heading">Todo List</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+        <%=image_tag 'calender_icon.jpg', width: '126', height: '114'%>
+        <span class="ser_heading">Calender</span>
+        </a>
+      </li>
+      <div class="clear"></div>
+      <li class="mrht58">
+        <a href="#">
+          <%=image_tag 'message_icon.jpg', width: '126', height: '114'%>
+          <span class="ser_heading">Messages</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+        <%=image_tag 'attandance_icon.jpg', width: '126', height: '114'%>
+        <span class="ser_heading">Attdance</span>
+        </a>
+      </li>
+      <div class="clear"></div>
+      <li class="mrht58">
+        <a href="#">
+        <%=image_tag 'medication_icon.jpg', width: '126', height: '114'%>
+        <span class="ser_heading">Medication</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+        <%=image_tag 'intolerance_icon.jpg', width: '126', height: '114'%>
+        <span class="ser_heading">Intolerance</span>
+        </a>
+      </li>
+      <div class="clear"></div>
+      <li class="mrht58">
+        <a href="#">
+        <%=image_tag 'alleragy_icon.jpg', width: '126', height: '114'%>
+        <span class="ser_heading">Allergy</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="notif_rht_col">
+    <div class="notif_heading">Notification<span class="noti_count">2</span></div>
+    <div class="notificaiton_list">
+      <h3 class="todo_list_img">Todo List</h3>
+        <%current_user.all_todos.each do |todo|%>
+          <ul>
+           <li><a href="#"><%=todo.title%></a> <%=todo.status%></li>
+          </ul>
+          <%=link_to "Accept", accept_todo_todo_path(todo), method: :post unless todo.status == "accepted"%>
+        <%end%>
+        <!-- <li ><a href="#" class="mother_icon">Mother's Day</a></li>
+        <li ><a href="#" class="environmnt_icon">Environment Day</a></li> -->
+    </div>
+    <div class="notificaiton_list">
+      <h3 class="messages_icon">Messages</h3>
+      <ul>
+        <li ><a href="#" class="parent_icon">Parent</a></li>
+        <li ><a href="#" class="medical_icon">Medical</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
