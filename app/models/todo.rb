@@ -56,4 +56,13 @@ class Todo < ActiveRecord::Base
     pic
   end
 
+  def save_user_todos(user_ids = [])
+    user_ids.each do |user_id|
+      if User.find(user_id)
+        user_todo = self.user_todos.new(user_id: user_id) 
+        user_todo.save
+      end
+    end
+  end
+
 end

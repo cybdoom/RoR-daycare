@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   resources :todos do
     member do
       get :share_todo
-      match :todo_departments, via: [:get, :post]
+      match :share_with_departments, via: [:get, :post]
+      match :share_with_workers, via: [:get, :post]
+      match :share_with_parents, via: [:get, :post]
       post :accept_todo
     end
     collection do

@@ -1,0 +1,40 @@
+<div class="hgt_auto">
+  <div class="header_top_row">
+    <span class="back_btn"><a href="/">&nbsp;</a></span>
+    <span class="menu_icons">
+      <div class="submenu_toggle">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <%if current_user%>
+            <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+          <%end%>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>
+<div class="mid_wrapp padd34">
+  <%=form_tag share_with_parents_todo_path(@todo), method: :post do%>
+    <div class="sel_col">
+      <a class="select_txt" href="#">Select All</a>
+    </div>
+    <div class="custom_checbox_list">
+      <ul>
+        <%current_daycare.parents.each do |parent|%>
+          <li>
+            <%= check_box_tag 'parent_ids[]', parent.id, false, :id => "parent_id_#{parent.id}" %>
+            <label for="parent_id_<%=parent.id%>"><%=parent.name%></label>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="task_com_col">
+      <h4>Once task are completed todo list delegatable</h4>
+      <span class="yes_no">
+      <a href="#" class="yn_active">Yes</a>
+      <a href="#">No</a>
+      </span>
+    </div>
+    <input name="" type="submit" class="submit_btn" value="Submit">
+  <%end%>
+</div>

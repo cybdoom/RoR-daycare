@@ -14,16 +14,16 @@
   </div>
 </div>
 <div class="mid_wrapp padd34">
-  <%=form_tag todo_departments_todo_path(@todo), method: :post do%>
+  <%=form_tag share_with_workers_todo_path(@todo), method: :post do%>
     <div class="sel_col">
       <a class="select_txt" href="#">Select All</a>
     </div>
     <div class="custom_checbox_list">
       <ul>
-        <%current_daycare.departments.each do |department|%>
+        <%current_daycare.workers.each do |worker|%>
           <li>
-            <%= check_box_tag 'department_ids[]', department.id, false, :id => "department_id_#{department.id}" %>
-            <label for="department_id_<%=department.id%>"><%=department.department_name%></label>
+            <%= check_box_tag 'worker_ids[]', worker.id, false, :id => "worker_id_#{worker.id}" %>
+            <label for="worker_id_<%=worker.id%>"><%=worker.name%></label>
           </li>
         <%end%>
       </ul>
