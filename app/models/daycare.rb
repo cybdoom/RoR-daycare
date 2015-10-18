@@ -7,13 +7,13 @@ class Daycare < ActiveRecord::Base
   has_many :users, dependent: :destroy
   has_many :roles, dependent: :destroy
   has_many :departments, dependent: :destroy
-  # has_many :todos, dependent: :destroy
+  has_many :todos, dependent: :destroy
   has_many :create_permissions, dependent: :destroy
   has_many :edit_permissions, dependent: :destroy
   has_many :view_permissions, dependent: :destroy
   has_many :report_permissions, dependent: :destroy
-  has_many :daycare_todos, dependent: :destroy
-  has_many :todos, through: :daycare_todos
+  # has_many :daycare_todos, dependent: :destroy
+  # has_many :todos, through: :daycare_todos
   belongs_to :customer_type
 
   validates :name, :country, :language, :address_line1, :customer_type_id, presence: true
