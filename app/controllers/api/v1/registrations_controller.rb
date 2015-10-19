@@ -22,7 +22,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
       @message = "Invalid Role Provided"
     end
 
-    if @user && @message
+    if @user && @user.valid?
       render json: {result: 'success', message: @message, api_key: @user.api_key} and return
     else
       render json: {result: 'failed', error: true, message: @message} and return
@@ -30,7 +30,6 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
   end
 
   private
-
     
     def create_super_admin
       @message = "In Progress"
@@ -49,15 +48,33 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
     end
 
     def create_daycare_worker
-      @message = "In Progress"
+      @daycare = Daycare.find(params[:user][:daycare_id])
+      @message = "Invalid daycare_id" and return unless @daycare.present?
+      @user = @daycare.workers.new(user_params)
+      if @user.save
+        @message = "Worker created Successfully"
+      else
+        @message = @user.errors.full_messages.uniq.join(', ')
+      end
     end
 
     def creaate_daycare_parent
-      @message = "In Progress"
+      @daycare = Daycare.find(params[:user][:daycare_id])
+      @message = "Invalid daycare_id" and return unless @daycare.present?
+      @user = @daycare.parents.new(user_params)
+      if @user.save
+        @message = "Parent created Successfully"
+      else
+        @message = @user.errors.full_messages.uniq.join(', ')
+      end
     end
 
     def daycare_params
       params.require(:daycare).permit(:name, :address_line1, :post_code, :country, :telephone, :customer_type_id, :language, manager_attributes: [:name, :email, :password, :password_confirmation])
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
     

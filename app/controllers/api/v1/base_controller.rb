@@ -47,7 +47,7 @@ class Api::V1::BaseController < ActionController::Base
     end
 
     def set_active_device
-      if @user.present?
+      if @user.present? && @user.valid?
         user_device = @device.user_devices.find_by(user_id: @user.id)
         user_device = UserDevice.create(user_id: @user.id, device_id: @device.id) unless user_device.present?
         user_device.activate_user_device
