@@ -2,5 +2,5 @@
 <p>You have been assigned as a daycare manager in the <%=@daycare.name%></p>
 
 <p>
-	Click <%= link_to('here', set_manager_password_password_url(@daycare.manager, email: @daycare.manager.email))	%> to set your account password.
+	Click <%= link_to('here', set_manager_password_password_url(@daycare.manager, set_password_token: @daycare.manager.set_password_token))	%> to set your account password.
 </p>

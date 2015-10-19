@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  before_create { generate_token(:set_password_token) }
+
   def all_todos
     self.todos.where("schedule_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")
     # Todo.all
@@ -58,5 +60,11 @@ class User < ActiveRecord::Base
     return true if superadmin?
     permission = daycare.report_permissions.find_by(functionality_type: functionality, user_type: self.type)
     permission ? true : false
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while (User.where(column => self[column]).present?)
   end
 end

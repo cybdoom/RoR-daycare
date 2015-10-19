@@ -1,17 +1,17 @@
 class PasswordsController < ApplicationController
 
   def set_manager_password
-    @user = User.find_by_email(params[:email])
+    @user = User.find_by_set_password_token(params[:set_password_token])
     @role = "manager"
   end
 
   def set_worker_password
-    @user = User.find_by_email(params[:email])
+    @user = User.find_by_set_password_token(params[:set_password_token])
     @role = "worker"
   end
 
   def set_parent_password
-    @user = User.find_by_email(params[:email])
+    @user = User.find_by_set_password_token(params[:set_password_token])
     @role = "parent"
   end
 
@@ -33,11 +33,11 @@ class PasswordsController < ApplicationController
       if role == "superadmin"
         '#'
       elsif role == "manager"
-        set_manager_password_password_path(user, email: user.email)
+        set_manager_password_password_path(user, set_password_token: user.set_password_token)
       elsif role == "worker"
-        set_worker_password_password_path(user, email: user.email)
+        set_worker_password_password_path(user, set_password_token: user.set_password_token)
       elsif role == "parent"
-        set_parent_password_password_path(user, email: user.email)
+        set_parent_password_password_path(user, set_password_token: user.set_password_token)
       else
         root_path
       end

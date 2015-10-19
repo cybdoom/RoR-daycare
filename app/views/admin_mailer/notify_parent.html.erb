@@ -1,5 +1,5 @@
 <h1>Congratulations!</h1>
 <p>You have been assigned as a daycare parent in the <%=@daycare.name%></p>
 <p>
-	Click <%= link_to('here', set_parent_password_password_url(@parent, email: @parent.email))	%> to set your account password.
+	Click <%= link_to('here', set_parent_password_password_url(@parent, set_password_token: @parent.set_password_token))	%> to set your account password.
 </p>
