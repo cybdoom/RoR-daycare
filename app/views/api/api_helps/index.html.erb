@@ -1,0 +1,87 @@
+ 
+<div class="main-container inner-page">
+  <div class="container">
+    <div class="row clearfix">
+      <h1 class="text-center title-1"> Daycare API Documentation </h1>
+      <hr class="center-block small text-hr">
+
+      <div class="col-lg-12 ">
+        <div>
+          <h2> Daycare API Documentation </h2>
+          <h6>API Endpoint</h6>
+          <p>
+            All API URLs listed in this documentation are relative to http://lvh.me:3000/api/v1. For example, the /api/vi/login API call is reachable at http://lvh.me:3000/api/v1/login
+          </p>
+          <h6>Output Format</h6>
+          <p>JSON</p>
+          <h6>Authorization</h6>
+          <p>
+            All API except login api needs you to pass client username and api key value as basic http authorization header.<br/>
+            for.ex sending request using curl <br/>
+            <code>curl --user username:api_key http://lvh.me:3000/api/v1/api_name</code><br/>
+            Here you need to replace username and api_key with actual client username and api key. You can get api_key using login api<br/>
+            <strong>Reference for sending basic http authentication request: </strong>
+            <ul>
+              <li><a href="http://en.wikipedia.org/wiki/Basic_access_authentication">http://en.wikipedia.org/wiki/Basic_access_authentication</a></li>
+              <li><a href="http://www.asp.net/web-api/overview/security/basic-authentication" target='_blank'></a>http://www.asp.net/web-api/overview/security/basic-authentication</li>
+              <li><a href="http://www.4guysfromrolla.com/articles/102605-1.aspx">http://www.4guysfromrolla.com/articles/102605-1.aspx</a></li>
+            </ul>
+          </p>
+        </div>
+      </div>
+
+      <div style="clear:both">
+        <hr>
+      </div>
+
+      <div class="col-lg-12">
+        <%=render 'api_list'%>
+      </div>
+
+      <div style="clear:both">
+        <hr>
+      </div>
+
+      <!--LOGIN API -->
+      
+      <div class="col-lg-12">
+        <div class="white-box text-center">
+          <%=render 'create_super_admin_api_help'%>
+        </div>
+      </div>
+
+      <div class="col-lg-12">
+        <div class="white-box text-center">
+          <%=render 'create_daycare_or_manager_signup_api_help'%>
+        </div>
+      </div>
+
+      <div class="col-lg-12">
+        <div class="white-box text-center">
+          <%=render 'parent_signup_api_help'%>
+        </div>
+      </div>
+
+      <div class="col-lg-12">
+        <div class="white-box text-center">
+          <%=render 'worker_signup_api_help'%>
+        </div>
+      </div>
+
+      <div style="clear:both">
+        <hr>
+      </div>
+
+      <!--LOGIN API -->
+
+      <div class="col-md-12">
+        <div class="white-box text-center">
+          <%=render 'login_api_help'%>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+ 
+

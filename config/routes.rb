@@ -85,4 +85,27 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
+
+  ############################## APIs ROUTES ###########################################
+  namespace :api, path: 'api' do
+    resources :api_helps, :only => [:index], path: 'help'
+
+    namespace :v1, path: 'v1' do
+      post 'login'  => 'sessions#create',       as: :login
+      post 'signup' => 'registrations#create',  as: :signup
+
+      resources :daycare_managers do
+      end
+
+      resources :daycare_workers do
+      end
+      
+      resources :daycare_parents do
+      end
+    end
+  end
+  #######################################################################################
+
 end

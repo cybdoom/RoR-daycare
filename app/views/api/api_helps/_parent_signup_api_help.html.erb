@@ -1,0 +1,102 @@
+<div id="parent_signup_api">
+  <h4>Parent Signup API</h4>
+  <table border="1">
+    <tr>
+      <td>URL</td><td>api/v1/signup</td>
+    </tr>
+    <tr>
+      <td>Http Method</td><td>Post</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>Allow the user to register a new account</td>
+    </tr>
+    <tr>
+      <td rowspan="10">REQUEST PARAMETERS</td>
+      <td>user[first_name]:-  first name of user</td>
+    </tr>
+    <tr>
+      <td>user[last_name]:-  last name of user</td>
+    </tr>
+    <tr>
+      <td>user[email]:-  email of user</td>
+    </tr>
+    <tr>
+      <td>user[password]:-  password for user</td>
+    </tr>
+    <tr>
+      <td>user[password_confirmation]:-  macth of password</td>
+    </tr>
+    <tr>
+      <td>user[company_name]:-  company of user</td>
+    </tr>
+    <tr>
+      <td>user[country]:-  country of user</td>
+    </tr>
+    <tr>
+      <td>device_token:-  device token of user's device</td>
+    </tr>
+    <tr>
+      <td>device_type:-  type of user device</td>
+    </tr>
+    <tr>
+      <td>Example Request JSON :-   {"daycare"=>
+                                      {"name"=>"TestDaycare",
+                                       "address_line1"=>"TestDayCare Address Line 1",
+                                       "post_code"=>"123456",
+                                       "country"=>"IN",
+                                       "telephone"=>"9999999999",
+                                       "customer_type_id"=>"1",
+                                       "language"=>"EN",
+                                       "manager_attributes"=>
+                                        {"name"=>"TestDaycareManager",
+                                         "email"=>"testdaycaremanager@test1.com",
+                                         "password"=>"11111111",
+                                         "password_confirmation"=>"11111111",
+                                         "role"=>"manager"}},
+                                     "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
+                                     "device_type"=>"ios",
+                                     }
+
+      </td>
+    </tr>
+    <tr>
+      <td>Example Successful Response JSON</td>
+      <td>{result: "success" message: "User creation successful" api_key: "HDlruJh1mpC8le6N24QKGQ" }</td>
+    </tr>
+    <tr>
+      <td rowspan=2>Example ERROR Response JSON</td>
+      <td>Duplicate email:- {result: "failed" error: true message: "Email has already been taken" }</td>
+    </tr>
+    <tr>
+      <td>Password Mismatch:- {result: "failed" error: true message: "Password confirmation doesn't match Password" } </td>
+    </tr>
+  </table>
+
+  <br>
+  
+  <table border="1">
+    <tr>
+      <th colspan=3>Return Values</th>
+    </tr>
+    <tr>
+      <td rowspan=11>Hash</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>success/failed</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>displays message</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>true if any error</td>
+    </tr>
+    <tr>
+      <td>api_key</td>
+      <td>api_key of user</td>
+    </tr>
+  </table>
+</div>

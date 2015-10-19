@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019161115) do
+ActiveRecord::Schema.define(version: 20151019185924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,13 @@ ActiveRecord::Schema.define(version: 20151019161115) do
 
   add_index "departments", ["daycare_id"], name: "index_departments_on_daycare_id", using: :btree
 
+  create_table "devices", force: :cascade do |t|
+    t.string   "device_token"
+    t.string   "device_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "key_tasks", force: :cascade do |t|
     t.string   "name"
     t.integer  "key_task_id"
@@ -130,6 +137,14 @@ ActiveRecord::Schema.define(version: 20151019161115) do
 
   add_index "todos", ["daycare_id"], name: "index_todos_on_daycare_id", using: :btree
 
+  create_table "user_devices", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "device_id",  null: false
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_todos", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "todo_id"
@@ -165,6 +180,7 @@ ActiveRecord::Schema.define(version: 20151019161115) do
     t.string   "type"
     t.string   "name"
     t.string   "set_password_token"
+    t.string   "api_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

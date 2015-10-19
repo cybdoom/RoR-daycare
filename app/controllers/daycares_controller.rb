@@ -26,6 +26,7 @@ class DaycaresController < ApplicationController
   end
 
   def create
+    binding.pry
     @daycare = Daycare.new(daycare_params)
     country = ISO3166::Country.new(params[:daycare][:country])
     @daycare.country = country.name

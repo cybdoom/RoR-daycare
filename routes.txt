@@ -88,3 +88,6 @@ add_customer_types_admin_customers GET|POST /admin/customers/add_customer_types(
                                    PATCH    /admin/todos/:id(.:format)                    admin/todos#update
                                    PUT      /admin/todos/:id(.:format)                    admin/todos#update
                                    DELETE   /admin/todos/:id(.:format)                    admin/todos#destroy
+                     api_api_helps GET      /api/help(.:format)                           api/api_helps#index
+                      api_v1_login POST     /api/v1/login(.:format)                       api/v1/sessions#create
+                     api_v1_signup POST     /api/v1/signup(.:format)                      api/v1/registrations#create

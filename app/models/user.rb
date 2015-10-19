@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   before_create { generate_token(:set_password_token) }
+  before_create { generate_token(:api_key) }
 
   def all_todos
     self.todos.where("schedule_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")
@@ -65,6 +66,6 @@ class User < ActiveRecord::Base
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
-    end while (User.where(column => self[column]).present?)
+    end while(User.find_by(column => self[column]).present?)
   end
 end
