@@ -32,7 +32,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
   private
     
     def create_super_admin
-      @message = "In Progress"
+      @message = "Cannot create admin. No Such API"
     end
 
     def create_daycare_and_daycare_manager

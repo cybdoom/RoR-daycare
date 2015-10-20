@@ -1,5 +1,5 @@
 <div id="create_daycare_or_manager_signup_api">
-  <h4>Manager Signup API</h4>
+  <h4>Daycare Manager Signup or Create Daycare API</h4>
   <table border="1">
     <tr>
       <td>URL</td><td>api/v1/signup</td>
@@ -12,35 +12,50 @@
       <td>Allow the user to register a new account</td>
     </tr>
     <tr>
-      <td rowspan="10">REQUEST PARAMETERS</td>
-      <td>user[first_name]:-  first name of user</td>
+      <td rowspan="15">REQUEST PARAMETERS</td>
+      <td>daycare[name] &nbsp&nbsp:-&nbsp&nbsp           Name of Daycare</td>
     </tr>
     <tr>
-      <td>user[last_name]:-  last name of user</td>
+      <td>daycare[address_line1] &nbsp&nbsp:-&nbsp&nbsp    Address of Daycare</td>
     </tr>
     <tr>
-      <td>user[email]:-  email of user</td>
+      <td>daycare[post_code] &nbsp&nbsp:-&nbsp&nbsp        Postal code of Daycare</td>
     </tr>
     <tr>
-      <td>user[password]:-  password for user</td>
+      <td>daycare[country] &nbsp&nbsp:-&nbsp&nbsp          Country Code of Daycare</td>
     </tr>
     <tr>
-      <td>user[password_confirmation]:-  macth of password</td>
+      <td>daycare[telephone] &nbsp&nbsp:-&nbsp&nbsp        Telephone of Daycare</td>
+    </tr>
+     <tr>
+      <td>daycare[customer_type_id] &nbsp&nbsp:-&nbsp&nbsp  Id of coustomer type for Daycare</td>
+    </tr>
+     <tr>
+      <td>daycare[language] &nbsp&nbsp:-&nbsp&nbsp  Language code for Daycare</td>
+    </tr>
+     <tr>
+      <td>daycare[manager_attributes][name] &nbsp&nbsp:-&nbsp&nbsp  Name of Daycare Manager</td>
+    </tr>
+     <tr>
+      <td>daycare[manager_attributes][email] &nbsp&nbsp:-&nbsp&nbsp  Email of Daycare Manager</td>
     </tr>
     <tr>
-      <td>user[company_name]:-  company of user</td>
+      <td>daycare[manager_attributes][password] &nbsp&nbsp:-&nbsp&nbsp  password for Daycare Manager</td>
     </tr>
     <tr>
-      <td>user[country]:-  country of user</td>
+      <td>daycare[manager_attributes][password_confirmation] &nbsp&nbsp:-&nbsp&nbsp  macth of password</td>
     </tr>
     <tr>
-      <td>device_token:-  device token of user's device</td>
+      <td>daycare[manager_attributes][role] &nbsp&nbsp:-&nbsp&nbsp  Role of Daycare Manager (i.e., "manager")</td>
     </tr>
     <tr>
-      <td>device_type:-  type of user device</td>
+      <td>device_token &nbsp&nbsp:-&nbsp&nbsp  device token of user's device</td>
     </tr>
     <tr>
-      <td>Example Request JSON :-   {"daycare"=>
+      <td>device_type &nbsp&nbsp:-&nbsp&nbsp  type of user device</td>
+    </tr>
+    <tr>
+      <td>Example Request JSON  &nbsp&nbsp:-&nbsp&nbsp   {"daycare"=>
                                       {"name"=>"TestDaycare",
                                        "address_line1"=>"TestDayCare Address Line 1",
                                        "post_code"=>"123456",
@@ -54,7 +69,7 @@
                                          "password"=>"11111111",
                                          "password_confirmation"=>"11111111",
                                          "role"=>"manager"}},
-                                     "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
+                                     "device_token"=>"HDlruJh1mpC8le6N24QKGQ",
                                      "device_type"=>"ios",
                                      }
 
@@ -66,10 +81,10 @@
     </tr>
     <tr>
       <td rowspan=2>Example ERROR Response JSON</td>
-      <td>Duplicate email:- {result: "failed" error: true message: "Email has already been taken" }</td>
+      <td>Duplicate email &nbsp&nbsp:-&nbsp&nbsp {result: "failed" error: true message: "Email has already been taken" }</td>
     </tr>
     <tr>
-      <td>Password Mismatch:- {result: "failed" error: true message: "Password confirmation doesn't match Password" } </td>
+      <td>Password Mismatch &nbsp&nbsp:-&nbsp&nbsp {result: "failed" error: true message: "Password confirmation doesn't match Password" } </td>
     </tr>
   </table>
 

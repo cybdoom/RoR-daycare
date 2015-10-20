@@ -1,0 +1,100 @@
+<div id="parent_login_api">
+  <h4>Parent Login API</h4>
+  <table border="1">
+    <tr>
+      <td>URL</td><td>api/v1/login</td>
+    </tr>
+    <tr>
+      <td>Http Method</td><td>Post</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>Allow the registered user to login</td>
+    </tr>
+    <tr>
+      <td rowspan="6">REQUEST PARAMETERS</td>
+      <td>login:-  email of user</td>
+    </tr>
+    <tr>
+      <td>password:-  password of user</td>
+    </tr>
+    <tr>
+      <td>role:-  Role of user device</td>
+    </tr>
+    <tr>
+      <td>device_token:-  device token of user device</td>
+    </tr>
+    <tr>
+      <td>device_type:-  type of user device</td>
+    </tr>
+    <tr>
+      <td>Example Request JSON :-  {
+                                      "login"=>"ashutosh413@gmail.com",
+                                      "password"=>"Abc.1234",
+                                      "role"=>"parent",
+                                      "device_token"=>"aaaaaaaaaaaaaaaaaaaaa",
+                                      "device_type"=>"ios",
+                                    }
+      </td>
+    </tr>
+    <tr>
+      <td>Example Successful Response JSON</td>
+      <td>
+        {
+          result: "success"
+          message: "Authentication successful"
+          api_key: "2IeEV8KAyLpd287uzod24Q"
+          name: "Ashutosh Rawat"
+        }
+      </td>
+    </tr>
+    <tr>
+      <td rowspan=2>Example ERROR Response JSON</td>
+      <td>wrong password:-  {
+                              result: "failed"
+                              error: true
+                              message: "Password is invalid"
+                            }
+      </td>
+    </tr>
+    <tr>
+      <td>No user:- {
+                      success: failed
+                      error: true
+                      message: "No user found"
+                    } 
+      </td>
+    </tr>
+  </table>
+
+  <br>
+
+  <table border="1">
+    <tr>
+      <th colspan=3>Return Values</th>
+    </tr>
+    <tr>
+      <td rowspan=11>Hash</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>success/failed</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>displays message</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>true if any error</td>
+    </tr>
+    <tr>
+      <td>api_key</td>
+      <td>api_key of user</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>name of user</td>
+    </tr>
+  </table>
+</div>
