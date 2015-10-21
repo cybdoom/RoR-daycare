@@ -1,0 +1,13 @@
+<%daycares.each do |daycare|%>
+  <div class="elly_col">
+   	<div class="elly_le">
+      <h4><%=daycare.name%></h4>
+      <!-- <p>4th Main Rd, Viveka Nagar<br/>Banglore-560032<br/>www.kindercare.com/Telephone: 080 500 15553</p> -->
+      <p><%= daycare.address_line1 %><br><%= daycare.post_code.to_i %><br><%=daycare.telephone.to_i%></p>
+    </div>
+    <span class="elly_logo"><%= image_tag 'r_logo2.png', width: "143", height: "87"%></span>
+    <!-- <span class="elly_checkbox"><%#= image_tag 'check_off.png', width: '42', height: '43' %></span> -->
+    <input type="radio" name="daycare_id" id="select_daycare_<%=daycare.id%>" value="<%=daycare.id%>" />
+    <label for="select_daycare_<%=daycare.id%>"></label>
+  </div>
+<%end%>

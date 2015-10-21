@@ -1601,6 +1601,102 @@ ul.allergys_col li p{  font-family: 'HelveticaNeue-LightCond'; color:#a6a8ab; fo
     width: 100%;
     float: left;
     background-size: 42px;}
+	
+	
+	
+	/* ADD CSS*/
+	
+	.add_child{
+		width:100%; text-align:center;
+	}
+	.add_child img{
+		border:1px solid #ec1e25; border-radius:10px;
+	}
+	.add_input_1{
+		width:100%; float:left; border-radius:8px; background:#fff; color: #a6a8ab; font-family: 'MyriadPro-Regular';  font-size: 20px; padding:15px 18px; border:0px; 
+		margin:15px 0px 0px;
+	}
+	.add_input_1.cal_icon1{
+		background: image-url('cal_icon1.png') no-repeat 98% 10px #fff;
+	}
+	a.select_txt.sel_txt1{
+		float:left; margin:10px 0px 0px;
+	}
+	
+	a.add_file_btn{
+		background: image-url('add_icon1.png') no-repeat right center; padding:20px 50px; display:block; text-decoration:none; color:#999; float:right; font-family: 'MyriadPro-Regular';
+		font-size:20px;
+	}
+	.cong_col.cong_col1{
+		padding:60px 0px;
+	}
+	.tick_btn{
+		background:#fff; padding:13px 19px 12px; float:right; width:69px; height:53px;
+	}
+	.add_key_task .key_task_input.key_input1{
+		width:79%;
+	}
+	.welcome_col h4.head_c1{
+		color:#000;
+	}
+	.welcome_col h6.head_c2{
+		color:#b3b3b3;
+	}
+	.previlidge_category.child_category{
+		padding:50px 0px;
+	}
+	.previlidge_category.child_category ul li{
+		background:#f05c51;
+	}
+	.previlidge_category.child_category ul li span.ser_heading{
+		background:#ee3e3a;
+	}
+	ul.allergys_col.allergys_col1{
+		margin:40px 0px 80px;
+	}
+	.custom_checbox_list.custom_checbox_list1{
+		margin-bottom:50px;
+	}
+	.childcare_logo{
+		width:100%; float:left; text-align:center;
+	}
+	.custom_input_wrap{
+		    width: 100%;
+    float: left;
+    background: #fff;
+    padding: 11px;
+    border-radius: 10px; margin:50px 0px;
+	}
+	.custom_input{
+		color: #a6a8ab;
+    font-family: 'MyriadPro-Regular';
+    font-size: 20px;
+    border-bottom: 1px solid #efefef!important;     width: 100%; border:0px;
+    float: left; padding:8px 10px 5px;
+	}
+	
+	.elly_Wrap{
+		width:100%; float:left; margin-bottom:50px;
+	}
+	.elly_col{
+		width:100%; float:left; padding:15px 30px; border-bottom:1px solid #a5a7aa;
+	}
+	.elly_col h4{
+		color:#6d6e70;
+	}
+	.elly_col p{
+		color:#808184; font-size:16px;
+	}
+	.elly_le{
+		width:70%; float:left;
+	}
+	.elly_logo{
+		float:left; margin:20px 0px 0px;
+	}
+	.elly_checkbox{
+		float:right; margin:40px;
+	}
+	
 @media only screen and (min-width:240px) and (max-width:759px) {
 .welcome_col {
 	padding: 30px 14px 0;

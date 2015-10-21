@@ -141,6 +141,10 @@ Rails.application.routes.draw do
   resources :daycare_workers do
     collection do
       match :login, via: [:get, :post]
+      get   :search_daycare
+      post  :select_department
+      post  :signup
+      post  :finish_signup
     end
     member do
       get :dashboard

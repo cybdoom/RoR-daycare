@@ -1,0 +1,28 @@
+<div class="header_top_row">
+	<span class="back_btn"><a href="#">Register</a></span>
+  <span class="menu_icons">
+  	<div class="submenu_toggle">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Welcome</a></li>
+      </ul>
+    </div>
+  </span>
+</div>
+
+<div class="mid_wrapp padd34">
+
+ 	<div class="childcare_logo">
+    <%=image_tag 'childcare_logo', width: '220', height: '120'%>
+  </div>
+  <%=form_for @worker, url: finish_signup_daycare_workers_path do |f|%>
+    <div class="custom_input_wrap">
+      <%=f.hidden_field :daycare_id, value: @daycare.id%>
+      <%=f.hidden_field :department_id, value: @department.id%>
+      <%= f.text_field :username, class: 'custom_input', placeholder: "Username", required: true %>
+      <%= f.email_field :email, class: 'custom_input', placeholder: "Email", required: true%>
+      <%= f.password_field :password, class: 'custom_input', placeholder: "Password", required: true%>
+    </div>
+    <%=f.submit 'Submit', class: 'submit_btn'%>
+  <%end%>
+</div>

@@ -25,7 +25,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'nested_form'
+
 gem 'pnotify-rails'
+
 gem 'unobtrusive_flash'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,7 +66,7 @@ gem 'jquery-datetimepicker-rails'
 gem 'chronic'
 
 # gem 'country_select'
-gem 'countries_and_languages', :require => 'countries_and_languages/rails'
+gem 'countries_and_languages', require: 'countries_and_languages/rails'
 
 gem 'countries', :require => 'global'
 
@@ -72,4 +74,4 @@ gem 'roo'
 
 gem 'roo-xls'
 
-gem "paperclip", "~> 4.3"
+gem 'paperclip', '~> 4.3'

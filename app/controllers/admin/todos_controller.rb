@@ -18,17 +18,18 @@ class Admin::TodosController < ApplicationController
   def create
     @todo = Todo.new(todo_params)
     params[:daycare_ids].each do |daycare_id|
+      @todo.daycare_id = daycare_id
       if params[:todo_assignee] == 'departments'
         @departments = Department.where(daycare_id: params[:daycare_ids])
         @departments.each do |department|
-          @todo.department_todos.build(department_id: department.id, daycare_id: daycare_id)
+          @todo.department_todos.build(department_id: department.id)
         end
       else
         params[:user_type].each do |user_type|
           if user_type != 'Partner'
             users = user_type.constantize.where(daycare_id: params[:daycare_ids])
             users.each do |user|
-              @todo.user_todos.build(user_id: user.id, daycare_id: daycare_id)
+              @todo.user_todos.build(user_id: user.id)
             end
           end
         end
@@ -57,10 +58,14 @@ class Admin::TodosController < ApplicationController
   end
 
   def update
-    @todo = Todo.find(params[:id])  
-    @todo.update_attributes(todo_params)
-    flash[:success] = 'Todo Successfully updated!'
-    redirect_to admin_dashboard_path
+    @todo = Todo.find(params[:id])
+    if @todo.update(todo_params)
+      flash[:success] = 'Todo Successfully updated!'
+      redirect_to admin_dashboard_path
+    else
+      flash[:error] = 'Todo not updated!'
+      render :edit
+    end
   end
 
   def destroy
