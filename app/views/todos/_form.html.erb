@@ -14,7 +14,8 @@
       <%if @todo.new_record?%>
         <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: true%>
       <%else%>
-        <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true%>
+        <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true %>
+        <%=f.hidden_field :schedule_date, value: @todo.schedule_date %>
       <%end%>
     </div>
     <a class="sc_cal_icon fl"></a>
@@ -23,24 +24,31 @@
       <%if @todo.new_record?%>
         <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker', readonly: true%>
       <%else%>
-        <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true%>
+        <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true %>
+        <%=f.hidden_field :due_date, value: @todo.due_date %>
       <%end%>
     </div>
   </div>
 
+  <div class="schedule_field">
+    <%#= select_tag :customer_type_id, options_from_collection_for_select(CustomerType.all, 'id', 'name'), prompt: 'Select Frequency', class: 'todo_select', required: true %>
+  </div>
 
   <div class="schedule_field">
     <div class="sc_1">
       <label>Is Delegatable</label>
       <div class="">
         <%=f.check_box :is_delegatable%>
+      </div>
     </div>
   </div>
-   <div class="schedule_field">
+
+  <div class="schedule_field">
     <div class="sc_1">
       <label>Is Circulatable</label>
       <div class="">
-        <%=f.check_box :is_circulatable%>       
+        <%=f.check_box :is_circulatable%>
+      </div>    
     </div>
   </div>
 
