@@ -12,64 +12,56 @@
       <td>Allow the user to register a new account</td>
     </tr>
     <tr>
-      <td rowspan="10">REQUEST PARAMETERS</td>
-      <td>user[first_name]:-  first name of user</td>
+      <td rowspan="9">REQUEST PARAMETERS</td>
+      <td>user[daycare_id]&nbsp&nbsp:-&nbsp&nbsp Id of Daycare</td>
     </tr>
     <tr>
-      <td>user[last_name]:-  last name of user</td>
+      <td>user[name]&nbsp&nbsp:-&nbsp&nbsp Name of Daycare Parent</td>
     </tr>
     <tr>
-      <td>user[email]:-  email of user</td>
+      <td>user[email]&nbsp&nbsp:-&nbsp&nbsp Email of Daycare Parent</td>
     </tr>
     <tr>
-      <td>user[password]:-  password for user</td>
+      <td>user[password]&nbsp&nbsp:-&nbsp&nbsp password of Daycare Parent</td>
     </tr>
     <tr>
-      <td>user[password_confirmation]:-  macth of password</td>
+      <td>user[password_confirmation]&nbsp&nbsp:-&nbsp&nbsp macth of password</td>
     </tr>
     <tr>
-      <td>user[company_name]:-  company of user</td>
+      <td>user[role]&nbsp&nbsp:-&nbsp&nbsp Role of Daycare Parent (i.e., "parent")</td>
     </tr>
     <tr>
-      <td>user[country]:-  country of user</td>
+      <td>device_token&nbsp&nbsp:-&nbsp&nbsp device token of parent's device</td>
     </tr>
     <tr>
-      <td>device_token:-  device token of user's device</td>
+      <td>device_type&nbsp&nbsp:-&nbsp&nbsp type of parent device</td>
     </tr>
     <tr>
-      <td>device_type:-  type of user device</td>
-    </tr>
-    <tr>
-      <td>Example Request JSON :-   {"daycare"=>
-                                      {"name"=>"TestDaycare",
-                                       "address_line1"=>"TestDayCare Address Line 1",
-                                       "post_code"=>"123456",
-                                       "country"=>"IN",
-                                       "telephone"=>"9999999999",
-                                       "customer_type_id"=>"1",
-                                       "language"=>"EN",
-                                       "manager_attributes"=>
-                                        {"name"=>"TestDaycareManager",
-                                         "email"=>"testdaycaremanager@test1.com",
-                                         "password"=>"11111111",
-                                         "password_confirmation"=>"11111111",
-                                         "role"=>"manager"}},
-                                     "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
-                                     "device_type"=>"ios",
-                                     }
+      <td>
+        Example Request JSON &nbsp&nbsp:-&nbsp&nbsp { "user"=>
+                                                {"name"=>"TestDaycareParent",
+                                                 "email"=>"testdaycareparent@test1.com",
+                                                 "password"=>"11111111",
+                                                 "password_confirmation"=>"11111111",
+                                                 "role"=>"parent"}
+                                                },
+                                               "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
+                                               "device_type"=>"ios",
+                                              }
 
       </td>
     </tr>
+
     <tr>
       <td>Example Successful Response JSON</td>
       <td>{result: "success" message: "User creation successful" api_key: "HDlruJh1mpC8le6N24QKGQ" }</td>
     </tr>
     <tr>
       <td rowspan=2>Example ERROR Response JSON</td>
-      <td>Duplicate email:- {result: "failed" error: true message: "Email has already been taken" }</td>
+      <td>Duplicate email&nbsp&nbsp:-&nbsp&nbsp{result: "failed" error: true message: "Email has already been taken" }</td>
     </tr>
     <tr>
-      <td>Password Mismatch:- {result: "failed" error: true message: "Password confirmation doesn't match Password" } </td>
+      <td>Password Mismatch&nbsp&nbsp:-&nbsp&nbsp{result: "failed" error: true message: "Password confirmation doesn't match Password" } </td>
     </tr>
   </table>
 
@@ -100,3 +92,5 @@
     </tr>
   </table>
 </div>
+
+<%= link_to "Go To Top", "#top" %>

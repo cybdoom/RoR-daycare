@@ -8,9 +8,9 @@ class Api::V1::SessionsController < Api::V1::BaseController
   # after_action :set_active_device, only: [:create]
 
   def create
-    @user, @message = User.authentication_user_with_login_parameters(params[:login], params[:password])
-    if @message.present?
-      render json: {result: 'failed', error: true, message: @message} and return
+    @user, @error_msg = User.authentication_user_with_login_parameters(params[:login], params[:password], params[:role])
+    if @error_msg.present?
+      render json: {result: 'failed', error: true, message: @error_msg} and return
     else
       set_active_device
       render json: {result: 'success', message: 'Authentication successful', api_key: @user.api_key, name: @user.name} and return

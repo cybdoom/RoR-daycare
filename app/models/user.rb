@@ -63,9 +63,57 @@ class User < ActiveRecord::Base
     permission ? true : false
   end
 
+  class << self
+    def authentication_user_with_login_parameters(login, password, role)
+      user, error_msg = nil, nil
+      error_msg = "Username can't be blank" unless login.present?
+      error_msg = "Password can't be blank" unless password.present?
+      error_msg = "Role can't be blank" unless role.present?
+      if login.present? && password.present? && role.present?
+        if role == "superadmin"
+          # user = User.joins(:role).where("roles.name = ?", "superadmin").with_username_or_email(login).first
+          error_msg =  "API Not Available for superadmin login"
+        elsif role == "manager"
+          user = Manager.with_username_or_email(login).first
+        elsif role == "parent"
+          user = Parent.with_username_or_email(login).first
+        elsif role == "worker"
+          user = Worker.with_username_or_email(login).first
+        else
+          error_msg = "Invalid Role Provided"
+        end
+        if user.present?
+          if user.valid_password?(password)
+            user.generate_token(:api_key) and user.save!(validate: false) if user.api_key.blank?
+          else
+            error_msg = "Password is invalid"
+          end
+        else
+          error_msg ||= "No user found"
+        end
+      end
+      return user, error_msg
+    end
+
+    # def with_email_and_api_key(email, api_key)
+    #   with_email(email).with_api_key(api_key).first
+    # end
+
+    # def with_username_and_api_key(username, api_key)
+    #   with_username(username).with_api_key(api_key).first
+    # end
+
+    def with_username_or_email(login)
+      where("email = ?", login)
+    end
+  end
+
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while(User.find_by(column => self[column]).present?)
   end
+
+  private
 end
