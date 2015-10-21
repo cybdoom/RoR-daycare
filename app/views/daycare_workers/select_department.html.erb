@@ -1,0 +1,47 @@
+<div class="header_top_row">
+  <span class="back_btn"><a href="#">Register</a></span>
+  <span class="menu_icons">
+    <div class="submenu_toggle">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Welcome</a></li>
+      </ul>
+    </div>
+  </span>
+</div>
+<div class="mid_wrapp padd34">
+  <div class="childcare_logo">
+    <%=image_tag 'childcare_logo', width: '220', height: '120'%>
+  </div>
+  <div class="sel_col">
+    <a class="select_txt sel_txt1" href="#">Choose Department</a>
+  </div>
+  <%=form_tag signup_daycare_workers_path do %>
+    <%=hidden_field_tag :daycare_id, @daycare.id%>
+    <div class="custom_checbox_list custom_checbox_list1">
+        <ul>
+          <%@daycare.departments.each do |department|%>
+            <li>
+              <input type="checkbox" name="department_id" value="<%=department.id%>" class="type_check" id="department<%=department.id%>" />
+              <label for="department<%=department.id%>"><%=department.department_name%></label>
+            </li>
+          <%end%>
+        </ul>
+    </div>
+    <%=submit_tag 'Signup', class: 'submit_btn'%>
+  <%end%>
+</div>
+<script type="text/javascript">
+  var selectedTypeBox = null;
+  $(".type_check").click(function() {
+    selectedTypeBox = this.id;
+
+    $(".type_check").each(function() {
+      if ( this.id == selectedTypeBox ){
+        this.checked = true;
+      }else{
+        this.checked = false;
+      };
+    });
+  });
+</script>
