@@ -53,6 +53,8 @@ group :development, :test do
   gem 'pry-rails'
   
   gem "letter_opener"
+
+  gem 'annotate'
 end
 
 gem 'devise'

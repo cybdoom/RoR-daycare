@@ -1,7 +1,32 @@
-class Todo < ActiveRecord::Base
+# == Schema Information
+#
+# Table name: todos
+#
+#  id              :integer          not null, primary key
+#  title           :string
+#  schedule_date   :datetime
+#  due_date        :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  is_delegatable  :boolean          default(FALSE)
+#  is_circulatable :boolean          default(FALSE)
+#  todo_for        :string
+#  status          :string           default("pending")
+#  acceptor_id     :integer
+#  daycare_id      :integer
+#  frequency       :string
+#  recurring_rule  :string
+#  until           :datetime
+#
+# Indexes
+#
+#  index_todos_on_daycare_id  (daycare_id)
+#
 
-  REPEAT_OPTIONS = %W(#{"One time event"} Weekly #{"Every month"} #{"Every 3 month"} #{"Every 6 month"} #{"Every year"} )
-  DAILY = %w(Sunday Monday Tuesday Wednesday Thrusday Friday Saturday)
+class Todo < ActiveRecord::Base
+  FREQUENCY = %W(#{"One Time Event"} #{"Recurring Event"})
+  RECURRANCE_OPTIONS = %W(#{"Every Day"} #{"Every Week"} #{"Every Other Week"} #{"Every Month"} #{"Every 3 Months"} #{"Every 6 Months"} #{"Every Year"} )
+  # DAILY = %w(Sunday Monday Tuesday Wednesday Thrusday Friday Saturday)
   
   belongs_to :daycare
   has_many :key_tasks, dependent: :destroy
@@ -16,6 +41,7 @@ class Todo < ActiveRecord::Base
   # has_many :daycares, dependent: :destroy
   has_one :icon, as: :photoable, class_name: "Photo", dependent: :destroy
   #has_many :create_permissions#, as: :functionality
+  has_many :occurences
 
   belongs_to :acceptor, class_name: 'User', foreign_key: 'acceptor_id'
 

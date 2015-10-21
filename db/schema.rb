@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019185924) do
+ActiveRecord::Schema.define(version: 20151021185507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,18 @@ ActiveRecord::Schema.define(version: 20151019185924) do
   add_index "key_tasks", ["key_task_id"], name: "index_key_tasks_on_key_task_id", using: :btree
   add_index "key_tasks", ["todo_id"], name: "index_key_tasks_on_todo_id", using: :btree
 
+  create_table "occurrences", force: :cascade do |t|
+    t.integer  "todo_id"
+    t.datetime "schedule_date"
+    t.datetime "due_date"
+    t.string   "status"
+    t.datetime "submitted_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "occurrences", ["todo_id"], name: "index_occurrences_on_todo_id", using: :btree
+
   create_table "permissions", force: :cascade do |t|
     t.integer  "daycare_id"
     t.string   "user_type"
@@ -133,6 +145,9 @@ ActiveRecord::Schema.define(version: 20151019185924) do
     t.string   "status",          default: "pending"
     t.integer  "acceptor_id"
     t.integer  "daycare_id"
+    t.string   "frequency"
+    t.string   "recurring_rule"
+    t.datetime "until"
   end
 
   add_index "todos", ["daycare_id"], name: "index_todos_on_daycare_id", using: :btree
@@ -194,6 +209,7 @@ ActiveRecord::Schema.define(version: 20151019185924) do
   add_foreign_key "departments", "daycares"
   add_foreign_key "key_tasks", "key_tasks"
   add_foreign_key "key_tasks", "todos"
+  add_foreign_key "occurrences", "todos"
   add_foreign_key "permissions", "daycares"
   add_foreign_key "roles", "daycares"
   add_foreign_key "todos", "daycares"

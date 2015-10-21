@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: devices
+#
+#  id           :integer          not null, primary key
+#  device_token :string
+#  device_type  :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class Device < ActiveRecord::Base
 
   VALID_DEVICES = %w(android ios)

@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: key_tasks
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  key_task_id :integer
+#  todo_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_key_tasks_on_key_task_id  (key_task_id)
+#  index_key_tasks_on_todo_id      (todo_id)
+#
+
 class KeyTask < ActiveRecord::Base
   has_many :sub_tasks, foreign_key: 'key_task_id', class_name: 'KeyTask'
   belongs_to :key_task

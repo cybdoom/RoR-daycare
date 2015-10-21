@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: daycares
+#
+#  id               :integer          not null, primary key
+#  name             :string
+#  address_line1    :string
+#  post_code        :string
+#  country          :string
+#  telephone        :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  customer_type_id :integer
+#  language         :string
+#
+
 require 'csv'
 class Daycare < ActiveRecord::Base
   has_one  :manager, dependent: :destroy

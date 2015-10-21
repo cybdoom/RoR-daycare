@@ -7,23 +7,37 @@
   </div>
 <% end %>
 
+
+<div class="schedule_col">
+  <div class="schedule_field">
+    <div class="sehedule_dt_tm">
+      <label>Todo Frequency</label>
+      <%= f.select(:frequency, Todo::FREQUENCY, {}, {:class => 'select_frequency'})%>
+    </div>
+    <div class="sehedule_dt_tm" id="repeat_opt" style="display:none;">
+      <label>Repeat At</label>
+      <%= f.select(:recurring_rule, Todo::RECURRANCE_OPTIONS, {prompt: "Select Repeat Options"}, {:class => ''})%>
+    </div>
+  </div>
+
+
 <div class="schedule_col">
   <div class="schedule_field">
     <div class="sehedule_dt_tm">
       <label>Schedule Date / time</label>
       <%if @todo.new_record?%>
-        <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: true%>
+        <%=f.text_field :schedule_date, placeholder: 'Choose Schedule date and time', class: 'datetimepicker', readonly: true%>
       <%else%>
-        <%=f.text_field :schedule_date, placeholder: '10-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true%>
+        <%=f.text_field :schedule_date, placeholder: 'Choose Schedule date and time', class: 'datetimepicker', readonly: true, disabled: true%>
       <%end%>
     </div>
     <a class="sc_cal_icon fl"></a>
     <div class="sehedule_dt_tm">
       <label>Due Date / time</label>
       <%if @todo.new_record?%>
-        <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker', readonly: true%>
+        <%=f.text_field :due_date, placeholder: 'Choose Completion date and time', class: 'datetimepicker', readonly: true%>
       <%else%>
-        <%=f.text_field :due_date, placeholder: '20-07-2015 10:30', class: 'datetimepicker', readonly: true, disabled: true%>
+        <%=f.text_field :due_date, placeholder: 'Choose Completion date and time', class: 'datetimepicker', readonly: true, disabled: true%>
       <%end%>
     </div>
   </div>
@@ -87,3 +101,18 @@
   </div>
   <%=f.submit 'Save', class: 'submit_btn mar_b'%>
 </div>
+
+<script type="text/javascript">
+  $(".select_frequency").change(function(){
+    if($(".select_frequency").val() == "" || $(".select_frequency").val() == "One Time Event"){
+      $("#todo_recurring_rule").val("")
+      $("#repeat_opt").hide()
+      
+    }else
+    {
+      
+      $("#todo_recurring_rule").val("")
+      $("#repeat_opt").show()
+    }
+  });
+</script>
