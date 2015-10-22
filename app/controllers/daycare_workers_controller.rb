@@ -42,7 +42,7 @@ class DaycareWorkersController < ApplicationController
   end
 
   def select_department
-    @daycare = Daycare.find(params[:daycare_id])
+    @daycare = Daycare.find(params[:cid])
     render :select_department
   end
 
