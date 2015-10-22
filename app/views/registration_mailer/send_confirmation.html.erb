@@ -1,0 +1,5 @@
+<h2>Hello <%=@user.email%></h2>
+<p>You have successfully created your account as a daycare <%=@user.type%>.
+To Confirm your account click on the link below.
+</p>
+<p><%=link_to 'Confirm My Account', confirm_account_url(token: @user.confirmation_token, user_type: @user.type)%></p>
