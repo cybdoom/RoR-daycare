@@ -85,6 +85,18 @@ Rails.application.configure do
 
   Rails.application.routes.default_url_options[:host] = 'https://polar-thicket-1336.herokuapp.com'
 
+  # config.action_mailer.delivery_method = :smtp
+
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               'gmail.com',
+  #   user_name:            'noreply.daycare@gmail.com',
+  #   password:             'daycare@2015',
+  #   authentication:       :login,
+  #   enable_starttls_auto: true 
+  # }
+
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
@@ -93,8 +105,7 @@ Rails.application.configure do
     domain:               'gmail.com',
     user_name:            'noreply.daycare',
     password:             'daycare@2015',
-    authentication:       'plain',
-    enable_starttls_auto: true 
-  }
+    authentication:       'login',
+    enable_starttls_auto: true  }
   
 end
