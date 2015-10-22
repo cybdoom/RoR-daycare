@@ -1,17 +1,15 @@
 class PasswordsController < ApplicationController
+  before_action :find_user, only: [:set_manager_password, :set_worker_password, :set_parent_password]
 
   def set_manager_password
-    @user = User.find_by_set_password_token(params[:set_password_token])
     @role = "manager"
   end
 
   def set_worker_password
-    @user = User.find_by_set_password_token(params[:set_password_token])
     @role = "worker"
   end
 
   def set_parent_password
-    @user = User.find_by_set_password_token(params[:set_password_token])
     @role = "parent"
   end
 
@@ -24,10 +22,10 @@ class PasswordsController < ApplicationController
   end
 
   private
+
     def set_daycare
       @daycare = current_daycare
     end
-
 
     def get_password_set_path(role, user)
       if role == "superadmin"
@@ -43,10 +41,9 @@ class PasswordsController < ApplicationController
       end
     end
 
-
     def password_and_set_redirect_path(role)
       if params[:password] == params[:password_confirmation]
-        if @user.update_attribute(:password, params[:password])
+        if @user.update(password: params[:password], set_password_token: nil)
           sign_in @user
           flash[:success] = 'Password Successfully Set'
           after_login_path_for(role, @user)
@@ -57,6 +54,17 @@ class PasswordsController < ApplicationController
       else
         flash[:alert] = "Password doesn't match"
         get_password_set_path(role, @user)
+      end
+    end
+
+    def find_user
+      if params[:set_password_token].present?
+        @user = User.find_by(set_password_token: params[:set_password_token])
+        unless @user
+          redirect_to root_url, alert: 'The reset password link has been expired!'
+        end
+      else
+        redirect_to root_url, alert: 'The set password link seems to be invalid!'
       end
     end
 

@@ -1,13 +1,17 @@
-<div class="header_top_row">
-  <span class="back_btn"><a href="#">Register</a></span>
-  <span class="menu_icons">
-    <div class="submenu_toggle">
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Welcome</a></li>
-      </ul>
-    </div>
-  </span>
+<div class="hgt_auto">
+  <div class="header_top_row">
+    <span class="back_btn"><a href="/">&nbsp;</a></span>
+    <span class="menu_icons">
+      <div class="submenu_toggle">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <%if current_user%>
+            <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+          <%end%>
+        </ul>
+      </div>
+    </span>
+  </div>
 </div>
 <div class="mid_wrapp padd34">
   <div class="childcare_logo">
