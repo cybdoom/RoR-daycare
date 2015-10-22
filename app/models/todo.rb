@@ -98,9 +98,6 @@ class Todo < ActiveRecord::Base
     end
   end
 
-
-
-
   private 
     def valid_recurring_rule
       if frequency == "One Time Event"

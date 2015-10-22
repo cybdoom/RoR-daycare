@@ -72,6 +72,8 @@ gem 'countries', :require => 'global'
 
 gem 'roo'
 
+gem 'whenever'
+
 gem 'roo-xls'
 
 gem 'paperclip', '~> 4.3'

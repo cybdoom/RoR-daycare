@@ -17,6 +17,6 @@
 #
 
 class Occurrence < ActiveRecord::Base
-	STATUS = %W( Draft Started Completed #{"Not Completed"} #{"Not Completed in Time"})
+	STATUS = %w( draft started completed not_completed not_completed_in_time)
 	belongs_to :todo
 end
