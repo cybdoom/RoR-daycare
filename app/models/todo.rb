@@ -95,40 +95,44 @@ class Todo < ActiveRecord::Base
     end
   end
 
-  def valid_recurring_rule
-    if frequency == "One Time Event"
-      errors.add(:invalid_rule, "You cann't set recurring rule for One Time Event") unless recurring_rule == nil
-    elsif frequency == "Recurring Event"
-      errors.add(:invalid_rule, "Please Select Correct recurring rule. Rule must be either one of following #{RECURRANCE_OPTIONS.join(', ')}") unless RECURRANCE_OPTIONS.include?(recurring_rule)
-    else
-      errors.add(:invalid_frequency, "Frequency must be either One Time Event or Recurring Event")
-    end
-  end
-  
-  def correct_due_date
-    if frequency == "One Time Event" && recurring_rule == nil
-      errors.add(:invalid_due_date, "Due Date must be greater than schedule_date") if due_date < schedule_date
-    elsif frequency == "Recurring Event" && RECURRANCE_OPTIONS.include?(recurring_rule)
-      if recurring_rule == "Every Day"
-        errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 23.hours}") if due_date < schedule_date || due_date >= schedule_date + 23.hours
-      elsif recurring_rule == "Every Week"
-        errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.week - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.week - 1.day
-      elsif recurring_rule == "Every Other Week"
-        errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 2.weeks - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 2.weeks - 1.day
-      elsif recurring_rule == "Every Month"
-        errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.month - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.month - 1.day
-      elsif recurring_rule == "Every 3 Months"
-        errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 3.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 3.months - 1.day
-      elsif recurring_rule == "Every 6 Months"
-        errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 6.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 6.months - 1.day
-      elsif recurring_rule == "Every Year"
-        errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.year - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.year - 1.day
-      else
+
+
+
+  private 
+    def valid_recurring_rule
+      if frequency == "One Time Event"
+        errors.add(:invalid_rule, "You cann't set recurring rule for One Time Event") unless recurring_rule == nil
+      elsif frequency == "Recurring Event"
         errors.add(:invalid_rule, "Please Select Correct recurring rule. Rule must be either one of following #{RECURRANCE_OPTIONS.join(', ')}") unless RECURRANCE_OPTIONS.include?(recurring_rule)
+      else
+        errors.add(:invalid_frequency, "Frequency must be either One Time Event or Recurring Event")
       end
-    else
-      errors.add(:invalid_options, "Check your frequency and recurring_rule something is wrong")
     end
-  end
+    
+    def correct_due_date
+      if frequency == "One Time Event" && recurring_rule == nil
+        errors.add(:invalid_due_date, "Due Date must be greater than schedule_date") if due_date < schedule_date
+      elsif frequency == "Recurring Event" && RECURRANCE_OPTIONS.include?(recurring_rule)
+        if recurring_rule == "Every Day"
+          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 23.hours}") if due_date < schedule_date || due_date >= schedule_date + 23.hours
+        elsif recurring_rule == "Every Week"
+          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.week - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.week - 1.day
+        elsif recurring_rule == "Every Other Week"
+          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 2.weeks - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 2.weeks - 1.day
+        elsif recurring_rule == "Every Month"
+          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.month - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.month - 1.day
+        elsif recurring_rule == "Every 3 Months"
+          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 3.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 3.months - 1.day
+        elsif recurring_rule == "Every 6 Months"
+          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 6.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 6.months - 1.day
+        elsif recurring_rule == "Every Year"
+          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.year - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.year - 1.day
+        else
+          errors.add(:invalid_rule, "Please Select Correct recurring rule. Rule must be either one of following #{RECURRANCE_OPTIONS.join(', ')}") unless RECURRANCE_OPTIONS.include?(recurring_rule)
+        end
+      else
+        errors.add(:invalid_options, "Check your frequency and recurring_rule something is wrong")
+      end
+    end
 
 end
