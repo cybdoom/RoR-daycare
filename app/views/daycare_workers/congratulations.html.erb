@@ -1,0 +1,23 @@
+<div class="hgt_auto">
+  <div class="header_top_row">
+    <span class="back_btn"><a href="/">&nbsp;</a></span>
+    <span class="menu_icons">
+      <div class="submenu_toggle">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <%if current_user%>
+            <li><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+          <%end%>
+        </ul>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="mid_wrapp padd34">
+  <div class="cong_col cong_col1">
+  	<h4>CONGRATUALTIONS !</h4>
+    <p>You Have Now Created Your Daycare Profile.</p>
+    <p>shortly we will get an email</p>
+  </div>
+</div>

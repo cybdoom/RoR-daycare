@@ -1,24 +1,12 @@
 class DaycareWorkersController < ApplicationController
-  before_action :authenticate_worker!, except: [:login, :new, :create, :search_daycare, :select_department, :signup, :finish_signup]
-  before_action :ensure_worker, except: [:login, :new, :create, :search_daycare, :select_department, :signup, :finish_signup]
+  before_action :authenticate_worker!, only: [:dashboard]
+  before_action :ensure_worker, only: [:dashboard]
   before_action :set_daycare, only: [:dashboard]
   before_action :set_worker, only: [:dashboard]
 
 
   def new
     @worker = Worker.new
-  end
-
-  def create
-    @daycare = Daycare.find(params[:worker][:daycare_id])
-    @worker = @daycare.workers.new(worker_params)
-    if @worker.save
-      flash[:success] = "Worker Successfully created."
-      sign_in @worker
-      redirect_to dashboard_daycare_worker_path(@worker)
-    else
-      render :new
-    end
   end
 
   def login
@@ -47,14 +35,14 @@ class DaycareWorkersController < ApplicationController
 
   def search_daycare
     if params[:q].present?
-      @daycares = Daycare.where("name ILIKE ?", "%#{params[:q]}%")
+      @daycares = Daycare.where("lower(name) LIKE ?", "%#{params[:q].downcase}%")
     else
       @daycares = Daycare.all
     end
   end
 
   def select_department
-    @daycare = Daycare.find(params[:daycare_id])
+    @daycare = Daycare.find(params[:cid])
     render :select_department
   end
 
@@ -68,13 +56,17 @@ class DaycareWorkersController < ApplicationController
   def finish_signup
     @worker = Worker.new(worker_params)
     if @worker.save
-      flash[:success] = 'Signup Successfully!'
-      sign_in @worker
-      redirect_to dashboard_daycare_worker_path(@worker)
+      RegistrationMailer.send_confirmation(@worker).deliver
+      flash[:success] = 'Your account has been created Successfully. Please confirm your account!'
+      redirect_to congratulations_daycare_workers_path
     else
       flash[:error] = 'Something went wrong! Please try again.'
       render :signup
     end
+  end
+
+  def congratulations
+    
   end
 
   private
@@ -87,7 +79,6 @@ class DaycareWorkersController < ApplicationController
     end
 
     def worker_params
-      # params[:worker].delete('daycare_id')
       params.require(:worker).permit!
     end
 

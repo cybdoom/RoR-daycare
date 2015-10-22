@@ -22,6 +22,7 @@
 #
 #  index_todos_on_daycare_id  (daycare_id)
 #
+#
 
 class Todo < ActiveRecord::Base
   FREQUENCY = %W(#{"One Time Event"} #{"Recurring Event"})

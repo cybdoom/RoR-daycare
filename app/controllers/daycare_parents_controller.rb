@@ -13,7 +13,7 @@ class DaycareParentsController < ApplicationController
     @parent = @daycare.parents.new(parent_params)
     if @parent.save
       flash[:success] = "Parent Successfully created."
-      sign_in @parent
+      RegistrationMailer.send_confirmation(@worker).deliver
       redirect_to dashboard_daycare_parent_path(@parent)
     else
       render :new

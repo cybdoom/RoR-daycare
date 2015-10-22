@@ -142,9 +142,10 @@ Rails.application.routes.draw do
     collection do
       match :login, via: [:get, :post]
       get   :search_daycare
-      post  :select_department
+      match :select_department, via: [:get, :post]
       post  :signup
       post  :finish_signup
+      get   :congratulations
     end
     member do
       get :dashboard
@@ -181,6 +182,8 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  get :confirm_account, to: 'common#confirm_account'
 
   # Example resource route within a namespace:
   namespace :admin do
