@@ -59,8 +59,6 @@ class Todo < ActiveRecord::Base
   after_create :set_first_occurrence
 
 
-
-
   #Check permissions by user
   def can_be_created_by?(user)
     return true if user.superadmin?
@@ -102,11 +100,11 @@ class Todo < ActiveRecord::Base
   end
 
   def previous_occurrences
-    occurrences.where("due_date <= ?", DateTime.now)
+    occurrences.where("occurrences.due_date <= ?", DateTime.now)
   end
 
   def current_occurrence
-    occurrences.where("schedule_date <= ? AND due_date > ?", DateTime.now, DateTime.now).last
+    occurrences.where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).last
   end
 
   def next_occurrence
@@ -114,7 +112,7 @@ class Todo < ActiveRecord::Base
   end
 
   def next_occurrences
-    occurrences.where("schedule_date >= ?", DateTime.now)
+    occurrences.where("occurrences.schedule_date >= ?", DateTime.now)
   end
 
   def self.min_duration
@@ -128,7 +126,7 @@ class Todo < ActiveRecord::Base
   private 
     def valid_recurring_rule
       if frequency == "One Time Event"
-        errors.add(:invalid_rule, "You cann't set recurring rule for One Time Event") unless recurring_rule == nil
+        errors.add(:invalid_rule, "You cann't set recurring rule for One Time Event") unless recurring_rule == ""
       elsif frequency == "Recurring Event"
         errors.add(:invalid_rule, "Please Select Correct recurring rule. Rule must be either one of following #{RECURRANCE_OPTIONS.join(', ')}") unless RECURRANCE_OPTIONS.include?(recurring_rule)
       else
@@ -142,7 +140,7 @@ class Todo < ActiveRecord::Base
       max_due_date = nil
 
 
-      if frequency == "One Time Event" && recurring_rule == nil
+      if frequency == "One Time Event" && recurring_rule == ""
         errors.add(:invalid_due_date, "Due Date must be greater than #{min_due_date}") if due_date <= min_due_date
       elsif frequency == "Recurring Event" && RECURRANCE_OPTIONS.include?(recurring_rule)
         if recurring_rule == "Every Day"
