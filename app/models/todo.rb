@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: todos
+#
+#  id              :integer          not null, primary key
+#  title           :string
+#  schedule_date   :datetime
+#  due_date        :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  is_delegatable  :boolean          default(FALSE)
+#  is_circulatable :boolean          default(FALSE)
+#  todo_for        :string
+#  status          :string           default("pending")
+#  acceptor_id     :integer
+#  daycare_id      :integer
+#
+
 class Todo < ActiveRecord::Base
 
   REPEAT_OPTIONS = %W(#{"One time event"} Weekly #{"Every month"} #{"Every 3 month"} #{"Every 6 month"} #{"Every year"} )

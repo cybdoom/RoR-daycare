@@ -29,8 +29,8 @@ gem 'nested_form'
 gem 'pnotify-rails'
 
 gem 'unobtrusive_flash'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+
+gem 'annotate', github: 'ctran/annotate_models'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

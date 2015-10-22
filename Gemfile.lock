@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: d878a5b784ee0f703e9ee677bc0231dc24159512
+  specs:
+    annotate (2.6.10)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -210,6 +218,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   bootstrap-glyphicons
   byebug
   chronic
