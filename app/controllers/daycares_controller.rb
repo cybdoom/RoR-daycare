@@ -97,7 +97,7 @@ class DaycaresController < ApplicationController
 
   def invite_workers
     if request.post?
-      DaycareMailer.send_invite_to_workers(params[:email_ids], @daycare).deliver_now
+      DaycareMailer.send_invite_to_workers(params[:email_ids], @daycare).deliver_later
       flash[:success] = 'Invitation to daycare workers has been sent successfully!'
       redirect_to invite_parents_daycare_path(@daycare)
     end
@@ -105,7 +105,7 @@ class DaycaresController < ApplicationController
 
   def invite_parents
     if request.post?
-      DaycareMailer.send_invite_to_parents(params[:email_ids], @daycare).deliver_now
+      DaycareMailer.send_invite_to_parents(params[:email_ids], @daycare).deliver_later
       flash[:success] = 'Invitation to daycare parents has been sent successfully!'
       redirect_to @daycare
     end

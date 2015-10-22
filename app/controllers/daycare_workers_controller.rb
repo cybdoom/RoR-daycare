@@ -56,7 +56,7 @@ class DaycareWorkersController < ApplicationController
   def finish_signup
     @worker = Worker.new(worker_params)
     if @worker.save
-      RegistrationMailer.send_confirmation(@worker).deliver
+      RegistrationMailer.send_confirmation(@worker).deliver_later
       flash[:success] = 'Your account has been created Successfully. Please confirm your account!'
       redirect_to congratulations_daycare_workers_path
     else

@@ -15,10 +15,10 @@
 </div>
 <div class="mid_wrapp padd34">
   <div class="childcare_logo">
-    <%=image_tag 'childcare_logo', width: '220', height: '120'%>
+    <%=image_tag 'childcare_logo.jpg', width: '220', height: '120'%>
   </div>
   <div class="sel_col">
-    <a class="select_txt sel_txt1" href="#">Choose Department</a>
+    <a class="select_txt sel_txt1" href="javascript:;">Choose Department</a>
   </div>
   <%=form_tag signup_daycare_workers_path do %>
     <%=hidden_field_tag :daycare_id, @daycare.id%>

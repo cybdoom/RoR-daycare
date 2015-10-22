@@ -41,15 +41,15 @@ class Admin::CustomersController < ApplicationController
   def notify_users
     @daycare = Daycare.find(params[:id])
     if request.post?
-      AdminMailer.notify_manager(@daycare).deliver
+      AdminMailer.notify_manager(@daycare).deliver_later
       # AdminMailer.notify_workers(@daycare).deliver
       @daycare.workers.each do |w|
-        AdminMailer.notify_worker(@daycare, w).deliver
+        AdminMailer.notify_worker(@daycare, w).deliver_later
       end
 
       # AdminMailer.notify_parents(@daycare).deliver
       @daycare.parents.each do |p|
-        AdminMailer.notify_parent(@daycare, p).deliver
+        AdminMailer.notify_parent(@daycare, p).deliver_later
       end
       flash[:success] = 'All users have been notified via email successfully!'
       redirect_to admin_dashboard_path
