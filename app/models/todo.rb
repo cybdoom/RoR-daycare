@@ -41,7 +41,7 @@ class Todo < ActiveRecord::Base
   # has_many :daycares, dependent: :destroy
   has_one :icon, as: :photoable, class_name: "Photo", dependent: :destroy
   #has_many :create_permissions#, as: :functionality
-  has_many :occurences
+  has_many :occurrences
 
   belongs_to :acceptor, class_name: 'User', foreign_key: 'acceptor_id'
 
@@ -54,6 +54,9 @@ class Todo < ActiveRecord::Base
 
   accepts_nested_attributes_for :key_tasks, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :icon, allow_destroy: true
+
+  after_create :set_first_occurence
+
 
   #Check permissions by user
   def can_be_created_by?(user)
@@ -133,6 +136,9 @@ class Todo < ActiveRecord::Base
       else
         errors.add(:invalid_options, "Check your frequency and recurring_rule something is wrong")
       end
+    end
+
+    def set_first_occurence
     end
 
 end
