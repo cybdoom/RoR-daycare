@@ -52,10 +52,10 @@ class Todo < ActiveRecord::Base
   validate :correct_due_date
   # validate :schedule_due_date
 
-  accepts_nested_attributes_for :key_tasks, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :key_tasks, :occurrences, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :icon, allow_destroy: true
 
-  after_create :set_first_occurence
+  after_create :set_first_occurrence
 
 
   #Check permissions by user
@@ -117,19 +117,19 @@ class Todo < ActiveRecord::Base
         errors.add(:invalid_due_date, "Due Date must be greater than schedule_date") if due_date < schedule_date
       elsif frequency == "Recurring Event" && RECURRANCE_OPTIONS.include?(recurring_rule)
         if recurring_rule == "Every Day"
-          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 23.hours}") if due_date < schedule_date || due_date >= schedule_date + 23.hours
+          errors.add(:due_date, "must be between #{schedule_date} and  #{schedule_date + 23.hours}") if due_date < schedule_date || due_date >= schedule_date + 23.hours
         elsif recurring_rule == "Every Week"
-          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.week - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.week - 1.day
+          errors.add(:due_date, "must be between #{schedule_date} and  #{schedule_date + 1.week - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.week - 1.day
         elsif recurring_rule == "Every Other Week"
-          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 2.weeks - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 2.weeks - 1.day
+          errors.add(:due_date, "must be between #{schedule_date} and  #{schedule_date + 2.weeks - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 2.weeks - 1.day
         elsif recurring_rule == "Every Month"
-          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.month - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.month - 1.day
+          errors.add(:due_date, "must be between #{schedule_date} and  #{schedule_date + 1.month - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.month - 1.day
         elsif recurring_rule == "Every 3 Months"
-          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 3.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 3.months - 1.day
+          errors.add(:due_date, "must be between #{schedule_date} and  #{schedule_date + 3.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 3.months - 1.day
         elsif recurring_rule == "Every 6 Months"
-          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 6.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 6.months - 1.day
+          errors.add(:due_date, "must be between #{schedule_date} and  #{schedule_date + 6.months - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 6.months - 1.day
         elsif recurring_rule == "Every Year"
-          errors.add(:due_date, "must be between #{due_date} and  #{schedule_date + 1.year - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.year - 1.day
+          errors.add(:due_date, "must be between #{schedule_date} and  #{schedule_date + 1.year - 1.day}") if due_date < schedule_date || due_date >= schedule_date + 1.year - 1.day
         else
           errors.add(:invalid_rule, "Please Select Correct recurring rule. Rule must be either one of following #{RECURRANCE_OPTIONS.join(', ')}") unless RECURRANCE_OPTIONS.include?(recurring_rule)
         end
@@ -138,7 +138,8 @@ class Todo < ActiveRecord::Base
       end
     end
 
-    def set_first_occurence
+    def set_first_occurrence
+      self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft)
     end
 
 end
