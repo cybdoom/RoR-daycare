@@ -12,10 +12,6 @@
 #
 #  index_roles_on_daycare_id  (daycare_id)
 #
-# Foreign Keys
-#
-#  fk_rails_fb7245d4ba  (daycare_id => daycares.id)
-#
 
 class Role < ActiveRecord::Base
   belongs_to :daycare

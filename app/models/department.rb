@@ -12,10 +12,6 @@
 #
 #  index_departments_on_daycare_id  (daycare_id)
 #
-# Foreign Keys
-#
-#  fk_rails_26e38d203c  (daycare_id => daycares.id)
-#
 
 class Department < ActiveRecord::Base
   belongs_to :daycare

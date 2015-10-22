@@ -13,11 +13,6 @@
 #  index_user_todos_on_todo_id  (todo_id)
 #  index_user_todos_on_user_id  (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_3915b8aaec  (user_id => users.id)
-#  fk_rails_a455812f8d  (todo_id => todos.id)
-#
 
 class UserTodo < ActiveRecord::Base
   # TODO_STATUS = %w( draft started completed not_completed not_completed_in_time)

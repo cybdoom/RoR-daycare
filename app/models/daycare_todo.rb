@@ -13,11 +13,6 @@
 #  index_daycare_todos_on_daycare_id  (daycare_id)
 #  index_daycare_todos_on_todo_id     (todo_id)
 #
-# Foreign Keys
-#
-#  fk_rails_5548e1faf5  (todo_id => todos.id)
-#  fk_rails_5e318e72db  (daycare_id => daycares.id)
-#
 
 class DaycareTodo < ActiveRecord::Base
   belongs_to :todo
