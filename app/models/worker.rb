@@ -28,9 +28,12 @@
 #  name                   :string
 #  set_password_token     :string
 #  api_key                :string
+#  department_id          :integer
+#  username               :string
 #
 # Indexes
 #
+#  index_users_on_department_id         (department_id)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #

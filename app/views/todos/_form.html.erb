@@ -123,4 +123,16 @@
       $("#repeat_opt").show()
     }
   });
+
+
+  $( ".select_frequency" ).load(function() {
+    if($(".select_frequency").val() == "" || $(".select_frequency").val() == "One Time Event"){
+      $("#todo_recurring_rule").val("")
+      $("#repeat_opt").hide()      
+    }else
+    {      
+      // $("#todo_recurring_rule").val("")
+      $("#repeat_opt").show()
+    }
+  });
 </script>

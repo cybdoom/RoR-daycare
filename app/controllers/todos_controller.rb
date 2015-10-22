@@ -19,10 +19,11 @@ class TodosController < ApplicationController
 
   def create
     @todo = @daycare.todos.new(todo_params)
-    if @todo.save!
+    if @todo.save
       flash[:success] = 'Todo has been successfully created'
       redirect_to share_todo_todo_path(@todo)
     else
+      flash[:alert] = @todo.errors.full_messages.uniq.join(',')
       render :new
     end
   end
