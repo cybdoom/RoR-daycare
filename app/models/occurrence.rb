@@ -17,12 +17,14 @@
 #
 
 class Occurrence < ActiveRecord::Base
-  # STATUS = %w( draft started ended)
-  STATUS = %w( draft started completed not_completed not_completed_in_time)
+  STATUS = %w(draft started ended)
   belongs_to :todo
 
   validates :schedule_date, :due_date, presence: true, uniqueness: {scope: :todo_id}
   validate :correct_due_date
+  # validate :correct_schedule_date
+  validate :valid_status
+
   
   def next_schedule_date
     get_start_date(todo.recurring_rule, schedule_date)
@@ -58,13 +60,22 @@ class Occurrence < ActiveRecord::Base
       next_schedule_date + (e_date - s_date)
     end
 
+    # def correct_schedule_date
+    #   if todo.occurrences.count > 1
+    #     errors.add(:schedule_date, "must be greater than or equal #{todo.schedule_date} and less than #{todo.due_date}") if schedule_date < todo.schedule_date || schedule_date >= todo.due_date
+    #   else
+    #     previous_occurence = todo.occurrences.find(todo.occurrences.maximum(:id))
+    #     errors.add(:schedule_date, "must be equal or might be greater than #{previous_occurence.next_schedule_date}") if schedule_date < previous_occurence.next_schedule_date || schedule_date >= previous_occurence.next_due_date
+    #   end
+    # end 
+
     def correct_due_date
       min_due_date = schedule_date + Todo.min_duration
       min_duration_to_next_schedule = Todo.min_duration_before_next_schedule
       max_due_date = nil
 
       if todo.frequency == "One Time Event" && todo.recurring_rule == ""
-        errors.add(:invalid_due_date, "Due Date must be greater than #{min_due_date}") if due_date <= min_due_date
+        errors.add(:due_date, "must be greater than #{min_due_date}") if due_date <= min_due_date
       elsif todo.frequency == "Recurring Event" && Todo::RECURRANCE_OPTIONS.include?(todo.recurring_rule)
         if todo.recurring_rule == "Every Day"
           max_due_date = schedule_date + 1.day - min_duration_to_next_schedule
@@ -88,6 +99,10 @@ class Occurrence < ActiveRecord::Base
       else
         errors.add(:invalid_options, "Check your frequency and recurring_rule something is wrong")
       end
+    end
+
+    def valid_status
+      errors.add(:occurrence_status, " must be one of #{STATUS.join(', ')}")
     end
 
 

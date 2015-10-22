@@ -15,11 +15,18 @@
 #
 
 class UserTodo < ActiveRecord::Base
-  # TODO_STATUS = %w( draft started completed not_completed not_completed_in_time)
-
+ 
   belongs_to :manager, -> {where(type: 'Manager')}, foreign_key: 'user_id', class_name: 'User'
   belongs_to :worker, -> {where(type: 'Worker')}, foreign_key: 'user_id', class_name: 'User'
   belongs_to :parent, -> {where(type: 'Parent')}, foreign_key: 'user_id', class_name: 'User'
   belongs_to :todo
   belongs_to :user
+
+  validates_uniqueness_of :user_id, scope: :todo_id
+  validate :delegatability #delegatable only if todo has one user
+
+  private
+  def delegatability
+  	errors.add(:delegatable_todo, "can have maximum one user") if todo.is_delegatable? && UserTodo.find_by(todo_id: todo_id)
+  end
 end

@@ -50,7 +50,8 @@ class Todo < ActiveRecord::Base
 
   validate :valid_recurring_rule
   validate :correct_due_date
-  # validate :schedule_due_date
+  validate :correct_schedule_date
+  validate :delegatability #delegatable only if todo has one user
 
   accepts_nested_attributes_for :key_tasks, :occurrences, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :icon, allow_destroy: true
@@ -89,14 +90,6 @@ class Todo < ActiveRecord::Base
     pic
   end
 
-  def save_user_todos(user_ids = [])
-    user_ids.each do |user_id|
-      if User.find(user_id)
-        user_todo = self.user_todos.new(user_id: user_id) 
-        user_todo.save
-      end
-    end
-  end
 
   def previous_occurrences
     occurrences.where("occurrences.due_date <= ?", DateTime.now)
@@ -112,6 +105,19 @@ class Todo < ActiveRecord::Base
 
   def next_occurrences
     occurrences.where("occurrences.schedule_date >= ?", DateTime.now)
+  end
+
+
+  def save_user_todos(user_ids = [])
+    user_ids.each do |user_id|
+      if User.find(user_id)
+        user_todo = self.user_todos.new(user_id: user_id) 
+        user_todo.save
+      end
+    end
+  end
+
+  def save_user_occurrences(user_ids=[])
   end
 
   def self.min_duration
@@ -133,6 +139,11 @@ class Todo < ActiveRecord::Base
       end
     end
     
+
+    def correct_schedule_date
+      errors.add(:schedule_date, "must be greater than #{DateTime.now}") if schedule_date <= DateTime.now + 5.hours
+    end 
+
     def correct_due_date
       min_due_date = schedule_date + Todo.min_duration
       min_duration_to_next_schedule = Todo.min_duration_before_next_schedule
@@ -140,7 +151,7 @@ class Todo < ActiveRecord::Base
 
 
       if frequency == "One Time Event" && recurring_rule == ""
-        errors.add(:invalid_due_date, "Due Date must be greater than #{min_due_date}") if due_date <= min_due_date
+        errors.add(:due_date, "must be greater than #{min_due_date}") if due_date <= min_due_date
       elsif frequency == "Recurring Event" && RECURRANCE_OPTIONS.include?(recurring_rule)
         if recurring_rule == "Every Day"
           max_due_date = schedule_date + 1.day - min_duration_to_next_schedule
@@ -176,6 +187,11 @@ class Todo < ActiveRecord::Base
 
     def set_first_occurrence
       self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft)
+      save_user_occurrences(user_ids=)
+    end
+
+    def delegatability
+      errors.add(:delegatable_todo, "can have maximum one user") if self.is_delegatable? && UserTodo.where(todo_id: todo_id).count > 1
     end
 
 end
