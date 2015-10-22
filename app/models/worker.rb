@@ -37,6 +37,10 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_f29bf9cdf2  (department_id => departments.id)
+#
 
 class Worker < User
 end

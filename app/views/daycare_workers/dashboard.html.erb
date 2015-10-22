@@ -67,7 +67,7 @@
     <div class="notif_heading">Notification<span class="noti_count">2</span></div>
     <div class="notificaiton_list">
       <h3 class="todo_list_img">Todo List</h3>
-        <%current_user.all_todos.each do |todo|%>
+        <%current_user.all_non_dued_todos.each do |todo|%>
           <ul>
            <li><a href="#"><%=todo.title%></a> <%=todo.status%></li>
           </ul>

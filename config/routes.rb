@@ -31,6 +31,11 @@
 #                                    PUT      /daycares/:id(.:format)                       daycares#update
 #                                    DELETE   /daycares/:id(.:format)                       daycares#destroy
 #              login_daycare_workers GET|POST /daycare_workers/login(.:format)              daycare_workers#login
+#     search_daycare_daycare_workers GET      /daycare_workers/search_daycare(.:format)     daycare_workers#search_daycare
+#  select_department_daycare_workers GET|POST /daycare_workers/select_department(.:format)  daycare_workers#select_department
+#             signup_daycare_workers POST     /daycare_workers/signup(.:format)             daycare_workers#signup
+#      finish_signup_daycare_workers POST     /daycare_workers/finish_signup(.:format)      daycare_workers#finish_signup
+#    congratulations_daycare_workers GET      /daycare_workers/congratulations(.:format)    daycare_workers#congratulations
 #           dashboard_daycare_worker GET      /daycare_workers/:id/dashboard(.:format)      daycare_workers#dashboard
 #                    daycare_workers GET      /daycare_workers(.:format)                    daycare_workers#index
 #                                    POST     /daycare_workers(.:format)                    daycare_workers#create
@@ -68,6 +73,7 @@
 #                                    PATCH    /todos/:id(.:format)                          todos#update
 #                                    PUT      /todos/:id(.:format)                          todos#update
 #                                    DELETE   /todos/:id(.:format)                          todos#destroy
+#                    confirm_account GET      /confirm_account(.:format)                    common#confirm_account
 #                        admin_login GET|POST /admin/login(.:format)                        admin/admin#login
 #                    admin_dashboard GET      /admin/dashboard(.:format)                    admin/admin#dashboard
 #             admin_select_privilege GET      /admin/select_privilege(.:format)             admin/admin#select_privilege

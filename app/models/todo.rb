@@ -22,6 +22,9 @@
 #
 #  index_todos_on_daycare_id  (daycare_id)
 #
+# Foreign Keys
+#
+#  fk_rails_08c9a13254  (daycare_id => daycares.id)
 #
 
 class Todo < ActiveRecord::Base

@@ -10,11 +10,14 @@
 #  submitted_at  :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  user_id       :integer
 #
 # Indexes
 #
 #  index_occurrences_on_todo_id  (todo_id)
+#
+# Foreign Keys
+#
+#  fk_rails_7b0137310e  (todo_id => todos.id)
 #
 
 class Occurrence < ActiveRecord::Base

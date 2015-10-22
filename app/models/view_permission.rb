@@ -14,6 +14,10 @@
 #
 #  index_permissions_on_daycare_id  (daycare_id)
 #
+# Foreign Keys
+#
+#  fk_rails_bb422512d1  (daycare_id => daycares.id)
+#
 
 class ViewPermission < Permission
 end

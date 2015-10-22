@@ -37,6 +37,10 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_f29bf9cdf2  (department_id => departments.id)
+#
 
 class User < ActiveRecord::Base
   belongs_to :daycare
@@ -53,9 +57,15 @@ class User < ActiveRecord::Base
   before_create { generate_token(:set_password_token) }
   before_create { generate_token(:api_key) }
 
-  def all_todos
-    self.todos.where("schedule_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")
+  def all_non_dued_todos
+    # self.todos.where("schedule_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")
     # Todo.all
+    my_todos = self.todos
+    my_todos = my_todos.includes(:occurrences).where("occurrences.user_id = ? AND occurrences.schedule_date <= ? AND occurrences.due_date > ?", id, DateTime.now, DateTime.now).references(:occurrences)
+    delegated_to_me_todos = Todo.includes(:user_todos, :occurrences).where.not("user_todos.user_id != ? ", id).where("occurrences.user_id = ? AND occurrences.schedule_date <= ? AND occurrences.due_date > ?", id, DateTime.now, DateTime.now).references(:user_todos).references(:occurrences)
+  end
+
+  def all_dued_todos
   end
 
   def superadmin?
