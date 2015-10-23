@@ -178,7 +178,7 @@ class Todo < ActiveRecord::Base
 
     def set_first_occurrence
       self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft)
-      save_user_occurrences(user_ids=[] )
+      save_user_occurrences(user_ids=[])
     end
 
     def delegatability

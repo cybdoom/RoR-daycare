@@ -29,6 +29,20 @@
     $('.user_type_common').click();
   });
   $('.user_type_common').click(function(){
-    $('#user_type_').val($(this).val());
+    // $('#user_type_').val($(this).val());
+    var arr = []
+    $('.user_type_common').each(function(){
+      if($(this).is(':checked')){
+        arr.push($(this).val())
+      }
+    });
+    user_types = $('#user_type_').val();
+    $.ajax({
+      type: 'GET',
+      data: {user_types: arr},
+      url: '/admin/fetch_users',
+      success: function (data) {
+      }
+    });
   });
 </script>

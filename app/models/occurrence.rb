@@ -70,7 +70,7 @@ class Occurrence < ActiveRecord::Base
     # end 
 
     def correct_due_date
-      min_due_date = schedule_date + Todo.min_duration
+      min_due_date = schedule_date + Todo.min_duration_between_schedule_and_due_dates
       min_duration_to_next_schedule = Todo.min_duration_before_next_schedule
       max_due_date = nil
 

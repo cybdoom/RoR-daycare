@@ -1,0 +1,5 @@
+<% if @success %>
+  $('#show_users').html("<%=j render 'admin/admin/choose_users', users: @users%>");
+<% else %>
+  $('#show_users').html('');
+<% end %>

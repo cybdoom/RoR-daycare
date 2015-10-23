@@ -1,0 +1,21 @@
+<div class="priv_col_wrapper">
+  <div class="sel_col mrg_bot_zero">
+    <h4>Users</h4>
+    <a class="select_txt select_user_all" href="javascript:;">Select All</a>
+  </div>
+  <div class="custom_checbox_list admin_tic_chkbox">
+    <ul>
+      <%users.each do |user|%>
+        <li>
+          <input type="checkbox" class="sel_user" name="user_ids[]" id="user_<%=user.id%>" value="<%user.id%>" />
+          <label for="user_<%=user.id%>"><%= user.name %></label>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.select_user_all').click(function(){
+    $('.sel_user').click();
+  });
+</script>
