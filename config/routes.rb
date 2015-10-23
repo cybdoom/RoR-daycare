@@ -200,6 +200,7 @@ Rails.application.routes.draw do
     get :functionality, to: 'admin#functionality'
     get :fetch_customer_types, to: 'admin#fetch_customer_types'
     get :fetch_customers, to: 'admin#fetch_customers'
+    get :fetch_users, to: 'admin#fetch_users'
     resources :customers, only: [] do
       collection { 
         get  :import_new

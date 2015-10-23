@@ -50,6 +50,19 @@ class Admin::AdminController < ApplicationController
     end
   end
 
+  def fetch_users
+    if params[:user_types].present?
+      @users = []
+      params[:user_types].each do |type|
+        @users << User.where(type: type)
+      end
+      @users.flatten!
+      @success = true
+    else
+      @success = false
+    end
+  end
+
   def set_privilege
     @daycare = Daycare.find(params[:daycare_id])
     if request.post?
