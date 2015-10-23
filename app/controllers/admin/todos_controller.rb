@@ -26,17 +26,17 @@ class Admin::TodosController < ApplicationController
         end
       else
         params[:user_type].each do |user_type|
-          if user_type != 'Partner'
+          # if user_type != 'Partner'
             users = user_type.constantize.where(daycare_id: params[:daycare_ids])
             users.each do |user|
               @todo.user_todos.build(user_id: user.id)
             end
-          end
+          # end
         end
       end
     end
     
-    if @todo.save
+    if @todo.save!
       flash[:success] = 'Todo Successfully created!'
       redirect_to admin_dashboard_path
     else

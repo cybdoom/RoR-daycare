@@ -55,6 +55,7 @@ class Todo < ActiveRecord::Base
 
   accepts_nested_attributes_for :key_tasks, :occurrences, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :icon, allow_destroy: true
+  accepts_nested_attributes_for :user_todos, allow_destroy: true
 
   after_create :set_first_occurrence
 
@@ -120,12 +121,16 @@ class Todo < ActiveRecord::Base
   def save_user_occurrences(user_ids=[])
   end
 
-  def self.min_duration
+  def self.min_duration_between_schedule_and_due_dates
     10.minutes
   end
 
   def self.min_duration_before_next_schedule
     10.minutes
+  end
+
+  def self.min_schedule_date
+    DateTime.now + 5.hours
   end
 
   private 
@@ -141,11 +146,11 @@ class Todo < ActiveRecord::Base
     
 
     def correct_schedule_date
-      errors.add(:schedule_date, "must be greater than #{DateTime.now}") if schedule_date <= DateTime.now + 5.hours
+      errors.add(:schedule_date, "must be greater than #{Todo.min_schedule_date}") if schedule_date < Todo.min_schedule_date
     end 
 
     def correct_due_date
-      min_due_date = schedule_date + Todo.min_duration
+      min_due_date = schedule_date + Todo.min_duration_between_schedule_and_due_dates
       min_duration_to_next_schedule = Todo.min_duration_before_next_schedule
       max_due_date = nil
 
@@ -182,7 +187,7 @@ class Todo < ActiveRecord::Base
     end
 
     def delegatability
-      errors.add(:delegatable_todo, "can have maximum one user") if self.is_delegatable? && UserTodo.where(todo_id: todo_id).count > 1
+      errors.add(:delegatable_todo, "can have maximum one user") if self.is_delegatable? && UserTodo.where(todo_id: id).count > 1
     end
 
 end

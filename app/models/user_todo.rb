@@ -22,6 +22,7 @@ class UserTodo < ActiveRecord::Base
   belongs_to :todo
   belongs_to :user
 
+  validates :user_id, :todo_id, presence: true
   validates_uniqueness_of :user_id, scope: :todo_id
   validate :delegatability #delegatable only if todo has one user
 
