@@ -69,7 +69,10 @@ class User < ActiveRecord::Base
 
     my_todos = todos.includes(:occurrences).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:occurrences)
 
-    delegatee_todos = daycare.todos.includes(users: :user_occurrences).where("user_occurrences.user_id != ? AND user_occurrences.delegatee_id = ?", id, id).references(:user_occurrences)
+    delegatee_todos = []
+    # delegatee_todos = daycare.todos.includes(users: :user_occurrences).where("user_occurrences.user_id != ? AND user_occurrences.delegatee_id = ? AND todos.schedule_date <= ? AND todos.due_date > ?", id, id, DateTime.now, DateTime.now).references(:user_occurrences)
+
+    circulatabe = daycare.todos.includes(users: :user_todos).where("user_todos.user_id = ? AND user_todos.status = ? AND todos.schedule_date <= ? AND todos.due_date > ?", id, "inactive", DateTime.now, DateTime.now).references(:user_todos)
 
     # ==========================================================
 
@@ -81,7 +84,7 @@ class User < ActiveRecord::Base
     # my_todos = my_todos.includes(:occurrences).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:occurrences)
     # delegated_to_me_todos = Todo.includes(:user_todos, :occurrences).where.not("user_todos.user_id != ? ", id).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:user_todos).references(:occurrences)
 
-    my_todos + delegatee_todos
+    my_todos + delegatee_todos + circulatabe
   end
 
   def all_dued_todos
