@@ -82,8 +82,13 @@ class TodosController < ApplicationController
 
   def accept_todo
     if current_user
-      @todo.update_attributes(status: "accepted", acceptor_id: current_user.id)
-      flash[:success] = 'You have accepted the task successfully'
+      if @todo.is_circulatable?
+        @todo.user_todos.find_by(user_id: current_user.id, todo_id: @todo.id).update_attributes(status: :active)
+        flash[:success] = 'You have accepted the task successfully'
+      else
+        flash[:error] = 'This is not a circulatable todo'
+      end
+      # @todo.update_attributes(status: "accepted", acceptor_id: current_user.id)
       redirect_to current_daycare
     end
   end

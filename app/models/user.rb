@@ -49,13 +49,13 @@ class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   before_create { generate_token(:set_password_token) }
   before_create { generate_token(:api_key) }
 
   def all_non_dued_todos
+
     #user_todos not circulatable
     #user todos circulatabe not not accepted
     #user todos circulatabe and accepted by self only

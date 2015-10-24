@@ -36,5 +36,10 @@ class UserTodo < ActiveRecord::Base
 
   def valid_status 
     errors.add(:user_todo_status, " must be one of #{STATUS.join(', ')}") unless STATUS.include?(status)
+    if self.todo.is_circulatable?
+      errors.add(:user_todo_status, " must be one inactive unless it is accepted by a user first") if self.new_record? && status == :active
+    else
+      errors.add(:user_todo_status, " must be one active as it is not a circulatable") if status == :inactive
+    end
   end
 end
