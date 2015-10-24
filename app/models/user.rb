@@ -22,7 +22,7 @@
 #  failed_attempts        :integer          default(0), not null
 #  unlock_token           :string
 #  locked_at              :datetime
-#  created_at             :datetime
+#  created_at             :datetimee
 #  updated_at             :datetime
 #  type                   :string
 #  name                   :string
@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
 
   before_create { generate_token(:set_password_token) }
   before_create { generate_token(:api_key) }
+  
 
   def all_non_dued_todos
 
@@ -65,8 +66,8 @@ class User < ActiveRecord::Base
     #current_occurrences
 
 
+    my_todos = todos.includes(:occurrences).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:occurrences)
 
-    non_circulatable = todos
     # ==========================================================
 
     # self.todos.where("schedule_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")

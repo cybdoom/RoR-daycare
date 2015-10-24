@@ -60,7 +60,8 @@ class Admin::TodosController < ApplicationController
         else
           users = User.where(daycare_id: daycare.id)
           users.each do |user|
-            @todo.user_todos.build(user_id: user.id)
+            # @todo.user_todos.build(user_id: user.id, status: :active)
+            @todo.user_todos.build(user_id: user.id, status: (@todo.is_circulatable? ? "inactive" :  "active") )
           end
         end
 

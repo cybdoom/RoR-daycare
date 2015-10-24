@@ -48,6 +48,8 @@ class Todo < ActiveRecord::Base
   validate :correct_due_date
   validate :correct_schedule_date
   validate :delegatability #delegatable only if todo has one user
+  validate :valid_user_todos_status
+
 
   accepts_nested_attributes_for :key_tasks, :occurrences, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :icon, allow_destroy: true
@@ -193,4 +195,13 @@ class Todo < ActiveRecord::Base
       errors.add(:delegatable_todo, "can have maximum one user") if self.is_delegatable? && UserTodo.where(todo_id: id).count > 1
     end
 
+    def valid_user_todos_status
+      self.user_todos.each do |ut| 
+        if self.is_circulatable?
+          errors.add(:user_todo_status, " must be inactive for circulatable todos unless it is accepted by a user first") if ut.new_record? && ut.status == "active"
+        else
+          errors.add(:user_todo_status, " must be active as it is not a circulatable") if ut.status ==  "inactive"
+        end
+      end        
+    end
 end
