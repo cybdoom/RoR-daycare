@@ -119,6 +119,12 @@ class Todo < ActiveRecord::Base
   end
 
   def save_user_occurrences(user_ids=[])
+    user_ids.each do |user_id|
+      if User.find(user_id)
+        user_todo = self.user_occurrences.new(user_id: user_id) 
+        user_todo.save
+      end
+    end
   end
 
   def self.min_duration_between_schedule_and_due_dates
@@ -183,7 +189,7 @@ class Todo < ActiveRecord::Base
 
     def set_first_occurrence
       self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft)
-      save_user_occurrences(user_ids=[])
+      save_user_occurrences(user_ids = self.users.pluck(:id))
     end
 
     def delegatability

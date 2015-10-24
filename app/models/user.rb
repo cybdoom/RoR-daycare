@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   belongs_to :daycare
   belongs_to :role
   has_many :user_todos, dependent: :destroy
+  has_many :user_occurrences, dependent: :destroy
   has_many :todos, through: :user_todos
   has_many :accepted_todos, class_name: 'Todo', foreign_key: 'acceptor_id'
   
