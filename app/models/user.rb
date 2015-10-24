@@ -43,8 +43,9 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_many :user_todos, dependent: :destroy
   has_many :user_occurrences, dependent: :destroy
-  has_many :todos, through: :user_todos
-  has_many :accepted_todos, class_name: 'Todo', foreign_key: 'acceptor_id'
+  has_many :todos, ->{where("user_todos.status = ?", :active)},  through: :user_todos
+  has_many :inactive_todos, ->{where("user_todos.status = ?", :inactive)},  through: :user_todos, source: :todo
+  # has_many :active_todos, ->{where("user_todos.status = ?", :active)},  through: :user_todos, source: :todo
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -55,13 +56,28 @@ class User < ActiveRecord::Base
   before_create { generate_token(:api_key) }
 
   def all_non_dued_todos
+    #user_todos not circulatable
+    #user todos circulatabe not not accepted
+    #user todos circulatabe and accepted by self only
+    #delegated to me todos
+
+    #filter
+    #current_occurrences
+
+
+
+    non_circulatable = todos
+    # ==========================================================
+
     # self.todos.where("schedule_date <= ?", DateTime.now).where.not("acceptor_id != ? AND status = ?", self.id, "accepted")
     # Todo.all
-    my_todos = self.todos
-    my_todos = my_todos.includes(:occurrences).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:occurrences)
-    delegated_to_me_todos = Todo.includes(:user_todos, :occurrences).where.not("user_todos.user_id != ? ", id).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:user_todos).references(:occurrences)
+   
 
-    my_todos + delegated_to_me_todos
+    # my_todos = self.todos
+    # my_todos = my_todos.includes(:occurrences).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:occurrences)
+    # delegated_to_me_todos = Todo.includes(:user_todos, :occurrences).where.not("user_todos.user_id != ? ", id).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:user_todos).references(:occurrences)
+
+    # my_todos + delegated_to_me_todos
   end
 
   def all_dued_todos

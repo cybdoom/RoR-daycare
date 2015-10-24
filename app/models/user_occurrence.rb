@@ -12,7 +12,7 @@
 #
 
 class UserOccurrence < ActiveRecord::Base
-  TODO_STATUS = %w( draft started completed not_completed not_completed_in_time)
+  TODO_STATUS = %w( draft accepted completed not_completed not_completed_in_time)
 
   validates :user_id, :occurrence_id, presence: true
   validates_uniqueness_of :user_id, scope: :occurrence_id

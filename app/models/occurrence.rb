@@ -19,6 +19,7 @@
 class Occurrence < ActiveRecord::Base
   STATUS = %w(draft started ended)
   
+  
   has_many :user_occurrences, dependent: :destroy
 
   belongs_to :todo

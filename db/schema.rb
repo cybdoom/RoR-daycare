@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022203155) do
+ActiveRecord::Schema.define(version: 20151024134925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,9 +141,7 @@ ActiveRecord::Schema.define(version: 20151022203155) do
     t.datetime "updated_at",                          null: false
     t.boolean  "is_delegatable",  default: false
     t.boolean  "is_circulatable", default: false
-    t.string   "todo_for"
     t.string   "status",          default: "pending"
-    t.integer  "acceptor_id"
     t.integer  "daycare_id"
     t.string   "frequency"
     t.string   "recurring_rule"
@@ -174,6 +172,7 @@ ActiveRecord::Schema.define(version: 20151022203155) do
     t.integer  "todo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "status"
   end
 
   add_index "user_todos", ["todo_id"], name: "index_user_todos_on_todo_id", using: :btree

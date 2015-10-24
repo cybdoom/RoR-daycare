@@ -10,9 +10,7 @@
 #  updated_at      :datetime         not null
 #  is_delegatable  :boolean          default(FALSE)
 #  is_circulatable :boolean          default(FALSE)
-#  todo_for        :string
 #  status          :string           default("pending")
-#  acceptor_id     :integer
 #  daycare_id      :integer
 #  frequency       :string
 #  recurring_rule  :string
@@ -43,10 +41,8 @@ class Todo < ActiveRecord::Base
   #has_many :create_permissions#, as: :functionality
   has_many :occurrences
 
-  belongs_to :acceptor, class_name: 'User', foreign_key: 'acceptor_id'
 
   validates :title, :schedule_date, :due_date, :daycare_id,  presence: true
-  # validates :title, :schedule_date, :due_date, :todo_for, presence: true
 
   validate :valid_recurring_rule
   validate :correct_due_date
@@ -112,7 +108,8 @@ class Todo < ActiveRecord::Base
   def save_user_todos(user_ids = [])
     user_ids.each do |user_id|
       if User.find(user_id)
-        user_todo = self.user_todos.new(user_id: user_id) 
+        user_todo = self.user_todos.new(user_id: user_id)
+        user_todo.status  == self.is_circulatable? ? "inactive" :  "active" 
         user_todo.save
       end
     end
@@ -121,8 +118,8 @@ class Todo < ActiveRecord::Base
   def save_user_occurrences(user_ids=[])
     user_ids.each do |user_id|
       if User.find(user_id)
-        user_todo = self.user_occurrences.new(user_id: user_id) 
-        user_todo.save
+        user_occurrence = self.user_occurrences.new(user_id: user_id) 
+        user_occurrence.save if UserTodo.find_by(user_id: user_id, todo_id: id, status: :active)
       end
     end
   end
@@ -189,7 +186,7 @@ class Todo < ActiveRecord::Base
 
     def set_first_occurrence
       self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft)
-      save_user_occurrences(user_ids = self.users.pluck(:id))
+      save_user_occurrences(user_ids = self.users.pluck(:id)) unless todo.is_circulatable?
     end
 
     def delegatability
