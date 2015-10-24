@@ -22,12 +22,12 @@ class UserTodo < ActiveRecord::Base
   belongs_to :todo
   belongs_to :user
 
-  validates :user_id, :todo_id, presence: true
+  # validates :user_id, :todo_id, presence: true
   validates_uniqueness_of :user_id, scope: :todo_id
   validate :delegatability #delegatable only if todo has one user
 
   private
   def delegatability
-  	errors.add(:delegatable_todo, "can have maximum one user") if todo.is_delegatable? && UserTodo.find_by(todo_id: todo_id)
+  	errors.add(:delegatable_todo, "can have maximum one user") if todo.present? && todo.is_delegatable? && UserTodo.find_by(todo_id: todo_id)
   end
 end

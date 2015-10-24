@@ -102,7 +102,7 @@ class Occurrence < ActiveRecord::Base
     end
 
     def valid_status
-      errors.add(:occurrence_status, " must be one of #{STATUS.join(', ')}")
+      errors.add(:occurrence_status, " must be one of #{STATUS.join(', ')}") unless STATUS.include?(status)
     end
 
 
