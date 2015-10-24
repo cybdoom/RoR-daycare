@@ -35,7 +35,6 @@ class UserTodo < ActiveRecord::Base
   end
 
   def valid_status 
-    errors.add(:user_todo_status, " must be one of #{STATUS.join(', ')}") unless STATUS.include?(status)
-    
+    errors.add(:user_todo_status, " must be one of #{STATUS.join(', ')}") unless STATUS.include?(status)    
   end
 end

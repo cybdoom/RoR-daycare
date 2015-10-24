@@ -25,6 +25,7 @@ class Occurrence < ActiveRecord::Base
   belongs_to :todo
 
   validates :schedule_date, :due_date, presence: true, uniqueness: {scope: :todo_id}
+  validates_presence_of :todo_id
   validate :correct_due_date
   # validate :correct_schedule_date
   validate :valid_status
@@ -38,6 +39,14 @@ class Occurrence < ActiveRecord::Base
     get_end_date(todo.recurring_rule, schedule_date, due_date)
   end
 
+  def save_user_occurrences(user_ids=[])
+    user_ids.each do |user_id|
+      if User.find(user_id)
+        user_occurrence = self.user_occurrences.new(user_id: user_id, todo_status: :draft) 
+        user_occurrence.save if UserTodo.find_by(user_id: user_id, todo_id: todo_id, status: :active)
+      end
+    end
+  end
 
   private
     def get_start_date(rule, date)

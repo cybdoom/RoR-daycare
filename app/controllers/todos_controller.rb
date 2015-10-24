@@ -84,6 +84,7 @@ class TodosController < ApplicationController
     if current_user
       if @todo.is_circulatable?
         @todo.user_todos.find_by(user_id: current_user.id, todo_id: @todo.id).update_attributes(status: :active)
+        @todo.current_occurrence.save_user_occurrences([current_user.id])
         flash[:success] = 'You have accepted the task successfully'
       else
         flash[:error] = 'This is not a circulatable todo'

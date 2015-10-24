@@ -45,8 +45,8 @@ class Todo < ActiveRecord::Base
   validates :title, :schedule_date, :due_date, :daycare_id,  presence: true
 
   validate :valid_recurring_rule
-  validate :correct_due_date
-  validate :correct_schedule_date
+  validate :correct_schedule_date, if: :schedule_date?
+  validate :correct_due_date, if: [:schedule_date?, :due_date?]
   validate :delegatability #delegatable only if todo has one user
   validate :valid_user_todos_status
 
@@ -117,14 +117,7 @@ class Todo < ActiveRecord::Base
     end
   end
 
-  def save_user_occurrences(user_ids=[])
-    user_ids.each do |user_id|
-      if User.find(user_id)
-        user_occurrence = self.user_occurrences.new(user_id: user_id) 
-        user_occurrence.save if UserTodo.find_by(user_id: user_id, todo_id: id, status: :active)
-      end
-    end
-  end
+  
 
   def self.min_duration_between_schedule_and_due_dates
     10.minutes
@@ -134,8 +127,8 @@ class Todo < ActiveRecord::Base
     10.minutes
   end
 
-  def self.min_schedule_date
-    DateTime.now + 5.hours
+  def min_schedule_date
+    self.is_circulatable? ? DateTime.now : DateTime.now + 5.hours
   end
 
   private 
@@ -151,7 +144,7 @@ class Todo < ActiveRecord::Base
     
 
     def correct_schedule_date
-      errors.add(:schedule_date, "must be greater than #{Todo.min_schedule_date}") if schedule_date < Todo.min_schedule_date
+      errors.add(:schedule_date, "must be greater than #{self.min_schedule_date}") if schedule_date < self.min_schedule_date
     end 
 
     def correct_due_date
@@ -187,8 +180,10 @@ class Todo < ActiveRecord::Base
     end
 
     def set_first_occurrence
-      self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft)
-      save_user_occurrences(user_ids = self.users.pluck(:id)) unless todo.is_circulatable?
+      unless self.is_circulatable?
+        o = self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft) 
+        o.save_user_occurrences(user_ids = self.users.pluck(:id)) if o.valid?
+      end
     end
 
     def delegatability

@@ -81,8 +81,8 @@ class Admin::TodosController < ApplicationController
     valid_todos.each do |t|
       t.save!
     end
-
-    redirect_to admin_dashboard_path, success: 'Todo Successfully created!'
+    flash[:success] = 'Todo Successfully created!'
+    redirect_to admin_dashboard_path
   end
 
   def todo_assignee

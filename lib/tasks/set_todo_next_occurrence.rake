@@ -24,7 +24,7 @@ namespace :set_todo_next_occurrence do
       unless todo.next_occurrences.present?
         nxt_o = Occurrence.create(todo_id: todo.id, schedule_date: current_occurrence.next_schedule_date, due_date: current_occurrence.next_due_date, status: :draft)
         if nxt_o.present? && nxt_o.valid?
-          todo.save_user_occurrences(user_ids=todo.users.pluck(:id)) unless todo.is_circulatable?
+          nxt_o.save_user_occurrences(user_ids=todo.users.pluck(:id)) unless todo.is_circulatable?
           puts("Next Occurrence Created Successfully")
         else
           puts("Failed to create Next Occurrence")

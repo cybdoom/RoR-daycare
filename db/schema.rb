@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024134925) do
+ActiveRecord::Schema.define(version: 20151024191304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,10 +161,10 @@ ActiveRecord::Schema.define(version: 20151024134925) do
   create_table "user_occurrences", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "occurrence_id"
-    t.integer  "delegated_user_id"
     t.string   "todo_status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "delegatee_id"
   end
 
   create_table "user_todos", force: :cascade do |t|
