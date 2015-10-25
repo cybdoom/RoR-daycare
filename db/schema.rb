@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024191304) do
+ActiveRecord::Schema.define(version: 20151025071833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "children", force: :cascade do |t|
     t.string   "name"
-    t.integer  "daycare_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "parent_id"
+    t.string   "birth_year"
+    t.integer  "department_id"
   end
-
-  add_index "children", ["daycare_id"], name: "index_children_on_daycare_id", using: :btree
 
   create_table "customer_types", force: :cascade do |t|
     t.string   "name"
@@ -161,10 +161,10 @@ ActiveRecord::Schema.define(version: 20151024191304) do
   create_table "user_occurrences", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "occurrence_id"
+    t.integer  "delegated_user_id"
     t.string   "todo_status"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "delegatee_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "user_todos", force: :cascade do |t|
@@ -212,7 +212,6 @@ ActiveRecord::Schema.define(version: 20151024191304) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "children", "daycares"
   add_foreign_key "daycare_todos", "daycares"
   add_foreign_key "daycare_todos", "todos"
   add_foreign_key "department_todos", "departments"

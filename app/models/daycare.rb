@@ -19,7 +19,7 @@ class Daycare < ActiveRecord::Base
   has_one  :manager, dependent: :destroy
   has_many :workers, dependent: :destroy
   has_many :parents, dependent: :destroy
-  has_many :children, dependent: :destroy
+  # has_many :children, dependent: :destroy
   has_many :users, dependent: :destroy
   has_many :roles, dependent: :destroy
   has_many :departments, dependent: :destroy

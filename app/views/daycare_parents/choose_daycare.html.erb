@@ -1,0 +1,20 @@
+<div class="header_top_row">
+  <span class="back_btn"><a href="#">Parent</a></span>
+  <span class="menu_icons">
+    <div class="submenu_toggle">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Welcome</a></li>
+        </ul>
+      </div>
+  </span>
+</div>
+
+<div class="mid_wrapp padd34">
+  <%=form_tag '/daycare_parents/register', method: :post do%>
+    <%=select_tag :daycare_id, options_for_select(Daycare.all.map{|c| [c.name, c.id]}), prompt: 'Select Daycare', class: 'd_input d_input1 daycare_select'%>
+    <%=text_field_tag :email, nil, class: 'add_input_1', placeholder: 'Email'%>
+    <%=password_field_tag :password, nil, class: 'add_input_1', placeholder: 'Password'%>
+    <%=submit_tag 'Select', class: 'submit_btn'%>
+  <%end%>
+</div>

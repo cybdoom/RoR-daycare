@@ -1,19 +1,27 @@
 class DaycareParentsController < ApplicationController
-  before_action :authenticate_parent!, except: [:login, :new, :create]
-  before_action :ensure_parent, except: [:login, :new, :create]
+  before_action :authenticate_parent!, except: [:login, :create, :choose_daycare, :register]
+  before_action :ensure_parent, except: [:login, :create, :choose_daycare, :register]
   before_action :set_daycare, only: [:dashboard]
   before_action :set_parent, only: [:dashboard]
 
-  def new
-    @parent = Parent.new
+  def register
+    @daycare = Daycare.find(params[:daycare_id])
+    @departments = @daycare.departments
+    @parent = @daycare.parents.new
+    @parent.children.new
+    render :register
   end
 
   def create
-    @daycare = Daycare.find(params[:parent][:daycare_id])
-    @parent = @daycare.parents.new(parent_params)
-    if @parent.save
+    if params[:department_ids].present?
+      params[:parent][:children_attributes].each_with_index do |(key, value), index|
+        value['department_id'] = params[:department_ids][index]
+      end
+    end
+    @parent = Parent.new(parent_params)
+    if @parent.save!
       flash[:success] = "Parent Successfully created."
-      RegistrationMailer.send_confirmation(@worker).deliver_later
+      RegistrationMailer.send_confirmation(@parent).deliver_later
       redirect_to dashboard_daycare_parent_path(@parent)
     else
       render :new
@@ -23,8 +31,13 @@ class DaycareParentsController < ApplicationController
   def login
     if request.post?
       @user = User.find_by(email: params[:email])
-      path = login_user_and_set_redirect_path("parent")
-      redirect_to path
+      if @user.confirmation_token.present?
+        flash[:error] = "You haven't confirm your account yet. Please confirm your account to login!"
+        redirect_to root_path
+      else
+        path = login_user_and_set_redirect_path("parent")
+        redirect_to path
+      end
     else
       if current_user && current_user.parent?
         flash[:success] = 'You are already logged in!'
@@ -46,7 +59,6 @@ class DaycareParentsController < ApplicationController
     end
 
     def parent_params
-      params[:parent].delete('daycare_id')
       params.require(:parent).permit!
     end
 

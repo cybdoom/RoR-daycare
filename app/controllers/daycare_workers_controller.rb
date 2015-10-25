@@ -12,8 +12,13 @@ class DaycareWorkersController < ApplicationController
   def login
     if request.post?
       @user = User.find_by(email: params[:email])
-      path = login_user_and_set_redirect_path("worker")
-      redirect_to path
+      if @user.confirmation_token.present?
+        flash[:error] = "You haven't confirm your account yet. Please confirm your account to login!"
+        redirect_to root_path
+      else
+        path = login_user_and_set_redirect_path("worker")
+        redirect_to path
+      end
     else
       if current_user && current_user.worker?
         flash[:success] = 'You are already logged in!'

@@ -39,4 +39,10 @@
 #
 
 class Parent < User
+  has_many :children, dependent: :destroy
+  has_many :departments, through: :children
+
+  accepts_nested_attributes_for :children, allow_destroy: true
+
+  validates :daycare_id, presence: true
 end
