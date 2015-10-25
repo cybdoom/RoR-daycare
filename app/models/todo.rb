@@ -198,7 +198,7 @@ class Todo < ActiveRecord::Base
     end
 
     def delegatability
-      errors.add(:delegatable_todo, "can have maximum one user") if self.is_delegatable? && UserTodo.where(todo_id: id).count > 1
+      errors.add(:delegatable_todo, "can have maximum one user") if self.is_delegatable? && self.user_todos.size > 1
     end
 
     def valid_user_todos_status
