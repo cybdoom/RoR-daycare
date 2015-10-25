@@ -69,7 +69,7 @@
       <h3 class="todo_list_img">Todo List</h3>
         <%current_user.all_non_dued_todos.each do |todo|%>
           <ul>
-           <li><a href="#"><%=todo.title%></a> <%=todo.status%></li>
+           <li><a href="#"><%=todo.title%></a></li>
           </ul>
           <%=link_to "Accept", accept_todo_todo_path(todo), method: :post if todo.is_circulatable? && UserTodo.find_by(user_id: current_user.id, todo_id: todo.id).try(:status) == "inactive"%>%>
         <%end%>
