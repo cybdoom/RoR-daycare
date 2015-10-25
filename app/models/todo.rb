@@ -108,13 +108,24 @@ class Todo < ActiveRecord::Base
 
 
   def save_user_todos(user_ids = [])
+    valid_user_todos = []
+    return false, "Delegatable todo can have maximum one user" if ((user_ids.size > 0 && self.user_todos.present?) || user_ids.size > 1) && self.is_delegatable?
+   
     user_ids.each do |user_id|
       if User.find(user_id)
         user_todo = self.user_todos.new(user_id: user_id)
-        user_todo.status  == self.is_circulatable? ? "inactive" :  "active" 
-        user_todo.save
+        user_todo.status  = self.is_circulatable? ? "inactive" :  "active" 
+        return false, user_todo.errors.full_messages.join(', ') unless user_todo.valid?
+        valid_user_todos << user_todo
+      else
+        return false, "User not found whome todo has to b shared"
       end
     end
+
+    valid_user_todos.each do |ut|
+      ut.save
+    end 
+    return true, ""
   end
 
   
@@ -180,8 +191,8 @@ class Todo < ActiveRecord::Base
     end
 
     def set_first_occurrence
+      o = self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft) 
       unless self.is_circulatable?
-        o = self.occurrences.create(todo_id: id, schedule_date: schedule_date, due_date: due_date, status: :draft) 
         o.save_user_occurrences(user_ids = self.users.pluck(:id)) if o.valid?
       end
     end
