@@ -57,7 +57,7 @@ class Todo < ActiveRecord::Base
 
   after_create :set_first_occurrence
 
-  cron_job :set_todo_next_occurrence, interval: 30.seconds
+  cron_job :set_todo_next_occurrence, interval: 6.hours
 
   #Check permissions by user
   def can_be_created_by?(user)
