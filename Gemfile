@@ -77,3 +77,7 @@ gem 'whenever'
 gem 'roo-xls'
 
 gem 'paperclip', '~> 4.3'
+
+gem "delayed_cron", git: 'https://github.com/shoaibmalik786/delayed_cron.git'
+
+gem 'sucker_punch'

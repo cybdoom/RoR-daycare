@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, at: '12:01 am' do
-  rake "set_todo_next_occurrence:next_occurrence"
-end
+# every 1.day, at: '12:01 am' do
+#   rake "set_todo_next_occurrence:next_occurrence"
+# end

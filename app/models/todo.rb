@@ -57,6 +57,7 @@ class Todo < ActiveRecord::Base
 
   after_create :set_first_occurrence
 
+  cron_job :set_todo_next_occurrence, interval: 30.seconds
 
   #Check permissions by user
   def can_be_created_by?(user)
@@ -117,7 +118,28 @@ class Todo < ActiveRecord::Base
     end
   end
 
+  def min_schedule_date
+    self.is_circulatable? ? DateTime.now : DateTime.now + 5.hours
+  end
   
+  def self.set_todo_next_occurrence
+    todos = Todo.includes(:occurrences).where("todos.frequency != ? AND occurrences.schedule_date <= ? AND occurrences.due_date > ?", "One Time Event", DateTime.now, DateTime.now).references(:occurrences)
+    todos.each do |todo|
+
+      current_occurrence = todo.current_occurrence
+      unless todo.next_occurrences.present?
+        nxt_o = Occurrence.create(todo_id: todo.id, schedule_date: current_occurrence.next_schedule_date, due_date: current_occurrence.next_due_date, status: :draft)
+        if nxt_o.present? && nxt_o.valid?
+          nxt_o.save_user_occurrences(user_ids=todo.users.pluck(:id)) unless todo.is_circulatable?
+          puts("Next Occurrence Created Successfully")
+        else
+          puts("Failed to create Next Occurrence")
+          puts(nxt_o.errors.full_messages.join(", "))
+        end
+      end
+    end
+    logger.info "==============Cron Job Run At #{DateTime.now}==================="
+  end
 
   def self.min_duration_between_schedule_and_due_dates
     10.minutes
@@ -125,10 +147,6 @@ class Todo < ActiveRecord::Base
 
   def self.min_duration_before_next_schedule
     10.minutes
-  end
-
-  def min_schedule_date
-    self.is_circulatable? ? DateTime.now : DateTime.now + 5.hours
   end
 
   private 
