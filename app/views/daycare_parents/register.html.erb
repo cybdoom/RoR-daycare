@@ -1,0 +1,67 @@
+<div class="header_top_row">
+  <span class="back_btn"><a href="#">Parent</a></span>
+  <span class="menu_icons">
+    <div class="submenu_toggle">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Welcome</a></li>
+        </ul>
+      </div>
+  </span>
+</div>
+
+<div class="mid_wrapp padd34">
+  <%= nested_form_for @parent, url: daycare_parents_path do |f| %>
+    <%= f.hidden_field :email, value: params[:email] %>
+    <%= f.hidden_field :password, value: params[:password] %>
+    <%= f.hidden_field :daycare_id, value: @daycare.id %>
+    <%= f.fields_for :children do |child| %>
+      <%child.object.build_photo%>
+      <%=child.fields_for :photo do |photo|%>
+        <div class="add_child">
+          <%=image_tag 'add_child_img.png', width: '225', height: '226' %>
+          <%= photo.file_field :image %>
+        </div>
+      <%end%>
+      <%=child.text_field :name, class: 'add_input_1', placeholder: 'Add your Child Name' %>
+      <%=child.text_field :birth_year, class: 'add_input_1', placeholder: 'Year of Birth' %>
+
+      <div class="sel_col">
+        <a class="select_txt sel_txt1" href="#">Select Department</a>
+      </div>
+
+      <div class="custom_checbox_list">
+        <ul>
+          <% if @departments.present? %>
+            <% @departments.each do |department| %>
+              <li>
+                <input type="checkbox" name="department_ids[]" id="new_children<%=department.id%>" value="<%=department.id%>" class='type_check'>
+                <label for="new_children<%=department.id%>"><%= department.department_name %></label>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.link_to_add "Add more.....", :children, class: 'add_file_btn' %>
+    
+    <%=f.submit 'Save', class: 'submit_btn'%>
+  <%end%>
+</div>
+
+
+<script type="text/javascript">
+  var selectedTypeBox = null;
+  $(".type_check").click(function() {
+    selectedTypeBox = this.id;
+
+    $(".type_check").each(function() {
+      if ( this.id == selectedTypeBox ){
+        this.checked = true;
+      }else{
+        this.checked = false;
+      };
+    });
+  });
+</script>

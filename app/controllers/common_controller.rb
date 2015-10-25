@@ -4,7 +4,7 @@ class CommonController < ApplicationController
     if params[:user_type].present? && params[:token].present?
       user = User.find_by(confirmation_token: params[:token])
       if user
-        user.confirm!
+        user.update(confirmation_token: nil, confirmation_sent_at: nil, confirmed_at: DateTime.now)
         flash[:success] = 'Your account has been successfully confirmed. You can now login!'
         case params[:user_type]
         when 'Worker'
