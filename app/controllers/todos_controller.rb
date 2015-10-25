@@ -66,17 +66,37 @@ class TodosController < ApplicationController
 
   def share_with_workers
     if request.post?
-      @todo.save_user_todos( params[:worker_ids])
-      flash[:success] = 'Todo has been shared with these workers successfully!'
-      redirect_to current_daycare
+      if params[:worker_ids]
+        res, error = @todo.save_user_todos( params[:worker_ids]) 
+      else
+        res, error = false, "No Workers Selected"
+      end
+
+      if res
+        flash[:success] = 'Todo has been shared with these workers successfully!'
+        redirect_to current_daycare
+      else
+        flash[:error] = error
+        redirect_to :back 
+      end
     end
   end
 
   def share_with_parents
     if request.post?
-      @todo.save_user_todos( params[:parent_ids])
-      flash[:success] = 'Todo has been shared with these parents successfully!'
-      redirect_to current_daycare
+      if params[:parent_ids]
+        res, error = @todo.save_user_todos( params[:parent_ids]) 
+      else
+        res, error = false, "No Parents Selected"
+      end
+      
+      if res
+        flash[:success] = 'Todo has been shared with these parents successfully!'
+        redirect_to current_daycare
+      else
+        flash[:error] = error
+        redirect_to :back 
+      end
     end
   end
 
