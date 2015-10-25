@@ -161,10 +161,10 @@ ActiveRecord::Schema.define(version: 20151025071833) do
   create_table "user_occurrences", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "occurrence_id"
-    t.integer  "delegated_user_id"
     t.string   "todo_status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "delegatee_id"
   end
 
   create_table "user_todos", force: :cascade do |t|

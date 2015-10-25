@@ -2,13 +2,13 @@
 #
 # Table name: user_occurrences
 #
-#  id                :integer          not null, primary key
-#  user_id           :integer
-#  occurrence_id     :integer
-#  delegated_user_id :integer
-#  todo_status       :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  occurrence_id :integer
+#  todo_status   :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  delegatee_id  :integer
 #
 
 class UserOccurrence < ActiveRecord::Base
