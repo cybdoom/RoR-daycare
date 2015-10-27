@@ -3,8 +3,11 @@ class Api::V1::BaseController < ActionController::Base
   # rescue_from ActiveRecord::RecordNotFound, :with => :bad_record
 
   before_action :authenticate_user_with_api_key
-  before_action :require_user
+  before_action :current_daycare
+  # before_action :authenticate_with_api_key_and_role
+  # before_action :require_user
 
+    
   private
 
     # def current_user
@@ -12,15 +15,33 @@ class Api::V1::BaseController < ActionController::Base
     # end
     # helper_method :current_user
 
-    # def authenticate_user_with_api_key
+    def authenticate_user_with_api_key
+      @current_user = nil
+      authenticate_with_http_basic do |email, api_key|
+        @current_user = User.find_by(email: email, api_key: api_key)
+      end
+      unless @current_user.present?
+        render json: {error: true, message: 'Unauthorised'} and return
+      end
+    end
+
+
+    # def authenticate_with_api_key_and_role
     #   @current_user = nil
-    #   authenticate_with_http_basic do |email, api_key|
-    #     @current_user = User.with_email_and_api_key(email, api_key)
-    #     unless @current_user.present?
-    #       render json: {error: true, message: 'Unauthorised'} and return
-    #     end
+    #   @current_user = params[:role].constantize.find_by_api_key(params[:api_key])
+    #   unless @current_user.present?
+    #     render json: {error: true, message: 'Unauthorised'} and return
     #   end
     # end
+   
+    def current_daycare
+      if @current_user
+        @current_daycare ||= @current_user.daycare
+      else
+        nil
+      end
+    end
+    # helper_method :current_daycare
 
     # def require_user
     #   unless @current_user.present?

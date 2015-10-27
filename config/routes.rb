@@ -241,6 +241,14 @@ Rails.application.routes.draw do
       
       resources :daycare_parents do
       end
+
+      resources :todos do
+        member do
+          post :share_with_departments
+          post :share_with_workers
+          post :share_with_parents
+        end
+      end
     end
   end
   #######################################################################################

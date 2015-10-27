@@ -4,7 +4,7 @@ class TodosController < ApplicationController
   before_action :set_daycare
   before_action :set_todo, only: [:edit, :update, :show, :destroy, :share_todo, :accept_todo, :share_with_departments, :share_with_workers, :share_with_parents ]
   before_action :parse_date, only: [:create, :update]
-  before_action :check_create_permission, only: [:new, :create, :delete]
+  before_action :check_create_permission, only: [:new, :create]
   before_action :check_view_permission, only: [:show, :search]
   before_action :check_edit_permission, only: [:edit, :update]
 
@@ -115,7 +115,7 @@ class TodosController < ApplicationController
   end
 
   private
-
+  
     def set_daycare
       @daycare = current_daycare
     end

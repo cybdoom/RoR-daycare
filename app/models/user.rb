@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def superadmin?
-  	role and role.name.eql?('superadmin')
+  	role.present? and role.name.eql?('superadmin')
   end
 
   def manager?
