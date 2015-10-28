@@ -134,7 +134,6 @@ class Api::V1::TodosController < Api::V1::BaseController
     end
 
     def check_create_params
-    binding.pry
       error = []
       params[:todo] = {} unless params[:todo].present?
       # error << "schedule_date required" unless params[:todo][:schedule_date]
