@@ -109,7 +109,6 @@ class Api::V1::TodosController < Api::V1::BaseController
 
   private
 
-
     def set_todo
       @todo = @current_daycare.todos.find(params[:id])
     end
@@ -136,8 +135,8 @@ class Api::V1::TodosController < Api::V1::BaseController
     def check_create_params
       error = []
       params[:todo] = {} unless params[:todo].present?
-      # error << "schedule_date required" unless params[:todo][:schedule_date]
-      # error << "due_date required" unless params[:todo][:due_date]
+      error << "schedule_date required" unless params[:todo][:schedule_date]
+      error << "due_date required" unless params[:todo][:due_date]
 
       if error.size > 0
         render json: {result: 'failed', error: true, message: error.join(", ")} and return

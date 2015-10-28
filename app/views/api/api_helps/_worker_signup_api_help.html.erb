@@ -16,6 +16,9 @@
       <td>user[daycare_id]&nbsp&nbsp:-&nbsp&nbsp Id of Daycare</td>
     </tr>
     <tr>
+      <td>user[department_id]&nbsp&nbsp:-&nbsp&nbsp Department of Worker</td>
+    </tr>
+    <tr>
       <td>user[name]&nbsp&nbsp:-&nbsp&nbsp Name of Daycare Worker</td>
     </tr>
     <tr>
@@ -23,9 +26,6 @@
     </tr>
     <tr>
       <td>user[password]&nbsp&nbsp:-&nbsp&nbsp password of Daycare Worker</td>
-    </tr>
-    <tr>
-      <td>user[password_confirmation]&nbsp&nbsp:-&nbsp&nbsp macth of password</td>
     </tr>
     <tr>
       <td>user[role]&nbsp&nbsp:-&nbsp&nbsp Role of Daycare Worker (i.e., "worker")</td>
@@ -38,16 +38,17 @@
     </tr>
     <tr>
       <td>
-        Example Request JSON &nbsp&nbsp:-&nbsp&nbsp { "user"=>
-                                                {"name"=>"TestDaycareWorker",
-                                                 "email"=>"testdaycareWorker@test1.com",
-                                                 "password"=>"11111111",
-                                                 "password_confirmation"=>"11111111",
-                                                 "role"=>"Worker"}
-                                                },
-                                               "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
-                                               "device_type"=>"ios",
-                                              }
+        Example Request JSON &nbsp&nbsp:-&nbsp&nbsp {"user"=>
+                                                      {"daycare_id"=>"1",
+                                                       "department_id"=>"1"
+                                                       "name"=>"TestDaycareWorker",
+                                                       "email"=>"testdaycareworker@test11d12.com",
+                                                       "password"=>"11111111",
+                                                       "role"=>"worker",
+                                                      },
+                                                     "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
+                                                     "device_type"=>"ios"
+                                                     }
 
       </td>
     </tr>
@@ -61,7 +62,7 @@
       <td>Duplicate email&nbsp&nbsp:-&nbsp&nbsp{result: "failed" error: true message: "Email has already been taken" }</td>
     </tr>
     <tr>
-      <td>Password Mismatch&nbsp&nbsp:-&nbsp&nbsp{result: "failed" error: true message: "Password confirmation doesn't match Password" } </td>
+      <td>Invalid foreign keys&nbsp&nbsp:-&nbsp&nbsp{result: "failed" error: true message: "Provided Invalid daycare_id or department_id " } </td>
     </tr>
   </table>
 

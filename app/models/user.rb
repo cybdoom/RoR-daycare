@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
+  
   before_create { generate_token(:set_password_token) }
   before_create { generate_token(:api_key) }
   

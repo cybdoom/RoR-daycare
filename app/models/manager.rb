@@ -39,4 +39,5 @@
 #
 
 class Manager < User
+  validates :daycare_id, presence: true
 end

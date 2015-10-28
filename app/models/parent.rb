@@ -45,4 +45,5 @@ class Parent < User
   accepts_nested_attributes_for :children, allow_destroy: true
 
   validates :daycare_id, presence: true
+  
 end
