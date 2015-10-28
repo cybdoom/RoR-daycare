@@ -24,4 +24,10 @@ class CommonController < ApplicationController
     end
   end
 
+  def invite_daycare
+    DaycareMailer.send_invite_to_daycare(params[:email_id]).deliver_later
+    flash[:success] = 'Invitation to daycare has been sent successfully!'
+    redirect_to root_url
+  end
+
 end

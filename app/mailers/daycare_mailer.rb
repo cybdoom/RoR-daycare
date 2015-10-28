@@ -12,4 +12,9 @@ class DaycareMailer < ApplicationMailer
     mail(to: emails, subject: 'Welcome to Daycare')
   end
 
+  def send_invite_to_daycare(email)
+    @email = email
+    mail(to: @email, subject: 'Welcome to Daycare')
+  end
+
 end

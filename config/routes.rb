@@ -192,6 +192,7 @@ Rails.application.routes.draw do
   end
 
   get :confirm_account, to: 'common#confirm_account'
+  post :invite_daycare, to: 'common#invite_daycare'
 
   # Example resource route within a namespace:
   namespace :admin do
