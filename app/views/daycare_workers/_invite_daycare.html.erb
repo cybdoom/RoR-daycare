@@ -1,0 +1,14 @@
+<div class="cong_col">
+  <p>No Result found. You can invite daycare to this applicaton</p>
+  <%=form_tag invite_daycare_path, method: :post do%>
+    <div class="cong_input_wrap mr_up">
+      <ol>
+        <li><%= email_field_tag :email_id, nil, placeholder: 'Daycare email', required: true %></li>
+      </ol>
+    </div>
+    
+    <div class="btns_col">
+      <%=submit_tag 'Send Invitation', class: 'submit_btn send_btn'%>
+    </div>
+  <%end%>
+</div>

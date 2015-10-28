@@ -1,1 +1,6 @@
-$("#daycare_list").html("<%=j render 'daycare_list', daycares: @daycares %>")
+<%if @daycares.present? %>
+  $("#daycare_list").html("<%=j render 'daycare_list', daycares: @daycares %>");
+<%else%>
+  $("#daycare_list").html('')
+  $("#invite_daycare").html("<%=j render 'invite_daycare'%>");
+<%end%>
