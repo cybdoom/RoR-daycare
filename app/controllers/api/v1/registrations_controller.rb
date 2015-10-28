@@ -1,15 +1,15 @@
 class Api::V1::RegistrationsController < Api::V1::BaseController
   skip_before_action :authenticate_user_with_api_key
-  skip_before_action :require_user
+  # skip_before_action :require_user
 
   before_action :require_device_token, only: [:create]
   before_action :require_device_type, only: [:create]
   before_action :set_device, only: [:create]
   after_action :set_active_device, only: [:create]
-  
+
   def create
     role = params[:daycare][:manager_attributes][:role] if params[:daycare] && params[:daycare][:manager_attributes]
-    role ||= params[:user][:role] if params[:user] && params[:user][:role] 
+    role ||= params[:user][:role] if params[:user] && params[:user][:role]
     if role == "superadmin"
       create_super_admin
     elsif role == "manager"
@@ -30,7 +30,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
   end
 
   private
-    
+
     def create_super_admin
       @message = "Cannot create admin. No Such API"
     end
@@ -77,5 +77,5 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    
+
 end

@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < Api::V1::BaseController
   skip_before_action :authenticate_user_with_api_key
-  skip_before_action :require_user
+  # skip_before_action :require_user
 
   before_action :require_device_token, only: [:create]
   before_action :require_device_type, only: [:create]

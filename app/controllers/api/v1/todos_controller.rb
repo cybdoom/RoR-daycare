@@ -1,4 +1,5 @@
 class Api::V1::TodosController < Api::V1::BaseController
+  # skip_before_action :authenticate_user_with_api_key
   before_action :check_create_params, only: [:new, :create]
   before_action :check_create_permission, only: [:new, :create]
   before_action :parse_date, only: [:create, :update]
@@ -7,15 +8,23 @@ class Api::V1::TodosController < Api::V1::BaseController
   def index
   end
 
- 
+
   def create
     @todo = @current_daycare.todos.new(todo_params)
-    params[:todo][:key_tasks].each do |k, v|
-      k_task = @todo.key_tasks.build(name: v["name"])
-      v["sub_tasks"].each do |a, b|  
-        k_task = k_task.sub_tasks.build(name: b["name"])
-      end  
-    end 
+    params[:todo][:key_tasks].each do |k_task|
+      kt = @todo.key_tasks.build(name: k_task["name"])
+      k_task["sub_tasks"].each do |sub_task|
+        st = kt.sub_tasks.build(name: sub_task["name"])
+      end
+    end
+
+    # params[:todo][:key_tasks].each do |k, v|
+    #   k_task = @todo.key_tasks.build(name: v["name"])
+    #   v["sub_tasks"].each do |a, b|
+    #     k_task = k_task.sub_tasks.build(name: b["name"])
+    #   end
+    # end
+
     if @todo.save
       render json: {result: 'success', message: 'Todo has been successfully created', todo_id: @todo.id} and return
     else
@@ -65,7 +74,7 @@ class Api::V1::TodosController < Api::V1::BaseController
       params[:worker_ids] ||= []
       params[:worker_ids] = params[:worker_ids].squish!.split(", ") if params[:worker_ids].class == String
       if params[:worker_ids]
-        res, error_msg = @todo.save_user_todos( params[:worker_ids]) 
+        res, error_msg = @todo.save_user_todos( params[:worker_ids])
       else
         res, error_msg = false, "No Workers Selected"
       end
@@ -84,16 +93,16 @@ class Api::V1::TodosController < Api::V1::BaseController
       params[:parent_ids] ||= []
       params[:parent_ids] = params[:parent_ids].squish!.split(", ") if params[:parent_ids].class == String
       if params[:parent_ids]
-        res, error_msg = @todo.save_user_todos( params[:parent_ids]) 
+        res, error_msg = @todo.save_user_todos( params[:parent_ids])
       else
         res, error_msg = false, "No Parents Selected"
       end
-      
+
       if res
         msg = 'Todo has been shared with these parents successfully!'
         render json: {result: 'success', message: msg} and return
       else
-        render json: {result: 'failed', error: true, message: error_msg} and return        
+        render json: {result: 'failed', error: true, message: error_msg} and return
       end
     end
   end
@@ -117,23 +126,24 @@ class Api::V1::TodosController < Api::V1::BaseController
     end
 
     def parse_date
-      # params[:todo][:schedule_date] = Chronic.parse(params[:todo][:schedule_date]) 
-      params[:todo][:schedule_date] = Time.at(params[:todo][:schedule_date].to_i) 
+      # params[:todo][:schedule_date] = Chronic.parse(params[:todo][:schedule_date])
+      params[:todo][:schedule_date] = Time.at(params[:todo][:schedule_date].to_i)
       params[:todo][:due_date] = Time.at(params[:todo][:due_date].to_i)
-      # params[:todo][:due_date] = Chronic.parse(params[:todo][:due_date]) 
+      # params[:todo][:due_date] = Chronic.parse(params[:todo][:due_date])
       # self.starts_at = Time.at(time)
     end
 
     def check_create_params
+    binding.pry
       error = []
       params[:todo] = {} unless params[:todo].present?
       # error << "schedule_date required" unless params[:todo][:schedule_date]
       # error << "due_date required" unless params[:todo][:due_date]
-           
+
       if error.size > 0
-        render json: {result: 'failed', error: true, message: error.join(", ")} and return        
+        render json: {result: 'failed', error: true, message: error.join(", ")} and return
       end
     end
 
-    
+
 end
