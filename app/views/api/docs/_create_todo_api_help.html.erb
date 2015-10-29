@@ -1,0 +1,137 @@
+<div id="create_todo_api">
+  <h4>CREATE TODO API</h4>
+  <table border="1" width="100%">
+    <tr>
+      <td>URL</td><td>/api/v1/todos</td>
+    </tr>
+    <tr>
+      <td>Http Method</td><td>Post</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>Allow the logged in user to create todo if user is having permissions to create todo</td>
+    </tr>
+    <tr>
+      <td rowspan="2">REQUEST HEADER</td>
+      <td>email:-  email of user</td>
+    </tr>
+    <tr>
+      <td>password:-  api_key of user</td>
+    </tr>
+
+    <tr>
+      <td rowspan="10">REQUEST PARAMETERS</td>
+      <td>todo[frequency]:-  Frequency of Todo. Must be one of <%=Todo::FREQUENCY%></td>
+    </tr>
+
+    <tr>
+      <td>todo[recurring_rule]:-  Rule for recurring Todo. If todo is One time event the it will be blank otherwise for recurring it must be one of <%=Todo::RECURRANCE_OPTIONS%></td>
+    </tr>
+
+    <tr>
+      <td>todo[schedule_date]:- TimeStamp in milisecond of todo schedule date and time </td>
+    </tr>
+    <tr>
+      <td>todo[due_date]:- TimeStamp in milisecond of todo due date and time </td>
+    </tr>
+    <tr>
+      <td>todo[is_delegatable]:- 1 if true otherwise 0 </td>
+    </tr>
+    <tr>
+      <td>todo[is_circulatable]:- 1 if true otherwise 0 </td>
+    </tr>
+
+    <tr>
+      <td>todo[title]:- Title for Todo </td>
+    </tr>
+
+    <tr>
+      <td>todo[key_tasks][]:-Array of hashes of tasks with sub tasks </td>
+    </tr>
+
+     <tr>
+      <td>todo[icon_attributes]:- Image for todo </td>
+    </tr>
+
+
+    <tr>
+      <td>Example Request JSON :-  {"todo"=>
+                                      {"frequency"=>"sdfsf",
+                                       "recurring_rule"=>"mmnbn",
+                                       "schedule_date"=>"1446066322",
+                                       "due_date"=>"1446411954",
+                                       "is_delegatable"=>"1",
+                                       "is_circulatable"=>"1",
+                                       "title"=>"qeqew",
+                                       "key_tasks"=>
+                                          [{"name"=>"asda", "subtasks"=>[{"name"=>"name1"}]}, {"name"=>"1", "subtasks"=>[{"name"=>"123"}, {"name"=>"12123321"}]}],
+                                       "icon_attributes"=>
+                                        {"image"=>
+                                          #<ActionDispatch::Http::UploadedFile:0x007fc04d5c4058
+                                           @content_type="image/png",
+                                           @headers=
+                                            "Content-Disposition: form-data; name=\"todo[icon_attributes][image]\"; filename=\"tablet_3-4.png\"\r\nContent-Type: image/png\r\n",
+                                           @original_filename="tablet_3-4.png",
+                                           @tempfile=#<File:/tmp/RackMultipart20151028-7523-1er04ao.png>>}},
+                                    }
+      </td>
+    </tr>
+    <tr>
+      <td>Example Successful Response JSON</td>
+      <td>
+        {
+          result: "success"
+          message: "Todo has been successfully created"
+          todo_id: "1"
+        }
+      </td>
+    </tr>
+    <tr>
+      <td rowspan=2>Example ERROR Response JSON</td>
+      <td>Blank schedule date:-  {
+                              result: "failed"
+                              error: true
+                              message: "Schedule date cann't be blank"
+                            }
+      </td>
+    </tr>
+    <tr>
+      <td>Invalid user or api key:- {
+                      success: failed
+                      error: true
+                      message: "Unauthorised"
+                    }
+      </td>
+    </tr>
+  </table>
+
+  <br>
+
+  <table border="1">
+    <tr>
+      <th colspan=3>Return Values</th>
+    </tr>
+    <tr>
+      <td rowspan=11>Hash</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>success/failed</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>displays message</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>true if any error</td>
+    </tr>
+    <tr>
+      <td>todo_id</td>
+      <td>Id of newely created todo</td>
+    </tr>
+
+  </table>
+</div>
+
+<%= link_to "Go To Top", "#top" %>

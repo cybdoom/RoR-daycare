@@ -228,8 +228,8 @@ Rails.application.routes.draw do
 
   ############################## APIs ROUTES ###########################################
   namespace :api, path: 'api' do
+    get :docs, to: 'api_helps#docs', path: 'docs'
     resources :api_helps, :only => [:index], path: 'help'
-
     namespace :v1, path: 'v1' do
       post 'login'  => 'sessions#create',       as: :login
       post 'signup' => 'registrations#create',  as: :signup
