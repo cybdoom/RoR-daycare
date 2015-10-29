@@ -10,7 +10,6 @@ class Api::V1::TodosController < Api::V1::BaseController
 
 
   def create
-    binding.pry
     @todo = @current_daycare.todos.new(todo_params)
     # params[:todo][:key_tasks].each do |k_task|
     #   kt = @todo.key_tasks.build(name: k_task["name"])
