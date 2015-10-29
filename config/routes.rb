@@ -250,6 +250,10 @@ Rails.application.routes.draw do
           post :share_with_parents
         end
       end
+
+      resource :common, controller: :common, only: [] do
+        post :invite_daycare
+      end
     end
   end
   #######################################################################################
