@@ -64,12 +64,12 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
       # @message = "Invalid department_id" and return unless @department.present?
       # @user = @daycare.workers.new(worker_params)
       
-        @user = Worker.new(worker_params)
-        if @user.save
-          @message = "Worker created Successfully"
-        else
-          @message = @user.errors.full_messages.uniq.join(', ')
-        end
+      @user = Worker.new(worker_params)
+      if @user.save
+        @message = "Worker created Successfully"
+      else
+        @message = @user.errors.full_messages.uniq.join(', ')
+      end
 
     end
 
@@ -102,9 +102,9 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
       params.require(:user).permit!
     end
 
-    def clid_params
-      params.require(:user).permit({:children_attributes => [:name, :birth_year, :department_id, :photo_attributes]})
-    end
+    # def clid_params
+    #   params.require(:user).permit({:children_attributes => [:name, :birth_year, :department_id, :photo_attributes]})
+    # end
 
 
 end
