@@ -10,13 +10,14 @@ class Api::V1::TodosController < Api::V1::BaseController
 
 
   def create
+    binding.pry
     @todo = @current_daycare.todos.new(todo_params)
-    params[:todo][:key_tasks].each do |k_task|
-      kt = @todo.key_tasks.build(name: k_task["name"])
-      k_task["sub_tasks"].each do |sub_task|
-        st = kt.sub_tasks.build(name: sub_task["name"])
-      end
-    end
+    # params[:todo][:key_tasks].each do |k_task|
+    #   kt = @todo.key_tasks.build(name: k_task["name"])
+    #   k_task["sub_tasks"].each do |sub_task|
+    #     st = kt.sub_tasks.build(name: sub_task["name"])
+    #   end
+    # end
 
     # params[:todo][:key_tasks].each do |k, v|
     #   k_task = @todo.key_tasks.build(name: v["name"])
@@ -114,8 +115,8 @@ class Api::V1::TodosController < Api::V1::BaseController
     end
 
     def todo_params
-      params.require(:todo).permit(:frequency, :recurring_rule, :schedule_date, :due_date, :is_delegatable, :is_circulatable, :title, icon_attributes: [:image])
-      # params.require(:todo).permit!
+      # params.require(:todo).permit(:frequency, :recurring_rule, :schedule_date, :due_date, :is_delegatable, :is_circulatable, :title, icon_attributes: [:image])
+      params.require(:todo).permit!
     end
 
     def check_create_permission
