@@ -74,16 +74,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
     end
 
     def create_daycare_parent
-      # @daycare = Daycare.find(params[:user][:daycare_id])
-      # @message = "Invalid daycare_id" and return unless @daycare.present?
       @user = Parent.new(parent_params)
-      clid_params[:children_attributes].each do |ca|
-        c = @user.children.build(ca)
-        c.build_photo(ca["photo_attributes"]) unless c.photo
-
-      end
-
-
       if @user.save
         @message = "Parent created Successfully"
       else
@@ -106,7 +97,9 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
 
     def parent_params
       params[:user][:password_confirmation] = params[:user][:password]
-      params.require(:user).permit(:daycare_id, :name, :email, :password, :password_confirmation)
+      # params.require(:user).permit(:daycare_id, :name, :email, :password, :password_confirmation)
+      params[:user].delete("role")
+      params.require(:user).permit!
     end
 
     def clid_params
