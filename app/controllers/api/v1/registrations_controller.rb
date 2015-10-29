@@ -29,6 +29,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
     ensure
       if @user && @user.valid?
         set_active_device
+        RegistrationMailer.send_confirmation(@user).deliver_later if @user.parent? or @user.worker?
         render json: {result: 'success', message: @message, api_key: @user.api_key} and return
       else
         render json: {result: 'failed', error: true, message: @message} and return
