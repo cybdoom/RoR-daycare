@@ -1,13 +1,134 @@
 <div class="main-container">
-	<div class="container">
-		<div id="top">
-			
-			<div class="col-lg-12">
-				<%=render 'api_list'%>
-			</div>
+  <div class="container">
+    <div id="top">
+      <h1 class="text-center title-1"> Daycare API Documentation </h1>
 
+      <div class="col-lg-12 ">
+        <div class="row doc_head1 mrg_top">
+          <h1>Daycare API </h1>
+        </div>
+        <div class="row">          
+          <h6>API Endpoint</h6>
+          <p>
+            All API URLs listed in this documentation are relative to <%=@host%>/api/v1. For example, the /api/vi/login API call is reachable at <%=@host%>/api/v1/login
+          </p>
+          <h6>Output Format</h6>
+          <p>JSON</p>
+          <h6>Authorization</h6>
+          <p>
+            All API except login api needs you to pass client username and api key value as basic http authorization header.<br/>
+            for.ex sending request using curl <br/>
+            <code>curl --user username:api_key <%=@host%>/api/v1/api_name</code><br/>
+            Here you need to replace username and api_key with actual client username and api key. You can get api_key using login api<br/>
+            <strong>Reference for sending basic http authentication request: </strong>
+            <ul>
+              <li><a href="http://en.wikipedia.org/wiki/Basic_access_authentication">http://en.wikipedia.org/wiki/Basic_access_authentication</a></li>
+              <li><a href="http://www.asp.net/web-api/overview/security/basic-authentication" target='_blank'></a>http://www.asp.net/web-api/overview/security/basic-authentication</li>
+              <li><a href="http://www.4guysfromrolla.com/articles/102605-1.aspx">http://www.4guysfromrolla.com/articles/102605-1.aspx</a></li>
+            </ul>
+          </p>
+        </div>
+      </div>
+
+      <!-- ################################### LIST OF APIs ############################### -->
+      <div class="col-lg-12">
+        <%=render 'api_list'%>
+      </div>
+
+      <!-- ############################### SIGNUP OR SETUP DAYCARE ######################## -->
+
+      <div class="col-lg-12">
+        <%=render 'create_super_admin_api_doc'%>
+      </div>
+
+      <div class="col-lg-12">
+        <%=render 'create_daycare_or_manager_signup_api_doc'%>
+      </div>
+
+
+      <div class="col-lg-12">
+        <%=render 'parent_signup_api_doc'%>
+      </div>
+
+      <div class="col-lg-12">
+        <%=render 'worker_signup_api_doc'%>
+      </div>
+
+
+      <!-- ################################## LOGIN ##################################### -->
+
+      <div class="col-lg-12">
+        <%=render 'super_admin_login_api_doc'%>
+      </div>
+
+      <div class="col-lg-12">
+        <%=render 'manager_login_api_doc'%>
+      </div>
+
+      <div class="col-lg-12">
+        <%=render 'parent_login_api_doc'%>
+      </div>
+
+      <!-- ############################## CREATE TODO #################################### -->
+
+      <div class="col-lg-12">
+        <%=render 'create_todo_api_doc'%>
+      </div>
+
+      <!-- #########################SHARE TODO WITH PARENTS ############################## -->
+
+      <div class="col-lg-12">
+        <%=render 'share_todo_with_parents_api_doc'%>
+      </div>
+
+     <!-- #############################SHARE TODO WITH WORKERS ############################## -->
+
+      <div class="col-lg-12">
+        <%=render 'share_todo_with_workers_api_doc'%>
+      </div>
+
+     <!-- #############################SHARE TODO WITH DEPRTMENTS ############################## -->
+      <div class="col-lg-12">
+        <%=render 'share_todo_with_departments_api_doc'%>
+      </div>
+
+      <div class="col-lg-12">
+        <%= render "invite_daycare_api_doc"%>
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <div class="col-lg-12">
+      </div>
+
+      <!-- ##############################SAMPLE######################################### -->
 			<div class="col-lg-12">
-				<%=render 'api/docs/create_daycare_or_manager_signup_api_doc'%>
+				<%=render 'sample'%>
 			</div>
 		</div>
 	</div>

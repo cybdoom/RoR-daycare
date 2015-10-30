@@ -1,0 +1,91 @@
+<div id="invite_daycare_api">
+  <div class="row doc_head1 mrg_top">
+    <h1>Invite Daycare API</h1>
+  </div>
+  <div class="row mrg_top">
+    Invite Daycare API<br>
+    <b>Link:   </b><%=@host%>/api/v1/common/invite_daycare<br>
+    <b>HTTP TYPE:   </b>POST
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Description</h3>
+  </div>
+  <div class="row">
+    <p>Send invitation to a daycare if daycare is not present.</p>
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Request Parameters</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>Field</th>
+        <th>Data Type</th>
+        <th>Note</th>
+        <th>Required / Optional</th>
+
+      </head>
+      <body>
+        <tr>
+          <td>email</td>
+          <td>String</td>
+          <td>Must be a valid email</td>
+          <td>1</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Request</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>S.No</th>
+        <th>Example of Request JSON</th>
+      </head>
+      <body>
+        <tr>
+          <th>1 </th>
+          <td>{
+	              "email"=>"ashutosh413@gmail.com",
+	            }</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Returns</h3>
+  </div>
+  <div class="row">
+    <table border="1" width="100%">
+      <thead>
+        <th>Action</th>
+        <th>Http Status Code</th>
+        <th>Note</th>
+        <th>Example</th>
+      </thead>
+      <body>
+        <tr>
+          <th>Successful Response JSON </th>
+          <td>200</td>
+          <td></td>
+          <td>{result: 'success', message: "Invitation to daycare has been sent successfully!"}</td>
+        </tr>
+        <tr>
+          <th rowspan="2">ERROR Response JSON</th>
+          <td>200</td>
+          <td>Invalid email</td>
+          <td>{result: 'failed', error: true, message: "Invalid Email"}</td>
+        </tr>
+      </body>
+    </table>
+    <%= link_to "Go To Top", "#top" %>
+  </div>
+</div>

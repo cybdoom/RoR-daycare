@@ -1,0 +1,143 @@
+<div id="parent_login_api">
+  <div class="row doc_head1 mrg_top">
+    <h1>Parent Login API</h1>
+  </div>
+  <div class="row mrg_top">
+    Parent Login API<br>
+    <b>Link:   </b><%=@host%>/api/v1/login<br>
+    <b>HTTP TYPE:   </b>POST
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Description</h3>
+  </div>
+  <div class="row">
+    <p>Allow the registered user to login</p>
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Request Parameters</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>Field</th>
+        <th>Data Type</th>
+        <th>Note</th>
+        <th>Required / Optional</th>
+
+      </head>
+      <body>
+        <tr>
+          <td>login</td>
+          <td>String</td>
+          <td>Email of user</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>password</td>
+          <td>String</td>
+          <td>Password of user</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>role</td>
+          <td>String</td>
+          <td>Role of user device</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>device_token</td>
+          <td>String</td>
+          <td>Device token of user device</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>device_type</td>
+          <td>String</td>
+          <td>Type of user device</td>
+          <td>1</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Request</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>S.No</th>
+        <th>Example of Request JSON</th>
+      </head>
+      <body>
+        <tr>
+          <th>1 </th>
+          <td>{
+                "login"=>"ashutosh413@gmail.com",
+                "password"=>"Abc.1234",
+                "role"=>"parent",
+                "device_token"=>"aaaaaaaaaaaaaaaaaaaaa",
+                "device_type"=>"ios",
+              }</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Returns</h3>
+  </div>
+  <div class="row">
+    <table border="1" width="100%">
+      <thead>
+        <th>Action</th>
+        <th>Http Status Code</th>
+        <th>Note</th>
+        <th>Example</th>
+      </thead>
+      <body>
+        <tr>{
+              success: failed
+              error: true
+              message: "No user found"
+            }</t
+          <th>Successful Response JSON </th>
+          <td></td>
+          <td>200</td>
+          <td>{
+                result: "success"
+                message: "Authentication successful"
+                api_key: "2IeEV8KAyLpd287uzod24Q"
+                name: "Ashutosh Rawat"
+              }</td>
+        </tr>
+        <tr>
+          <th  rowspan="2">ERROR Response JSON</th>
+          <td>200</td>
+          <td>Wrong password</td>
+          <td>
+              {
+                result: "failed"
+                error: true
+                message: "Password is invalid"
+              }</td>
+        </tr>
+        <tr>
+          <td>200</td>
+          <td>No user</td>
+          <td> 
+            {
+              success: failed
+              error: true
+              message: "No user found"
+            }</td>
+        </tr>
+      </body>
+    </table>
+    <%= link_to "Go To Top", "#top" %>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+<div id="share_todo_with_workers_api">
+  <div class="row doc_head1 mrg_top">
+    <h1>Share Todo with Workers API</h1>
+  </div>
+  <div class="row mrg_top">
+    Share Todo with Workers API<br>
+    <b>Link:   </b><%=@host%>/api/v1/todos/:id/share_with_workers<br>
+    <b>HTTP TYPE:   </b>POST
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Description</h3>
+  </div>
+  <div class="row">
+    <p>Allow the user with create permission to share todo with workers</p>
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Request Header Parameters</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>Field</th>
+        <th>Data Type</th>
+        <th>Note</th>
+        <th>Required / Optional</th>
+
+      </head>
+      <body>
+
+        <tr>
+          <td>email</td>
+          <td>String</td>
+          <td>Email of user</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>password</td>
+          <td>String</td>
+          <td>api_key of user</td>
+          <td>1</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Request Parameters</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>Field</th>
+        <th>Data Type</th>
+        <th>Note</th>
+        <th>Required / Optional</th>
+
+      </head>
+      <body>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+          <td>Id of todo</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>worker_ids</td>
+          <td>Integer Array</td>
+          <td>Array of workers Ids to whom todo has to be shared</td>
+          <td>1</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Request</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>S.No</th>
+        <th>Example of Request JSON</th>
+      </head>
+      <body>
+        <tr>
+          <th>1 </th>
+          <td>{
+              "worker_ids"=>[10, 12],
+              "id"=>"42"
+              }</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Returns</h3>
+  </div>
+  <div class="row">
+    <table border="1" width="100%">
+      <thead>
+        <th>Action</th>
+        <th>Http Status Code</th>
+        <th>Note</th>
+        <th>Example</th>
+      </thead>
+      <body>
+        <tr>
+          <th>Successful Response JSON </th>
+          <td>200</td>
+          <td></td>
+          <td>{
+                result: "success"
+                message: Todo has been shared with these workers successfully!
+              }</td>
+        </tr>
+        <tr>
+          <th  rowspan="2">ERROR Response JSON</th>
+          <td>200</td>
+          <td>Delgatability error</td>
+          <td>{
+                result: "failed"
+                error: true
+                message: "Delegatable Todo can have maximum one user"
+              }</td>
+        </tr>
+      </body>
+    </table>
+    <%= link_to "Go To Top", "#top" %>
+  </div>
+</div>

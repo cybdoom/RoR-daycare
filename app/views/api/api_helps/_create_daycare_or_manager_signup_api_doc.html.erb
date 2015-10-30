@@ -4,8 +4,8 @@
   </div>
   <div class="row mrg_top">
     Daycare Manager Signup or Create Daycare API<br>
-    <b>Link:   </b><%=@host%>api/v1/signup<br>
-    <b>HTTP TYPE:   </b>Post
+    <b>Link:   </b><%=@host%>/api/v1/signup<br>
+    <b>HTTP TYPE:   </b>POST
   </div>
 
   <div class="row mrg_top">
@@ -16,7 +16,7 @@
   </div>
 
   <div class="row mrg_top">
-    <h3>Parameters</h3>
+    <h3>Request Parameters</h3>
   </div>
   <div class="row ">
     <table border="1" width="100%">
@@ -25,92 +25,92 @@
         <th>Data Type</th>
         <th>Note</th>
         <th>Required / Optional</th>
-        
+
       </head>
       <body>
         <tr>
           <td>daycare[name]</td>
-          <td></td>
+          <td>String</td>
           <td>Name of Daycare</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>daycare[address_line1]</td>
-          <td></td>
+          <td>String</td>
           <td>Address of Daycare</td>
-          <td></td>
+          <td>0</td>
         </tr>
         <tr>
           <td>daycare[post_code]</td>
-          <td></td>
+          <td>String</td>
           <td>Postal code of Daycare</td>
-          <td></td>
+          <td>0</td>
         </tr>
         <tr>
           <td>daycare[country]</td>
-          <td></td>
+          <td>String</td>
           <td>Country Code of Daycare</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>daycare[telephone]</td>
-          <td></td>
+          <td>String</td>
           <td>Telephone of Daycare</td>
-          <td></td>
+          <td>0</td>
         </tr>
          <tr>
           <td>daycare[customer_type_id]</td>
-          <td></td>
+          <td>Integer</td>
           <td>Id of coustomer type for Daycare</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>daycare[language]</td>
-          <td></td>
+          <td>String</td>
           <td>Language code for Daycare</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>daycare[manager_attributes][name]</td>
-          <td></td>
+          <td>String</td>
           <td>Name of Daycare Manager</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>daycare[manager_attributes][email]</td>
-          <td></td>
+          <td>String</td>
           <td>Email of Daycare Manager</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>daycare[manager_attributes][password]</td>
-          <td></td>
+          <td>String</td>
           <td>password for Daycare Manager</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>daycare[manager_attributes][password_confirmation]</td>
-          <td></td>
+          <td>String</td>
           <td>macth of password</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>daycare[manager_attributes][role]</td>
-          <td></td>
+          <td>String</td>
           <td>Role of Daycare Manager (i.e., "manager")</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>device_token</td>
-          <td></td>
+          <td>String</td>
           <td>device token of user's device</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>device_type</td>
-          <td></td>
-          <td>type of user device</td>
-          <td></td>
+          <td>String</td>
+          <td>type of user device (ios or android)</td>
+          <td>1</td>
         </tr>
       </body>
     </table>
@@ -166,20 +166,20 @@
       <body>
         <tr>
           <th>Successful Response JSON </th>
-          <td></td>
+          <td>200</td>
           <td></td>
           <td>{result: "success" message: "User creation successful" api_key: "HDlruJh3mpC8le6N24QKGQ" }</td>
         </tr>
         <tr>
           <th  rowspan="2">ERROR Response JSON</th>
-          <td></td>
-          <td></td>
-          <td>Duplicate email {result: "failed" error: true message: "Email has already been taken" }</td>
+          <td>200</td>
+          <td>Duplicate email </td>
+          <td>{result: "failed" error: true message: "Email has already been taken" }</td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td>Password Mismatch {result: "failed" error: true message: "Password confirmation doesn't match Password" }</td>
+          <td>200</td>
+          <td>Password Mismatch</td>
+          <td>{result: "failed" error: true message: "Password confirmation doesn't match Password" }</td>
         </tr>
       </body>
     </table>

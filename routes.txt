@@ -74,6 +74,7 @@
                                    PUT      /todos/:id(.:format)                               todos#update
                                    DELETE   /todos/:id(.:format)                               todos#destroy
                    confirm_account GET      /confirm_account(.:format)                         common#confirm_account
+                    invite_daycare POST     /invite_daycare(.:format)                          common#invite_daycare
                        admin_login GET|POST /admin/login(.:format)                             admin/admin#login
                    admin_dashboard GET      /admin/dashboard(.:format)                         admin/admin#dashboard
             admin_select_privilege GET      /admin/select_privilege(.:format)                  admin/admin#select_privilege
@@ -97,7 +98,7 @@ add_customer_types_admin_customers GET|POST /admin/customers/add_customer_types(
                                    PATCH    /admin/todos/:id(.:format)                         admin/todos#update
                                    PUT      /admin/todos/:id(.:format)                         admin/todos#update
                                    DELETE   /admin/todos/:id(.:format)                         admin/todos#destroy
-                     api_api_helps GET      /api/help(.:format)                                api/api_helps#index
+                          api_docs GET      /api/docs(.:format)                                api/api_helps#docs
                       api_v1_login POST     /api/v1/login(.:format)                            api/v1/sessions#create
                      api_v1_signup POST     /api/v1/signup(.:format)                           api/v1/registrations#create
            api_v1_daycare_managers GET      /api/v1/daycare_managers(.:format)                 api/v1/daycare_managers#index
@@ -135,3 +136,4 @@ share_with_departments_api_v1_todo POST     /api/v1/todos/:id/share_with_departm
                                    PATCH    /api/v1/todos/:id(.:format)                        api/v1/todos#update
                                    PUT      /api/v1/todos/:id(.:format)                        api/v1/todos#update
                                    DELETE   /api/v1/todos/:id(.:format)                        api/v1/todos#destroy
+      invite_daycare_api_v1_common POST     /api/v1/common/invite_daycare(.:format)            api/v1/common#invite_daycare
