@@ -57,6 +57,8 @@ group :development, :test do
   gem "letter_opener"
 
   gem 'annotate'
+
+  gem 'quiet_assets'
 end
 
 gem 'devise'
