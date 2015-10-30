@@ -1,68 +1,80 @@
 <%si_no = 1%>
-<div class="white-box text-center">
+<!-- <div class="white-box text-center"> -->
+<div class="row doc_head1 mrg_top">
+  <h1>List of APIs</h1>
+</div>
+<div class="row mrg_top">
+  API List<br>
   <table border="1" width="100%">
-    <tr>
-      <td>Sr. #</td>
-      <td>API NAME</td>
-    </tr>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Create  Admin", "#create_super_admin_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Create Daycare and Signup as Manager", "#create_daycare_or_manager_signup_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Signup as Daycare Parent", "#parent_signup_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Signup as Daycare Worker", "#worker_signup_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Admin Login", "#super_admin_login_api  " %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Manager Login", "#manager_login_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Parent Login", "#parent_login_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Worker Login", "#worker_login_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Create Todo", "#create_todo_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Share Todo with Parents", "#share_todo_with_parents_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Share Todo with Workers", "#share_todo_with_workers_api" %></td>
-    </tr>
-    <%si_no += 1%>
-    <tr>
-      <td><%=si_no%></td>
-      <td><%= link_to "Share Todo with Departments", "#share_todo_with_departments_api" %></td>
-    </tr>
+    <thead>
+      <th>Sr. #</th>
+      <th>API NAME</th>
+    </thead>
+    <tbody>        
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Create  Admin", "#create_super_admin_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Create Daycare and Signup as Manager", "#create_daycare_or_manager_signup_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Signup as Daycare Parent", "#parent_signup_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Signup as Daycare Worker", "#worker_signup_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Admin Login", "#super_admin_login_api  " %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Manager Login", "#manager_login_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Parent Login", "#parent_login_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Worker Login", "#worker_login_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Create Todo", "#create_todo_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Share Todo with Parents", "#share_todo_with_parents_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Share Todo with Workers", "#share_todo_with_workers_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Share Todo with Departments", "#share_todo_with_departments_api" %></td>
+      </tr>
+      <%si_no += 1%>
+      <tr>
+        <td><%=si_no%></td>
+        <td><%= link_to "Invite a Daycare", "#invite_daycare_api" %></td>
+      </tr>
+    </tbody>
   </table>
 </div>

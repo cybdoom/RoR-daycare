@@ -1,0 +1,228 @@
+<div id="create_todo_api">
+  <div class="row doc_head1 mrg_top">
+    <h1>Create Todo API</h1>
+  </div>
+  <div class="row mrg_top">
+    Create Todo API<br>
+    <b>Link:   </b><%=@host%>/api/v1/todo<br>
+    <b>HTTP TYPE:   </b>Post
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Description</h3>
+  </div>
+  <div class="row">
+    <p>Allow the logged in user to create todo if user is having permissions to create todo.</p>
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Request Header Parameters</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>Field</th>
+        <th>Data Type</th>
+        <th>Note</th>
+        <th>Required / Optional</th>
+
+      </head>
+      <body>
+
+        <tr>
+          <td>email</td>
+          <td>String</td>
+          <td>Email of user</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>password</td>
+          <td>String</td>
+          <td>api_key of user</td>
+          <td>1</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+  <div class="row mrg_top">
+    <h3>Request Parameters</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>Field</th>
+        <th>Data Type</th>
+        <th>Note</th>
+        <th>Required / Optional</th>
+
+      </head>
+      <body>
+        <tr>
+          <td>todo[frequency]</td>
+          <td></td>
+          <td>Frequency of Todo. Must be one of <%=Todo::FREQUENCY%></td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[recurring_rule]</td>
+          <td></td>
+          <td>Rule for recurring Todo. If todo is One time event the it will be blank otherwise for recurring it must be one of <%=Todo::RECURRANCE_OPTIONS%></td>
+          <td>0/1</td>
+        </tr>
+        <tr>
+          <td>todo[schedule_date]</td>
+          <td></td>
+          <td>TimeStamp in milisecond of todo schedule date and time</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[due_date]</td>
+          <td></td>
+          <td>TimeStamp in milisecond of todo due date and time </td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[is_delegatable]</td>
+          <td></td>
+          <td>1 if true otherwise 0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[is_circulatable]</td>
+          <td></td>
+          <td>1 if true otherwise 0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[title]</td>
+          <td></td>
+          <td>Title for Todo</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[key_tasks_attributes][0][name]</td>
+          <td></td>
+          <td>Title for first Key Task</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[key_tasks_attributes][0][sub_tasks_attributes][0][name]</td>
+          <td></td>
+          <td>Title for first sub task of first Key Task</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[key_tasks_attributes][0][sub_tasks_attributes][1][name]</td>
+          <td></td>
+          <td>Title for second sub task of first Key Task</td>
+          <td>1</td>
+        </tr>
+
+        <tr>
+          <td>todo[key_tasks_attributes][1][name]</td>
+          <td></td>
+          <td>Title for Second Key Task</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>todo[key_tasks_attributes][1][sub_tasks_attributes][0][name]</td>
+          <td></td>
+          <td>Title for first sub task of Second Key Task</td>
+          <td>1</td>
+        </tr>
+
+         <tr>
+          <td>todo[icon_attributes][image]</td>
+          <td></td>
+          <td>Image for todo icon</td>
+          <td>1</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Request</h3>
+  </div>
+  <div class="row ">
+    <table border="1" width="100%">
+      <head>
+        <th>S.No</th>
+        <th>Example of Request JSON</th>
+      </head>
+      <body>
+        <tr>
+          <th>1 </th>
+          <td> {todo =>{"frequency"=>"One Time Event",
+                 "recurring_rule"=>"",
+                 "schedule_date"=>2015-10-31 00:03:04 +0530,
+                 "due_date"=>2015-11-02 23:59:29 +0530,
+                 "is_delegatable"=>"1",
+                 "is_circulatable"=>"1",
+                 "title"=>"qeqew",
+                 "key_tasks_attributes"=>
+                  {"0"=>{"name"=>"wqeqweqw", "sub_tasks_attributes"=>{"0"=>{"name"=>"qweqweq"}}},
+                   "1"=>{"name"=>"dadasdas", "sub_tasks_attributes"=>{"1"=>{"name"=>"asdasdasdasdasdas"}}}},
+                 "icon_attributes"=>
+                                        {"image"=>
+                                          #<ActionDispatch::Http::UploadedFile:0x007fc04d5c4058
+                                           @content_type="image/png",
+                                           @headers=
+                                            "Content-Disposition: form-data; name=\"todo[icon_attributes][image]\"; filename=\"tablet_3-4.png\"\r\nContent-Type: image/png\r\n",
+                                           @original_filename="tablet_3-4.png",
+                                           @tempfile=#<File:/tmp/RackMultipart20151028-7523-1er04ao.png>>}}
+                }</td>
+        </tr>
+      </body>
+    </table>
+  </div>
+
+
+  <div class="row mrg_top">
+    <h3>Returns</h3>
+  </div>
+  <div class="row">
+    <table border="1" width="100%">
+      <thead>
+        <th>Action</th>
+        <th>Http Status Code</th>
+        <th>Note</th>
+        <th>Example</th>
+      </thead>
+      <body>
+        <tr>
+          <th>Successful Response JSON </th>
+          <td></td>
+          <td></td>
+          <td>{
+                result: "success"
+                message: "Todo has been successfully created"
+                todo_id: "1"
+              }</td>
+        </tr>
+        <tr>
+          <th  rowspan="2">ERROR Response JSON</th>
+          <td></td>
+          <td>Blank schedule date</td>
+          <td> {
+                  result: "failed"
+                  error: true
+                  message: "Schedule date cann't be blank"
+                }</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Invalid user or api key</td>
+          <td>{
+                success: failed
+                error: true
+                message: "Unauthorised"
+              }</td>
+        </tr>
+      </body>
+    </table>
+    <%= link_to "Go To Top", "#top" %>
+  </div>
+</div>
