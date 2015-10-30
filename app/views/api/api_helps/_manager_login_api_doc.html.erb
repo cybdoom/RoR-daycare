@@ -29,33 +29,33 @@
       <body>
         <tr>
           <td>login</td>
-          <td></td>
+          <td>String</td>
           <td>Email of user</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>password</td>
-          <td></td>
+          <td>String</td>
           <td>Password of user</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>role</td>
-          <td></td>
+          <td>String</td>
           <td>Role of user device</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>device_token</td>
-          <td></td>
+          <td>String</td>
           <td>Device token of user device</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>device_type</td>
-          <td></td>
+          <td>String</td>
           <td>Type of user device</td>
-          <td></td>
+          <td>1</td>
         </tr>
       </body>
     </table>
@@ -75,12 +75,12 @@
         <tr>
           <th>1 </th>
           <td>{
-                                      "login"=>"ashutosh413@gmail.com",
-                                      "password"=>"Abc.1234",
-                                      "role"=>"manager",
-                                      "device_token"=>"aaaaaaaaaaaaaaaaaaaaa",
-                                      "device_type"=>"ios",
-                                    }</td>
+                "login"=>"ashutosh413@gmail.com",
+                "password"=>"Abc.1234",
+                "role"=>"manager",
+                "device_token"=>"aaaaaaaaaaaaaaaaaaaaa",
+                "device_type"=>"ios",
+              }</td>
         </tr>
       </body>
     </table>
@@ -101,7 +101,7 @@
       <body>
         <tr>
           <th>Successful Response JSON </th>
-          <td></td>
+          <td>200</td>
           <td></td>
           <td>{
               result: "success"
@@ -112,22 +112,22 @@
         </tr>
         <tr>
           <th  rowspan="2">ERROR Response JSON</th>
-          <td></td>
+          <td>200</td>
           <td>Wrong password</td>
           <td>{
-                              result: "failed"
-                              error: true
-                              message: "Password is invalid"
-                            }</td>
+                result: "failed"
+                error: true
+                message: "Password is invalid"
+              }</td>
         </tr>
         <tr>
-          <td></td>
+          <td>200</td>
           <td>No user</td>
           <td>{
-                      success: failed
-                      error: true
-                      message: "No user found"
-                    }</td>
+                success: failed
+                error: true
+                message: "No user found"
+              }</td>
         </tr>
       </body>
     </table>

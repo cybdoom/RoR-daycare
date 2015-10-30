@@ -30,63 +30,51 @@
       <body>
         <tr>
           <td>user[daycare_id]</td>
-          <td></td>
+          <td>Integer</td>
           <td>Id of Daycare</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>user[name]</td>
-          <td></td>
-          <td>Name of Daycare Parent</td>
-          <td></td>
+          <td>String</td>
+          <td>Name of Daycare Parent User.</td>
+          <td>1</td>
         </tr>
         <tr>
           <td>user[email]</td>
-          <td></td>
-          <td>Email of Daycare Parent</td>
-          <td></td>
+          <td>String</td>
+          <td>Email of Daycare Parent.</td>
+          <td>1</td>
         </tr>
         <tr>
           <td>user[password]</td>
-          <td></td>
-          <td>Password of Daycare Parent</td>
-          <td></td>
+          <td>String</td>
+          <td>Password of Daycare Parent.</td>
+          <td>1</td>
         </tr>
         <tr>
           <td>user[password_confirmation]</td>
-          <td></td>
+          <td>String</td>
           <td>Match of password</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>user[role]</td>
-          <td></td>
+          <td>String</td>
           <td>Role of Daycare Parent (i.e., "parent")</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>device_token</td>
-          <td></td>
+          <td>String</td>
           <td>Device token of parent's device</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>device_type</td>
-          <td></td>
+          <td>String</td>
           <td>type of parent device</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>1</td>
         </tr>
       </body>
     </table>
@@ -135,18 +123,18 @@
       <body>
         <tr>
           <th>Successful Response JSON </th>
-          <td></td>
+          <td>200</td>
           <td></td>
           <td>{result: "success" message: "User creation successful" api_key: "HDlruJh1mpC8le6N24QKGQ" }</td>
         </tr>
         <tr>
           <th  rowspan="2">ERROR Response JSON</th>
-          <td></td>
+          <td>200</td>
           <td>Duplicate email</td>
           <td>{result: "failed" error: true message: "Email has already been taken" }</td>
         </tr>
         <tr>
-          <td></td>
+          <td>200</td>
           <td>Password Mismatch</td>
           <td>{result: "failed" error: true message: "Password confirmation doesn't match Password" }</td>
         </tr>

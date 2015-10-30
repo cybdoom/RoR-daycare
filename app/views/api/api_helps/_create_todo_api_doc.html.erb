@@ -60,81 +60,81 @@
       <body>
         <tr>
           <td>todo[frequency]</td>
-          <td></td>
+          <td>String</td>
           <td>Frequency of Todo. Must be one of <%=Todo::FREQUENCY%></td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[recurring_rule]</td>
-          <td></td>
+          <td>String</td>
           <td>Rule for recurring Todo. If todo is One time event the it will be blank otherwise for recurring it must be one of <%=Todo::RECURRANCE_OPTIONS%></td>
-          <td>0/1</td>
+          <td>0(if one time event) / 1(if except one time event)</td>
         </tr>
         <tr>
           <td>todo[schedule_date]</td>
-          <td></td>
+          <td>Timestamp Integer</td>
           <td>TimeStamp in milisecond of todo schedule date and time</td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[due_date]</td>
-          <td></td>
+          <td>Timestamp Integer</td>
           <td>TimeStamp in milisecond of todo due date and time </td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[is_delegatable]</td>
-          <td></td>
+          <td>Boolean</td>
           <td>1 if true otherwise 0</td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[is_circulatable]</td>
-          <td></td>
+          <td>Boolean</td>
           <td>1 if true otherwise 0</td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[title]</td>
-          <td></td>
+          <td>String</td>
           <td>Title for Todo</td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[key_tasks_attributes][0][name]</td>
-          <td></td>
+          <td>String</td>
           <td>Title for first Key Task</td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[key_tasks_attributes][0][sub_tasks_attributes][0][name]</td>
-          <td></td>
+          <td>String</td>
           <td>Title for first sub task of first Key Task</td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[key_tasks_attributes][0][sub_tasks_attributes][1][name]</td>
-          <td></td>
+          <td>String</td>
           <td>Title for second sub task of first Key Task</td>
           <td>1</td>
         </tr>
 
         <tr>
           <td>todo[key_tasks_attributes][1][name]</td>
-          <td></td>
+          <td>String</td>
           <td>Title for Second Key Task</td>
           <td>1</td>
         </tr>
         <tr>
           <td>todo[key_tasks_attributes][1][sub_tasks_attributes][0][name]</td>
-          <td></td>
+          <td>String</td>
           <td>Title for first sub task of Second Key Task</td>
           <td>1</td>
         </tr>
 
          <tr>
           <td>todo[icon_attributes][image]</td>
-          <td></td>
+          <td>File</td>
           <td>Image for todo icon</td>
           <td>1</td>
         </tr>
@@ -194,7 +194,7 @@
       <body>
         <tr>
           <th>Successful Response JSON </th>
-          <td></td>
+          <td>200</td>
           <td></td>
           <td>{
                 result: "success"
@@ -204,7 +204,7 @@
         </tr>
         <tr>
           <th  rowspan="2">ERROR Response JSON</th>
-          <td></td>
+          <td>200</td>
           <td>Blank schedule date</td>
           <td> {
                   result: "failed"
@@ -213,7 +213,7 @@
                 }</td>
         </tr>
         <tr>
-          <td></td>
+          <td>200</td>
           <td>Invalid user or api key</td>
           <td>{
                 success: failed

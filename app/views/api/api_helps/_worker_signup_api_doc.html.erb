@@ -30,51 +30,51 @@
       <body>
         <tr>
           <td>user[daycare_id]</td>
-          <td></td>
+          <td>Integer</td>
           <td>Id of Daycare</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>user[department_id]</td>
-          <td></td>
+          <td>Integer</td>
           <td>Department of Worker</td>
-          <td></td>
+          <td>1</td>
         </tr>
         <tr>
           <td>user[name]</td>
-          <td></td>
+          <td>String</td>
           <td>Name of Daycare Worker</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>user[email]</td>
-          <td></td>
+          <td>String</td>
           <td>Email of Daycare Worker</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>user[password]</td>
-          <td></td>
+          <td>String</td>
           <td>Password of Daycare Worker</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>user[role]</td>
-          <td></td>
+          <td>String</td>
           <td>Role of Daycare Worker (i.e., "worker")</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>device_token</td>
-          <td></td>
+          <td>String</td>
           <td>Device token of Worker's device</td>
-          <td></td>
+          <td>1</td>
         </tr>
          <tr>
           <td>device_type</td>
-          <td></td>
+          <td>String</td>
           <td>Type of Worker device</td>
-          <td></td>
+          <td>1</td>
         </tr>
       </body>
     </table>
@@ -94,16 +94,16 @@
         <tr>
           <th>1 </th>
           <td>{"user"=>
-                                                      {"daycare_id"=>"1",
-                                                       "department_id"=>"1"
-                                                       "name"=>"TestDaycareWorker",
-                                                       "email"=>"testdaycareworker@test11d12.com",
-                                                       "password"=>"11111111",
-                                                       "role"=>"worker",
-                                                      },
-                                                     "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
-                                                     "device_type"=>"ios"
-                                                     }</td>
+                {"daycare_id"=>"1",
+                 "department_id"=>"1"
+                 "name"=>"TestDaycareWorker",
+                 "email"=>"testdaycareworker@test11d12.com",
+                 "password"=>"11111111",
+                 "role"=>"worker",
+                },
+               "device_token"=>"ssashasjhjkashdkjahskdjhaskjdkjah",
+               "device_type"=>"ios"
+               }</td>
         </tr>
       </body>
     </table>
@@ -124,18 +124,18 @@
       <body>
         <tr>
           <th>Successful Response JSON </th>
-          <td></td>
+          <td>200</td>
           <td></td>
           <td>{result: "success" message: "User creation successful" api_key: "HDlruJh1mpC8le6N24QKGQ" }</td>
         </tr>
         <tr>
           <th  rowspan="2">ERROR Response JSON</th>
-          <td></td>
+          <td>200</td>
           <td>Duplicate email</td>
           <td>{result: "failed" error: true message: "Email has already been taken" }</td>
         </tr>
         <tr>
-          <td></td>
+          <td>200</td>
           <td>Invalid foreign keys</td>
           <td>{result: "failed" error: true message: "Provided Invalid daycare_id or department_id " }</td>
         </tr>
