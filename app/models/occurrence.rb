@@ -21,6 +21,7 @@ class Occurrence < ActiveRecord::Base
   
   
   has_many :user_occurrences, dependent: :destroy
+  has_many :todo_comments, ->{where(is_archived: true)}, dependent: :destroy
 
   belongs_to :todo
 

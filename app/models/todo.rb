@@ -40,6 +40,7 @@ class Todo < ActiveRecord::Base
   has_one :icon, as: :photoable, class_name: "Photo", dependent: :destroy
   #has_many :create_permissions#, as: :functionality
   has_many :occurrences
+  has_many :todo_comments, ->{where(is_archived: true)}, through: :occurrences
 
 
   validates :title, :schedule_date, :due_date, :daycare_id,  presence: true

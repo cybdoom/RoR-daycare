@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025071833) do
+ActiveRecord::Schema.define(version: 20151031171820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,15 @@ ActiveRecord::Schema.define(version: 20151025071833) do
   end
 
   add_index "roles", ["daycare_id"], name: "index_roles_on_daycare_id", using: :btree
+
+  create_table "todo_comments", force: :cascade do |t|
+    t.integer  "occurrence_id"
+    t.text     "comment"
+    t.integer  "user_id"
+    t.boolean  "is_archived",   default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "todos", force: :cascade do |t|
     t.string   "title"
