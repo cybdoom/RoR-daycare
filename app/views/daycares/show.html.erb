@@ -73,6 +73,10 @@
               <a href="#"><%= image_tag todo.image(:mini), width: '40', height: '40'%><%=todo.title%></a>
 
               <%=link_to "Accept", accept_todo_todo_path(todo), method: :post if todo.is_circulatable? && UserTodo.find_by(user_id: current_user.id, todo_id: todo.id).try(:status) == "inactive"%>
+              <% if todo.user_todos.find_by(user_id: current_user.id, todo_id: todo.id).try(:status) == "active"%>
+                <%=link_to "Done", submit_todo_todo_path(todo, act: "mark_as_done"), method: :post %>
+                <%=link_to "Not Applicable", submit_todo_todo_path(todo, act: "mark_as_not_applicable"), method: :post %>
+              <%end%>
             </li>
           </ul>
         <%end%>

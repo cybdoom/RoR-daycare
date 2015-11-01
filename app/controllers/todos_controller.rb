@@ -2,7 +2,7 @@ class TodosController < ApplicationController
   # before_action :authenticate_manager!, except: [:accept_todo]
   # before_action :ensure_manager, except: [:accept_todo]
   before_action :set_daycare
-  before_action :set_todo, only: [:edit, :update, :show, :destroy, :share_todo, :accept_todo, :share_with_departments, :share_with_workers, :share_with_parents ]
+  before_action :set_todo, only: [:edit, :update, :show, :destroy, :share_todo, :accept_todo, :share_with_departments, :share_with_workers, :share_with_parents, :submit_todo]
   before_action :parse_date, only: [:create, :update]
   before_action :check_create_permission, only: [:new, :create]
   before_action :check_view_permission, only: [:show, :search]
@@ -68,6 +68,7 @@ class TodosController < ApplicationController
     if request.post?
       if params[:worker_ids]
         res, error = @todo.save_user_todos( params[:worker_ids]) 
+         # o.save_user_occurrences(user_ids = self.users.pluck(:id)) if res
       else
         res, error = false, "No Workers Selected"
       end
@@ -114,6 +115,11 @@ class TodosController < ApplicationController
     end
   end
 
+  def submit_todo
+    # send(params[:act])
+    redirect_to :back
+  end
+
   private
   
     def set_daycare
@@ -156,6 +162,8 @@ class TodosController < ApplicationController
         flash[:alert] = "You dont have permission to edit todo"
         redirect_to @daycare
       end
-    end  
+    end 
+
+    
 
 end

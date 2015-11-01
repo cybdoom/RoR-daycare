@@ -200,6 +200,7 @@ class Todo < ActiveRecord::Base
       unless self.is_circulatable?
         o.save_user_occurrences(user_ids = self.users.pluck(:id)) if o.valid?
       end
+      return false
     end
 
     def delegatability
