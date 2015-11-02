@@ -91,7 +91,6 @@ class Todo < ActiveRecord::Base
     pic
   end
 
-
   def previous_occurrences
     occurrences.where("occurrences.due_date <= ?", DateTime.now)
   end
@@ -107,7 +106,6 @@ class Todo < ActiveRecord::Base
   def next_occurrences
     occurrences.where("occurrences.schedule_date >= ?", DateTime.now)
   end
-
 
   def save_user_todos(user_ids = [])
     valid_user_todos = []
