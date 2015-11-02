@@ -5,8 +5,7 @@ class Admin::TodosController < ApplicationController
 
   def index
     @todos = Todo.includes(:departments, :users).where(daycare_id: params[:daycare_ids]).where('users.type in (?)', params[:user_type]).references(:todo)
-    @todos = Todo.all
-    
+    # @todos = Todo.all
   end
 
   def new

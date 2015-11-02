@@ -23,7 +23,7 @@ class Occurrence < ActiveRecord::Base
   has_one :user_occurrence, dependent: :destroy
   has_one :user, through: :user_occurrences
 
-  has_many :todo_comments, ->{where(is_archived: true)}, dependent: :destroy
+  has_many :todo_comments, -> { where(is_archived: true) }, dependent: :destroy
 
   belongs_to :todo
 
@@ -45,7 +45,7 @@ class Occurrence < ActiveRecord::Base
   def save_user_occurrences(user_ids=[])
     user_ids.each do |user_id|
       if User.find(user_id)
-        user_occurrence = self.user_occurrences.new(user_id: user_id, todo_status: :draft) 
+        user_occurrence = self.build_user_occurrence(user_id: user_id, todo_status: :draft) 
         user_occurrence.save if UserTodo.find_by(user_id: user_id, todo_id: todo_id, status: :active)
       end
     end
