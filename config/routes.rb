@@ -185,6 +185,7 @@ Rails.application.routes.draw do
       match :share_with_workers, via: [:get, :post]
       match :share_with_parents, via: [:get, :post]
       post :accept_todo
+      post :submit_todo
     end
     collection do
       get :search

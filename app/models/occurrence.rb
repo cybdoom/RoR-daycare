@@ -20,7 +20,10 @@ class Occurrence < ActiveRecord::Base
   STATUS = %w(draft started ended)
   
   
-  has_many :user_occurrences, dependent: :destroy
+  has_one :user_occurrence, dependent: :destroy
+  has_one :user, through: :user_occurrences
+
+  has_many :todo_comments, ->{where(is_archived: true)}, dependent: :destroy
 
   belongs_to :todo
 

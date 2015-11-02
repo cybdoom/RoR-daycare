@@ -26,8 +26,19 @@ class UserOccurrence < ActiveRecord::Base
     User.find(delegatee_id || user_id)
   end
 
+  def mark_as_done
+    self.todo_status = :completed
+    self.save
+  end
+  def mark_as_not_applicable
+    self.todo_status = :not_completed
+    self.save
+  end
+
   private
   def valid_todo_status
     errors.add(:todo_status, "must be one of #{TODO_STATUS.join(', ')}")  unless TODO_STATUS.include?(todo_status)
   end
+
+
 end
