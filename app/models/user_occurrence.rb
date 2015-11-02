@@ -26,13 +26,23 @@ class UserOccurrence < ActiveRecord::Base
     User.find(delegatee_id || user_id)
   end
 
-  def mark_as_done
+  def mark_as_completed
     self.todo_status = :completed
-    self.save
+    if self.save
+      return true
+    else
+      return false
+    end
   end
-  def mark_as_not_applicable
-    self.todo_status = :not_completed
-    self.save
+
+  def mark_as_not_applicable#comments, user_id)
+    
+    # self.todo_status = :not_completed
+    # if self.save
+    #   return true
+    # else
+    #   return false
+    # end
   end
 
   private
