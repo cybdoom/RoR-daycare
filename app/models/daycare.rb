@@ -65,9 +65,9 @@ class Daycare < ActiveRecord::Base
           @worker.password = Devise.friendly_token.first(8)
         end
 
-        CSV.parse_line(row['Daycare Children Names']).each do |name|
-          @child = @daycare.children.build(name: name)
-        end
+        # CSV.parse_line(row['Daycare Children Names']).each do |name|
+        #   @child = @daycare.children.build(name: name)
+        # end
 
         CSV.parse_line(row['Daycare Parent Names']).each_with_index do |name, index|
           @worker = @daycare.parents.build(name: name)
