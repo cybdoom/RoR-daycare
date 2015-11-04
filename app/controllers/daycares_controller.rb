@@ -23,13 +23,14 @@ class DaycaresController < ApplicationController
 
   def new
     @daycare = Daycare.new
+    @daycare.build_manager
   end
 
   def create
     @daycare = Daycare.new(daycare_params)
     country = ISO3166::Country.new(params[:daycare][:country])
     @daycare.country = country.name
-    if @daycare.save
+    if @daycare.save!
       flash[:success] = "Daycare Successfully created."
       sign_in @daycare.manager
       redirect_to add_departments_daycare_path(@daycare)
@@ -58,12 +59,17 @@ class DaycaresController < ApplicationController
   def login
     if request.post?
       @user = User.find_by(email: params[:email])
-      if @user.confirmation_token.present?
-        flash[:error] = "You haven't confirm your account yet. Please confirm your account to login!"
-        redirect_to root_path
+      if @user
+        if @user.confirmation_token.present?
+          flash[:error] = "You haven't confirm your account yet. Please confirm your account to login!"
+          redirect_to root_path
+        else
+          path = login_user_and_set_redirect_path("manager")
+          redirect_to path
+        end
       else
-        path = login_user_and_set_redirect_path("manager")
-        redirect_to path
+        flash[:error] = "You don't have the account of daycare manager!"
+        redirect_to root_path
       end
     else
       if current_user && current_user.manager?
