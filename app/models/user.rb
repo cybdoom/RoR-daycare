@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   has_many :inactive_todos, ->{where("user_todos.status = ?", :inactive)},  through: :user_todos, source: :todo
   # has_many :active_todos, ->{where("user_todos.status = ?", :active)},  through: :user_todos, source: :todo
 
-  has_many :todo_comments, ->{where(is_archived: true)}
+  has_many :todo_comments, ->{where(is_archived: false)}
   # has_many :delegated_todos, ->{where {"todos.delegatee_id"}}
   
   # Include default devise modules. Others available are:
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
     #current_occurrences
 
     my_todos = todos.includes(:occurrences).where("occurrences.schedule_date <= ? AND occurrences.due_date > ?", DateTime.now, DateTime.now).references(:occurrences)
-
+    my_todos = my_todos.includes(occurrences: :user_occurrence).where("user_occurrences.todo_status NOT in (?)", ["completed"]).references(:user_occurrences)
     delegatee_todos = []
     # delegatee_todos = daycare.todos.includes(users: :user_occurrences).where("user_occurrences.user_id != ? AND user_occurrences.delegatee_id = ? AND todos.schedule_date <= ? AND todos.due_date > ?", id, id, DateTime.now, DateTime.now).references(:user_occurrences)
 

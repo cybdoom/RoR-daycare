@@ -117,6 +117,12 @@ class TodosController < ApplicationController
 
   def submit_todo
     # send(params[:act])
+    if params[:comments].blank? && params[:act] == "mark_as_not_applicable"
+      flash[:error] = "Please provide the comments first"
+      redirect_to :back and return
+    end
+    @todo.current_occurrence.todo_comments.create(comment: params[:comments], user_id: current_user.id)  if params[:comments]
+    @todo.current_occurrence.user_occurrence.send(params[:act])
     redirect_to :back
   end
 
