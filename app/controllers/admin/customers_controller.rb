@@ -12,10 +12,11 @@ class Admin::CustomersController < ApplicationController
   def import
     if params[:customer_type_id].present?
       @daycare = Daycare.import(params[:file], params[:customer_type_id])
-      if @daycare.save
+      if @daycare.save(validate: false)
         flash[:success] = "Success: customers were loaded"
         redirect_to notify_users_admin_customer_path(@daycare)
       else
+        flash[:error] = 'Validation failed'
         render :import_new
       end
     else
