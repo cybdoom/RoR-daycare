@@ -57,10 +57,10 @@ class Admin::TodosController < ApplicationController
             @todo.department_todos.build(department_id: department.id)
           end
         else
-          users = User.where(daycare_id: daycare.id)
-          users.each do |user|
+          # users = User.where(daycare_id: daycare.id)
+          params[:user_ids].each do |user_id|
             # @todo.user_todos.build(user_id: user.id, status: :active)
-            @todo.user_todos.build(user_id: user.id, status: (@todo.is_circulatable? ? "inactive" :  "active") )
+            @todo.user_todos.build(user_id: user_id, status: (@todo.is_circulatable? ? "inactive" :  "active") )
           end
         end
 

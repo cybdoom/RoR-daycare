@@ -18,14 +18,35 @@ class TodosController < ApplicationController
   end
 
   def create
-    @todo = @daycare.todos.new(todo_params)
-    if @todo.save
-      flash[:success] = 'Todo has been successfully created'
-      redirect_to share_todo_todo_path(@todo)
+    valid_todos = []
+    @todo = Todo.new(todo_params)
+    @todo.daycare_id = @daycare.id
+
+    if params[:todo_assignee] == 'departments'
+      @departments = Department.where(daycare_id: @daycare.id)
+      @departments.each do |department|
+        @todo.department_todos.build(department_id: department.id)
+      end
     else
-      flash[:alert] = @todo.errors.full_messages.uniq.join(',')
-      render :new
+      params[:user_ids].each do |user_id|
+        @todo.user_todos.build(user_id: user_id, status: (@todo.is_circulatable? ? "inactive" :  "active") )
+      end
     end
+
+    if @todo.valid?
+      valid_todos << @todo 
+    else
+      @error = true
+      flash[:error] = @todo.errors.full_messages.uniq.join(", ")
+    end
+
+    render :new  and return  if @error == true
+
+    valid_todos.each do |t|
+      t.save!
+    end
+    flash[:success] = 'Todo Successfully created!'
+    redirect_to @daycare
   end
 
   def edit
