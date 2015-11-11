@@ -170,6 +170,4 @@ class TodosController < ApplicationController
       end
     end 
 
-    
-
 end

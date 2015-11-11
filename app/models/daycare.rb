@@ -50,6 +50,7 @@ class Daycare < ActiveRecord::Base
         @daycare.post_code = row['Postcode'].to_s
         @daycare.telephone = row['Telephone'].to_s
         @daycare.customer_type_id = customer_type_id
+
         CSV.parse_line(row['Department Names']).each do |name|
           @daycare.departments.build(department_name: name)
         end

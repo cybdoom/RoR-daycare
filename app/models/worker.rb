@@ -39,5 +39,5 @@
 #
 
 class Worker < User
-  validates :daycare_id, :department_id, presence: true
+  # validates :department_id, presence: true
 end
