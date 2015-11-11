@@ -13,8 +13,13 @@
     </span>
   </div>
 </div>
-<div class="mid_wrapp padd34">  
-  <%=nested_form_for @todo do |f|%>   
-    <%= render 'form', f: f%>
+<div class="mid_wrapp padd34">
+  <%=nested_form_for @todo do |f|%>
+    <%= render 'admin/todos/chose_department_or_user'%>
+    <div id="show_user_types"></div>
+    <div id="show_users"></div>
+    <div style="display:none" id="todo_next_btn">
+      <%= render 'form', f: f%>
+    </div>
   <%end%>
 </div>

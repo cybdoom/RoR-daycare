@@ -73,6 +73,7 @@ class Admin::AdminController < ApplicationController
           end
         end
       end
+      flash[:success] = 'Privilege successfully set!'
       redirect_to admin_dashboard_path
     end
   end

@@ -1,6 +1,6 @@
 class Admin::TodosController < ApplicationController
   before_action :authenticate_admin!
-  before_action :ensure_superadmin
+  before_action :ensure_superadmin, except: [:todo_assignee]
   before_action :parse_date, only: [:create, :update]
 
   def index
